@@ -1,0 +1,10 @@
+#1
+Jetstream geinstalleerd voor authenticatie
+optie : livewire genomen (blade)
+
+#2
+voorlopig:
+mysql via xampp (maak eerst tabel 'insuraquest' aan in je mysql)
+> voor userauthenticatie
+server via php artisan serve (=localhost)
+
