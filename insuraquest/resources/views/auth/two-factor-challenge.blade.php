@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            {{-- // logo insuraquest nog toe te voegen --}}
         </x-slot>
 
         <div x-data="{ recovery: false }">
