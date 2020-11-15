@@ -6,5 +6,8 @@ optie : livewire genomen (blade)
 voorlopig:
 mysql via xampp (maak eerst tabel 'insuraquest' aan in je mysql)
 > voor userauthenticatie
-server via php artisan serve (=localhost)
+server opstarten via terminal: php artisan serve (=localhost)
+uitvoeren in insuraquest/insuraquest
 
+#3
+TO DO: generate language NL / FR ? Localization instellen

@@ -14,9 +14,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages/welcome');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('pages/dashboard');
 })->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/search', function () {
+    return view('pages/search');
+})->name('search');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin', function () {
+    return view('pages/admin');
+})->name('admin');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/librarian', function () {
+    return view('pages/librarian');
+})->name('librarian');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/documentation', function () {
+    return view('pages/documentation');
+})->name('documentation');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
+    return view('pages/team');
+})->name('team');
