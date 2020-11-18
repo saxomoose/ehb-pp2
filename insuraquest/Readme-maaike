@@ -1,0 +1,13 @@
+#1
+Jetstream geinstalleerd voor authenticatie
+optie : livewire genomen (blade)
+
+#2
+voorlopig:
+mysql via xampp (maak eerst tabel 'insuraquest' aan in je mysql)
+> voor userauthenticatie
+server opstarten via terminal: php artisan serve (=localhost)
+uitvoeren in insuraquest/insuraquest
+
+#3
+TO DO: generate language NL / FR ? Localization instellen
