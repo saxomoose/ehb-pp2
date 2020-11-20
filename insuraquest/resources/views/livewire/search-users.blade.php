@@ -1,14 +1,16 @@
 
 <div>
-    <input wire:model="search" type="text" placeholder="Search/Filter users..."/>
+    <input  style="width: 100%" wire:model="search" type="text" placeholder="Search- Filter users by name or mail..."/>
 <hr>
 <hr>
-    <ul>
+    <ul style="padding-left: 2%">
         @foreach($users as $user)
-        <hr>
+
             <li>{{ $user->name }}</li>
             <li>{{ $user->email }}</li>
+            <hr>
         @endforeach
     </ul>
+    {{ $users->links() }}
 
 </div>
