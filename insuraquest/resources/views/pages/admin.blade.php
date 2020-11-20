@@ -10,6 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- create compenent for admin page --}}
                 {{-- <x-jet-welcome /> --}}
+                @livewire('search-users')
             </div>
         </div>
     </div>

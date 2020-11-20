@@ -1,9 +1,12 @@
 <div>
-    <input wire:model="search" type="text" placeholder="Search users..."/>
+    <input wire:model="search" type="text" placeholder="Search/Filter users..."/>
 
     <ul>
         @foreach($users as $user)
-            <li>{{ $user->username }}</li>
+        <br>
+            <li>{{ $user->name }}</li>
+            <li>{{ $user->email }}</li>
+            <br>
         @endforeach
     </ul>
 </div>

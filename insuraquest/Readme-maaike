@@ -11,3 +11,10 @@ uitvoeren in insuraquest/insuraquest
 
 #3
 TO DO: generate language NL / FR ? Localization instellen
+
+#4
+Livewire components aanmaken :
+php artisan make: livewire COMPONENTNAME
+> maakt COMPONENTNAME.php aan waarin je je backend code / query zet ( HTTP > Livewire)
+> maakt COMPONENTNAME.blade.php aan waarin je je view en lay-out zet ( Resources > Views > Livewire)
+> op de page waar je je de component wilt renderen kan je deze ophalen via  @livewire('COMPONENTNAME')
