@@ -40,3 +40,22 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/documentation', function 
 Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
     return view('pages/team');
 })->name('team');
+
+
+// admin routes
+
+
+
+ Route::name('admin.')->group(function() {
+
+    Route::get('/changetype/{id}/{newtype}', [
+        'uses' => 'AdminController@getType',
+        'as' => 'type'
+    ]);
+
+    Route::get('/deleteuser/{id}', [
+        'uses' => 'AdminController@getDeleteUser',
+        'as' => 'deleteuser'
+    ]);
+ });
+

@@ -8,6 +8,9 @@ mysql via xampp (maak eerst tabel 'insuraquest' aan in je mysql)
 > voor userauthenticatie
 server opstarten via terminal: php artisan serve (=localhost)
 uitvoeren in insuraquest/insuraquest
+>Users tabel seeden : php artisan db:seed
+> in mysql kan je je eigen type wijzigen, zodat je de website kan bekijken als librarian, user, guest of admin
+nog to do : 1 default user insteken die admin is waarmee we kunnen inloggen (@the moment nog password probleem)
 
 #3
 TO DO: generate language NL / FR ? Localization instellen
