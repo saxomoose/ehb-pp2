@@ -9,9 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- create compenent for admin page --}}
-                {{-- <x-jet-welcome /> --}}
+
+                @can('isAdmin', App\Models\User::class)
                 @livewire('search-users')
-                // test if after merge i can still change code
+    <!-- The Current User Can Create Posts -->
+                @endcan
+                @cannot('isAdmin', App\Models\User::class)
+                <p>You are not authorized to view admin page</p>
+                @endcannot
+
             </div>
         </div>
     </div>

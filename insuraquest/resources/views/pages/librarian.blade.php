@@ -9,7 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- create component for librarian page --}}
-                {{-- <x-jet-welcome /> --}}
+                @can('isLibrarian', App\Models\User::class)
+                <p>You are authorized to view librarian page - IN PROGRESS</p>
+    <!-- The Current User Can Create Posts -->
+                @endcan
+                @cannot('isLibrarian', App\Models\User::class)
+                <p>You are not authorized to view librarian page</p>
+                @endcannot
             </div>
         </div>
     </div>
