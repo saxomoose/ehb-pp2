@@ -51,11 +51,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
     Route::get('/changetype/{id}/{newtype}', [
         'uses' => 'AdminController@getType',
         'as' => 'type'
-    ]);
+    ])->middleware('can:isAdmin,App\Models\User');
 
     Route::get('/deleteuser/{id}', [
         'uses' => 'AdminController@getDeleteUser',
         'as' => 'deleteuser'
-    ]);
+    ])->middleware('can:isAdmin,App\Models\User');
  });
 
