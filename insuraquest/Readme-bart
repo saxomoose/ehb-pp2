@@ -1,0 +1,4 @@
+#1
+Op de librarian page de mogelijkheid tot uploaden files toegevoegd.
+*** Momenteel nog naar lokale map in laravel- Moet naar folder waar FSCrawler zal gaan scannen voor ElasticSearch***
+

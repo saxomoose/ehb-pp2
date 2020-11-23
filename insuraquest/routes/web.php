@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\FileUploadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,3 +42,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/documentation', function 
 Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
     return view('pages/team');
 })->name('team');
+
+
+Route::get('/librarian.blade', 'App\Http\Controllers\FileUploadController@fileUpload')->name('file.upload.post');
+Route::post('/librarian.blade', 'App\Http\Controllers\FileUploadController@fileUploadPost');

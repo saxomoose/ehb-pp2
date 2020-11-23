@@ -24,6 +24,7 @@
                     <li>https://getbootstrap.com/</li>
                     <li>https://jetstream.laravel.com/1.x/stacks/livewire.html#components</li>
                     <li>https://laravel-livewire.com/</li>
+                    <li><a href="https://www.itsolutionstuff.com/post/laravel-8-file-upload-example-tutorialexample.html">Laravel 8 file upload tutorial</a></li>
                 </ul>
             </div>
         </div>
