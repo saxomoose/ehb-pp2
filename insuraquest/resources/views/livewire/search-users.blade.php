@@ -16,28 +16,28 @@
                          <p>Wijzig type naar:
                         @unless($user->type == "admin")
                         <a class="btn btn-dark btn-sm"
-                                                            href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"admin"])}}"
-                                                            role="button">admin</a>
+                            href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"admin"])}}"
+                            role="button">admin</a>
 
-                                                            @endunless
+                            @endunless
                         @unless($user->type == "librarian")
                          <a class="btn btn-warning btn-sm"
-                                                            href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"librarian"])}}"
-                                                            role="button">librarian</a>
+                            href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"librarian"])}}"
+                            role="button">librarian</a>
 
-                                                            @endunless
+                            @endunless
                         @unless($user->type == "user")
                         <a class="btn btn-primary btn-sm"
-                                                                   href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"user"])}}"
-                                                                   role="button">user</a>
+                            href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"user"])}}"
+                            role="button">user</a>
 
-                                                                   @endunless
+                            @endunless
                       @unless($user->type == "guest")
                         <a class="btn btn-secondary btn-sm"
-                                                                   href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"guest"])}}"
-                                                                   role="button">guest</a>
+                            href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"guest"])}}"
+                            role="button">guest</a>
 
-                                                                   @endunless
+                            @endunless
                          </p> <a class="btn btn-danger btn-sm"
                          href="{{ Route('admin.deleteuser', ['id'=>$user->id])}}"
                          role="button">Delete user</a>
