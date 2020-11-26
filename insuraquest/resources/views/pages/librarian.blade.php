@@ -7,6 +7,22 @@
     <div class="container mx-auto px-32">
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    {{-- create component for librarian page --}}
+
+                    @can('isLibrarian', App\Models\User::class)
+                    <p>You are authorized to view librarian page</p>
+        <!-- The Current User Can Upload files -->
+                    @endcan
+                    @cannot('isLibrarian', App\Models\User::class)
+                    <p>You are not authorized to view librarian page</p>
+                    @endcannot
+                </div>
+
+            </div>
+        </div>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class=" p-8 bg-white overflow-hidden shadow-xl sm:rounded-lg border-8">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">
@@ -65,20 +81,7 @@
                         </button>
                     </div>
                 </div>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                {{-- create component for librarian page --}}
-                @can('isLibrarian', App\Models\User::class)
-                <p>You are authorized to view librarian page - IN PROGRESS</p>
-    <!-- The Current User Can Create Posts -->
-                @endcan
-                @cannot('isLibrarian', App\Models\User::class)
-                <p>You are not authorized to view librarian page</p>
-                @endcannot
-            </div>
             </form>
-        </div>
-    </div>
+
+
 </x-app-layout>
