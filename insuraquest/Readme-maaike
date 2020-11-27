@@ -1,3 +1,5 @@
+TODO: superadmin maken waarmee je alles kan zien!
+
 #1
 Jetstream geinstalleerd voor authenticatie
 optie : livewire genomen (blade)
@@ -8,6 +10,11 @@ mysql via xampp (maak eerst tabel 'insuraquest' aan in je mysql)
 > voor userauthenticatie
 server opstarten via terminal: php artisan serve (=localhost)
 uitvoeren in insuraquest/insuraquest
+>Users tabel seeden : php artisan db:seed
+> In de seeding worden ook 3 test-accounts toegevoegd: een admin, librarian en user
+zodat je kan inloggen onder de rollen om te testen.
+admin login: admin@insuraquest.com - admin . lib: librarian@insuraquest.com - librarian. user: user@insuraquest.com - user.
+superadmin login: superadmin@insuraquest.com - superadmin
 
 #3
 TO DO: generate language NL / FR ? Localization instellen
