@@ -42,6 +42,14 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
             'type' => 'user',
         ]);
+        DB::table('users')->insert([
+            'name' => 'superadmin',
+            'email' => 'superadmin@insuraquest.com',
+            'password' => Hash::make('superadmin'),
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+            'type' => 'superadmin',
+        ]);
 
          \App\Models\User::factory(15)->create();
 

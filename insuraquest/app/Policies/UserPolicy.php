@@ -28,7 +28,11 @@ class UserPolicy
      */
     public function isAdmin(User $user)
     {
+<<<<<<< HEAD
         return $user->type == 'admin'|| $user->type == 'superadmin';//
+=======
+        return $user->type == 'admin' || $user->type == 'superadmin';//
+>>>>>>> 8dfc59c82716c160f55291ea34ec1ba5d36b56fb
     }
 
     /**
@@ -39,8 +43,14 @@ class UserPolicy
      */
     public function isUser(User $user)
     {
+<<<<<<< HEAD
         return $user->type == 'user'|| $user->type == 'superadmin';//
+=======
+        return $user->type == 'user' || $user->type == 'superadmin';//
+>>>>>>> 8dfc59c82716c160f55291ea34ec1ba5d36b56fb
     }
+
+
 
 
 }

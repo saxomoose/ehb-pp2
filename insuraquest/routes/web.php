@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\FileUploadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('pages/welcome');
@@ -41,11 +44,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
     return view('pages/team');
 })->name('team');
 
+// Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
+Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload.post')->middleware('can:isLibrarian,App\Models\User');
+Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->middleware('can:isLibrarian,App\Models\User');
 
 // admin routes
-
-
-
  Route::name('admin.')->group(function() {
 
     Route::get('/changetype/{id}/{newtype}', [
