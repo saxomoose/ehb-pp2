@@ -9,10 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- create compenent for admin page --}}
-<<<<<<< HEAD
                 {{-- TO DO :: create filter for admin to quickly see guests --}}
-=======
->>>>>>> 8dfc59c82716c160f55291ea34ec1ba5d36b56fb
                 @can('isAdmin', App\Models\User::class)
 
                 @livewire('search-users')
