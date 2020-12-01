@@ -44,7 +44,7 @@ class FileUploadController extends Controller
 
         return back()
 
-            ->with('success','You have successfully upload file.')
+            ->with('success','File upload was successfully!')
 
             ->with('file',$fileName);
     }
