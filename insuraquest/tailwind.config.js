@@ -20,4 +20,9 @@ module.exports = {
     },
 
     plugins: [require('@tailwindcss/ui')],
+
+    // plugin toegevoegd door bart voor tailwind custom forms
+    plugins: [
+        require('@tailwindcss/custom-forms'),
+      ]
 };

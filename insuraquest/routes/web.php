@@ -45,8 +45,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
 })->name('team');
 
 // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
-Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload.post')->middleware('can:isLibrarian,App\Models\User');
-Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->middleware('can:isLibrarian,App\Models\User');
+Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload')->middleware('can:isLibrarian,App\Models\User');
+Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post')->middleware('can:isLibrarian,App\Models\User');
 
 // admin routes
  Route::name('admin.')->group(function() {
