@@ -16,12 +16,14 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
+                @can('isUser', App\Model\User::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
                     <x-jet-nav-link href="{{ route('search') }}" :active="request()->routeIs('search')">
                         {{ __('Search') }}
                     </x-jet-nav-link>
                 </div>
+                @endcan
                 @can('isAdmin', App\Models\User::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">

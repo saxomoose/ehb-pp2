@@ -50,7 +50,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //SEARCH routes
     Route::get('/search', function(){
         return view('pages/search');
-    })->name('search');
+    })->name('search')->middleware('can:isUser,App\Models\User');
 
     //LIBRARIAN routes
     Route::middleware(['can:isLibrarian,App\Models\User'])->group(function(){
