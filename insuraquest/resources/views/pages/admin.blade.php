@@ -11,6 +11,7 @@
                 {{-- create compenent for admin page --}}
                 {{-- TO DO :: create filter for admin to quickly see guests --}}
 
+                {{-- rendert insuraquest/resources/livewire/search-users-blade.php --}}
                 @livewire('search-users')
 
 
