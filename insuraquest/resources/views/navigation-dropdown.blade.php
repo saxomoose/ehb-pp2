@@ -17,20 +17,25 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
                     <x-jet-nav-link href="{{ route('search') }}" :active="request()->routeIs('search')">
                         {{ __('Search') }}
                     </x-jet-nav-link>
                 </div>
+                @can('isAdmin', App\Models\User::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
                         {{ __('Admin') }}
                     </x-jet-nav-link>
                 </div>
+                @endcan
+                @can('isLibrarian', App\Models\User::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('librarian') }}" :active="request()->routeIs('librarian')">
                         {{ __('Librarian') }}
                     </x-jet-nav-link>
                 </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->

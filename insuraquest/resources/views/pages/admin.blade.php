@@ -10,14 +10,9 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{-- create compenent for admin page --}}
                 {{-- TO DO :: create filter for admin to quickly see guests --}}
-                @can('isAdmin', App\Models\User::class)
 
                 @livewire('search-users')
 
-                @endcan
-                @cannot('isAdmin', App\Models\User::class)
-                <p>You are not authorized to view admin page</p>
-                @endcannot
 
             </div>
         </div>
