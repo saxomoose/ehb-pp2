@@ -3,3 +3,7 @@ Op de librarian page de mogelijkheid tot uploaden files toegevoegd.
 Routes toegeveoegd van librarian page naar nieuwe Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
 *** Momenteel nog naar lokale map in laravel- Moet naar folder waar FSCrawler zal gaan scannen voor ElasticSearch***
 
+Plugin toegevoegd (tailwind.config.js) om de layout van forms in Tailwind te kunnen gebruiken.
+https://tailwindcss-custom-forms.netlify.app/
+
+

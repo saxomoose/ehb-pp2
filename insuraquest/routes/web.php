@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('pages/welcome');
 });
 
+
 //controleert of de user is ingelogd. Zoniet redirect hij naar de login page.
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
@@ -74,8 +75,4 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     })->name('team');
 
 });
-
-
-
-
 
