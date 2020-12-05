@@ -20,6 +20,14 @@ Route::get('/', function () {
     return view('pages/welcome');
 });
 
+Route::get('/es', function () {
+    return view('pages/elasticsearch');
+});
+
+Route::get('/create', 'ResponseController@create');
+Route::post('/create', 'ResponseController@store');
+//Route::get('/results', 'DocumentsController@show');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('pages/dashboard');
 })->name('dashboard');
