@@ -9,12 +9,12 @@
             <div class=" p-8 bg-white overflow-hidden shadow-xl sm:rounded-lg border-8">
                 <div>
                 {{-- Create compenent for search page --}}
-                    <form action="{{ route('search') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('documentsearch') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                         <div class=container>
                             <div class="form-row">
                                 <div class="form-group col-8">
-                                    <input type="text" class="form-control" placeholder="Search for document...">
+                                    <input type="text" class="form-control" name="searchtext" placeholder="Search for document...">
                                 </div>
                                 <div class="form-group col">
                                     <button type="submit"
@@ -27,16 +27,16 @@
 
                             <div class="form-row">
                                 <div class="form-group col-auto">
-                                    <label for="language">Language</label>
-                                    <select multiple class="form-control" name="language" size=2>
+                                    <label for="language[]">Language</label>
+                                    <select multiple="multiple" class="form-control" name="language[]" size=2>
                                         <option selected></option>
                                         <option value="dutch">Dutch</option>
                                         <option value="french">French</option>
                                     </select>
                                  </div>
                                  <div class="form-group col-auto">
-                                    <label for="issuer">Issuer</label>
-                                    <select multiple class="form-control" name="issuer" size=2>
+                                    <label for="issuer[]">Issuer</label>
+                                    <select multiple class="form-control" name="issuer[]" size=2>
                                         <option selected></option>
                                         <option value="eu">EU</option>
                                         <option value="be">BE</option>
@@ -56,8 +56,8 @@
                                     </select>
                                  </div>
                                  <div class="form-group col-auto">
-                                    <label for="category">Category</label>
-                                    <select multiple class="form-control" name="category" size=2>
+                                    <label for="category[]">Category</label>
+                                    <select multiple class="form-control" name="category[]" size=2>
                                         <option selected></option>
                                         <option value="wetgeving">Wetgeving</option>
                                         <option value="rechtspraak">Rechtspraak</option>
@@ -65,8 +65,8 @@
                                     </select>
                                  </div>
                                  <div class="form-group col-auto">
-                                    <label for="keyword">Keyword</label>
-                                    <select multiple class="form-control"  name="keyword" size=2>
+                                    <label for="keyword[]">Keyword</label>
+                                    <select multiple class="form-control"  name="keyword[]" size=2>
                                         <option selected></option>
                                         <option value="auto">Auto</option>
                                         <option value="brand">Brand</option>
@@ -79,8 +79,8 @@
                                     </select>
                                  </div>
                                 <div class="form-group col-auto">
-                                    <label for="date-until">Date published</label>
-                                    <input type="date" class="form-control" name="date-until">
+                                    <label for="date-from">Date published from</label>
+                                    <input type="date" class="form-control" name="date-from">
                                 </div>
                                 <div class="form-group col-auto">
 
@@ -89,7 +89,24 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="panel-body">
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-block ">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <strong>{{ $message }}</strong>
+                            </div>
+                            @endif
+                            @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong><br> There were some problems with your input.
+                                <ul><br>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
                     </form>
                 </div>
             </div>

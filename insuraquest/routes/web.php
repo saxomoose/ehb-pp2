@@ -62,3 +62,7 @@ Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('fi
     ])->middleware('can:isAdmin,App\Models\User');
  });
 
+ //SEARCH route
+
+Route::post('/search.blade', 'SearchDocumentsController@postSearch')->name('documentsearch')->middleware('can:isUser,App\Models\User');
+
