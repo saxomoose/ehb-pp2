@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PHPUnit\Util\Json;
+use App\View\Components\Collection;
 
 class SearchDocumentsController extends Controller
 {
@@ -34,11 +35,11 @@ class SearchDocumentsController extends Controller
     $j = json_encode($arr);
     $json = 'insuraquest\storage\app\MOCK_DATA.json';
     $jsonResponse = collect(json_decode($j));
+    $page = (new Collection($jsonResponse))->paginate(5);
 
 
         return back()
             ->with('success', $response)
-            ->with('result', $jsonResponse);
-
+            ->with('result', $page);
     }
 }

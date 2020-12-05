@@ -114,7 +114,7 @@
                     <p>
                     {{$item}}</p>
                     @endforeach
-
+                    {{ $r->links() }}
                 </div>
             @endif
                 </div>

@@ -64,5 +64,5 @@ Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('fi
 
  //SEARCH route
 
-Route::post('/search.blade', 'SearchDocumentsController@postSearch')->name('documentsearch')->middleware('can:isUser,App\Models\User');
+Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')->middleware('can:isUser,App\Models\User');
 
