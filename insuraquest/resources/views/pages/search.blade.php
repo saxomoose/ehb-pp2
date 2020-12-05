@@ -108,7 +108,19 @@
                             @endif
                         </div>
                     </form>
+                    @if ($r = Session::get('result'))
+                <div >
+                    @foreach($r as $item)
+                    <p>
+                    {{$item}}</p>
+                    @endforeach
+
                 </div>
+            @endif
+                </div>
+            </div>
+
+
             </div>
         </div>
     </div>
