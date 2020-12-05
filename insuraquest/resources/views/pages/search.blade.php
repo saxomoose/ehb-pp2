@@ -23,7 +23,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <p> Select filters before quering search </p>
+                            <p> Select filters before quering search. Press shift to select multiple values. </p>
 
                             <div class="form-row">
                                 <div class="form-group col-auto">
