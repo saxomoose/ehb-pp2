@@ -9,7 +9,7 @@ class Response extends Model
 {
     use HasFactory;
 
-    public function search($params)
+    public function search($search, $cb1, $cb2)
     {
         $hosts = [
             'host' => '10.3.50.7',

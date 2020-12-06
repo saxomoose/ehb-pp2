@@ -36,14 +36,7 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        //die($request);
-        dump(request()->all());
-        //$request->search-veld-content
-        //$request->checks-boxes-active
-        // --> $params
-        // return new $response
-        //Response::create($params);
-
+        //
     }
 
     /**
@@ -52,9 +45,46 @@ class ResponseController extends Controller
      * @param  \App\Models\Response  $response
      * @return \Illuminate\Http\Response
      */
-    public function show(Response $response)
+    public function show(Request $request)
     {
-          echo('totaal aantal resultaten: '.$response['hits']['total']);
+        //die($request);
+        dump(request()->all());
+        dump(request('es'));
+        dump(request('fire'));
+        dump(request('car'));
+
+        $search = request('es');
+        $cb1 = request('fire');
+        $cb2 = request('car');
+        //dump($search);
+        
+        $hosts = [
+            'host' => '10.3.50.7',
+            'port' => '9200',
+            'scheme' => 'http',
+            ];
+    
+        $client = ClientBuilder::create()
+                    ->setHosts($hosts)
+                    ->build();
+
+        $params = [
+            'index' => 'insuraquest',
+            'body' => [
+                'query' => [
+                    'match' => [
+                        'content' => $search
+                    ]
+                ]
+            ]
+        ];
+        $response = $client->search($params);
+
+        return $response;
+
+        //Response::create($params);*/
+/*
+        echo('totaal aantal resultaten: '.$response['hits']['total']);
   
           $indices = $response['hits']['hits'];
           foreach($indices as $index)
@@ -62,7 +92,7 @@ class ResponseController extends Controller
               print_r($index['_source']['content']);
           }
   
-          return view('documents.show', ['document' => $response]); //te checken hoe deze structuur in elkaar zit!!!
+          return view('documents.show', ['document' => $response]); //te checken hoe deze structuur in elkaar zit!!!*/
     }
 
     /**

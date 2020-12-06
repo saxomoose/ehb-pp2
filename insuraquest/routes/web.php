@@ -25,7 +25,7 @@ Route::get('/es', function () {
 });
 
 Route::get('/create', 'ResponseController@create');
-Route::post('/create', 'ResponseController@store');
+Route::post('/create', 'ResponseController@show');
 //Route::get('/results', 'DocumentsController@show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

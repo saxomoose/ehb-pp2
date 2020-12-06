@@ -7,24 +7,13 @@
     -->
 <form method="post" action="/create">
 @csrf
-
-            <label for="elastic-search">Ask ElasticSearch: </label>
-
-<input type="search" id="elastic-search" 
-
-       aria-label="elasticsearch">
-
-    <button type="submit">Get it boy!</button>
-
-</br>
-
+    <label for="elastic-search">Ask ElasticSearch: </label>
+    <input type="search" id="elastic-search" name="es" aria-label="elasticsearch">
+        <button type="submit">Get it boy!</button>
+    </br>
     <input type="checkbox" id="fire" name="fire" value="fire">
-
-<label for="fire"> fire</label><br>
-
-<input type="checkbox" id="car" name="car" value="Car">
-
-<label for="car"> car</label><br>
-
+        <label for="fire"> fire</label><br>
+    <input type="checkbox" id="car" name="car" value="Car">
+        <label for="car"> car</label><br>
 </form>
 
