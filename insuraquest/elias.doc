@@ -1,0 +1,32 @@
+GET /insuraquest/_search
+{
+
+    "query" : {
+
+        "bool" : {
+          
+          "filter" : {
+                "term" : { "content": "allianz" }
+            },
+
+            "must": [
+
+                {
+
+                    "match" : { "external.tag": "leven" }
+
+                },
+
+                {
+
+                    "match" : { "external.language": "Nederlands" }
+
+                }
+
+            ]
+
+        }
+
+    }
+
+}
