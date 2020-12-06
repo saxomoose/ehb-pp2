@@ -45,6 +45,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
 })->name('team');
 
 // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
+// Middleware acts as a bridge between a request and a response. It is a type of filtering mechanism.
+// hier gebruiken we het om de librarian page enkel toe te laten voor profiel 'librarian'
 Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload')->middleware('can:isLibrarian,App\Models\User');
 Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post')->middleware('can:isLibrarian,App\Models\User');
 
