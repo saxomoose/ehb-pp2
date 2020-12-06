@@ -26,7 +26,7 @@ class QueryController extends Controller
      */
     public function create()
     {
-        return view('pages.response.create');
+        return view('pages.query.create');
     }
 
     /**
@@ -89,10 +89,22 @@ class QueryController extends Controller
 
         $output = '...' . $before . '<b>' .$term . '</b>' . Str::words(Str::after($string, $term), 10);
         
-        return $output; 
+        //return $output; 
 
-        //return $response;
-        
+        $results = $response['hits']['hits'];
+        //return $results;
+        return view('pages.query.show', [
+                            'hits' => $response['hits']['total'],
+                            'results' => $results
+                    ]);
+        /*
+        return view('pages.query.show', [
+                            'hits' => $response['hits']['total'],
+                            'id' => $response['hits']['hits'][0]['_id'],
+                            'score' => $response['hits']['hits'][0]['_score'],
+                            'content' => $response['hits']['hits'][0]['_source']['content'],
+                    ]);
+        */
         /*
         echo('totaal aantal resultaten: '.$response['hits']['total']);
   
@@ -102,7 +114,7 @@ class QueryController extends Controller
               print_r($index['_source']['content']);
           }
         
-        return view('documents.show', ['document' => $response]); //te checken hoe deze structuur in elkaar zit!!!*/
+
 
 
                 /*
