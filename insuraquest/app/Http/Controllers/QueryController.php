@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Query;
 use Illuminate\Http\Request;
 use Elasticsearch\ClientBuilder;
+use Illuminate\Support\Str;
 
 class QueryController extends Controller
 {
@@ -50,12 +51,12 @@ class QueryController extends Controller
         //die($request);
         //dump(request()->all());
         //dump(request('es'));
-        //dump(request('fire'));
-        //dump(request('car'));
+        //dump(request('leven'));
+        //dump(request('Nederlands'));
 
         $search = request('es');
-        $cb1 = request('fire');
-        $cb2 = request('car');
+        $cb1 = request('leven');
+        $cb2 = request('Nederlands');
         //dump($search);
 
         $hosts = [
@@ -70,12 +71,27 @@ class QueryController extends Controller
 
         //$query = Query::create()
         //            ->setParams($search);
+
         $query = new Query();
-        $query->setParams($search);
+        $query->setParams($search, $cb1, $cb2);
 
         $response = $client->search($query->params);
 
-        return $response;
+        $string = $response['hits']['hits'][0]['_source']['content'];
+
+        $term = $search;
+
+        $pos = strpos($string, $term);
+        $before = Str::substr($string, ($pos -50), 50);
+
+        $spacePos = strpos($before, ' ');
+        $before = Str::substr($before, $spacePos+1);
+
+        $output = '...' . $before . '<b>' .$term . '</b>' . Str::words(Str::after($string, $term), 10);
+        
+        return $output; 
+
+        //return $response;
         
         /*
         echo('totaal aantal resultaten: '.$response['hits']['total']);

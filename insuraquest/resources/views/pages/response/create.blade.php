@@ -11,9 +11,9 @@
     <input type="search" id="elastic-search" name="es" aria-label="elasticsearch">
         <button type="submit">Get it boy!</button>
     </br>
-    <input type="checkbox" id="fire" name="fire" value="fire">
-        <label for="fire"> fire</label><br>
-    <input type="checkbox" id="car" name="car" value="Car">
-        <label for="car"> car</label><br>
+    <input type="checkbox" id="leven" name="leven" value="leven">
+        <label for="leven"> Leven</label><br>
+    <input type="checkbox" id="Nederlands" name="Nederlands" value="Nederlands">
+        <label for="Nederlands"> Nederlands</label><br>
 </form>
 
