@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UploadFile extends Model
 {
    public $fillable = ['title', 'language', 'date', 'issuer', 'category', 'keyword'];
+
+   
+
 }
