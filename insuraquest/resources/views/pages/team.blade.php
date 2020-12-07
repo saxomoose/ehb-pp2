@@ -14,7 +14,7 @@
                       <p class="text-2xl max-w-xl mx-auto font-semibold mb-12 text-gray-400">Programming Project II</p>
                       <div class="flex flex-wrap -mx-8">
                         <div class="md:w-1/3 p-8">
-                          <img class="w-1/3 mx-auto mb-4 rounded-full" src="/pictures/male.png" alt="">
+                          <img class="w-1/3 mx-auto mb-4 rounded-full" src="/pictures/olivier.jpg" alt="">
                           <h3 class="text-xl mb-1 font-semibold font-heading">Olivier Thas</h3>
                           <span>Product Owner</span>
                           <p class="mt-4 text-gray-400 leading-relaxed">Student 2Ba TI Werktraject<br>Business IT</p>
@@ -41,7 +41,7 @@
                                 <p class="mt-4 text-gray-400 leading-relaxed">Student 2Ba TI Werktraject<br>Software Engineering</p>
                             </div>
                             <div class="md:w-1/3 p-8 md:border-l">
-                                <img class="w-1/3 mx-auto mb-4 rounded-full" src="/pictures/male.png" alt="">
+                                <img class="w-1/3 mx-auto mb-4 rounded-full" src="/pictures/mathieu.JPG" alt="">
                                 <h3 class="text-xl mb-1 font-semibold font-heading">Mathieu Tulpinck</h3>
                                 <span>Back-end</span>
                                 <p class="mt-4 text-gray-400 leading-relaxed">Student 2Ba TI Werktraject<br>Software Engineering</p>
