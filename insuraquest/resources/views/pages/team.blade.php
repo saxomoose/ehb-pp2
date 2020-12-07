@@ -26,16 +26,16 @@
                           <p class="mt-4 text-gray-400 leading-relaxed">Student 2Ba TI Werktraject<br>Network & Security</p>
                         </div>
                         <div class="md:w-1/3 p-8 md:border-l">
-                          <img class="w-1/3 mx-auto mb-4 rounded-full" src="/pictures/female.jpg" alt="">
+                          <img class="w-1/3 mx-auto mb-4 rounded-full" src="/pictures/maaike.jpg" alt="">
                           <h3 class="text-xl mb-1 font-semibold font-heading">Maaike Dupont</h3>
                           <span>Front-end</span>
-                          <p class="mt-4 text-gray-400 leading-relaxed">Student ?Ba TI Werktraject<br>specialisatie</p>
+                          <p class="mt-4 text-gray-400 leading-relaxed">Student 2Ba TI Werktraject<br>Software Engineering</p>
                         </div>
                     </section>
                     <section class="py-12 px-4 text-center content-center">
                         <div class="flex flex-wrap -mx-8 justify-center">
                             <div class="md:w-1/3 p-8 ">
-                                <img class="w-1/3 mx-auto mb-4 rounded-full" src="/pictures/male.png" alt="">
+                                <img class="w-1/3 mx-auto mb-4 rounded-full" src="/pictures/elias.jpeg" alt="">
                                 <h3 class="text-xl mb-1 font-semibold font-heading">Elias Joostens</h3>
                                 <span>Back-end</span>
                                 <p class="mt-4 text-gray-400 leading-relaxed">Student 2Ba TI Werktraject<br>Software Engineering</p>
