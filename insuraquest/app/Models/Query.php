@@ -11,7 +11,7 @@ class Query extends Model
 
     var $params;
 
-    public function setParams($search)
+    public function setParams($search, $cb1, $cb2)
     {
         $this->params = [
                             'index' => 'insuraquest',
@@ -19,10 +19,10 @@ class Query extends Model
                                 'query' => [
                                     'match' => [
                                         'content' => $search
-                                    ]
+                                    ],
+                                    'match' => ['external.tag' => $cb1]
                                 ]
                             ]
                         ];
-
     }
 }
