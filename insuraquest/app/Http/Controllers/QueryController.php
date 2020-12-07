@@ -164,4 +164,9 @@ class QueryController extends Controller
     {
         //
     }
+
+    public function shortText($string)
+    {
+        //code van Elias
+    }
 }
