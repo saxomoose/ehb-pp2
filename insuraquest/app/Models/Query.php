@@ -26,6 +26,40 @@ class Query extends Model
             ]
         ];
  */
+/*         $this->params = [
+            'index' => 'insuraquest',
+            'body' => [
+                'query' => [
+                    'match' => [
+                        'content' => $search
+                    ]
+                ],
+                'highlight' => [
+                    'fields' => [ 'content' => new \stdClass() ]
+                ]
+            ]
+        ];
+*/
+$this->params = [
+    'index' => 'insuraquest',
+    'body' => [
+        'query' => [
+            'match' => [
+                'content' => $search
+            ]
+        ],
+        'highlight' => [
+            'fields' => [ 
+                'content' => [
+                    '<em>leven</em>',
+                    'require_field_match' => false,
+                    'number_of_fragments' => 1,
+                    'fragment_size' => 10
+                ]
+            ]
+        ]
+    ]
+];
 // Bool query based only on content (full text search)
 /*         $this->params = [
             'index' => 'insuraquest',
