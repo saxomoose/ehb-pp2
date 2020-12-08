@@ -11,18 +11,71 @@ class Query extends Model
 
     var $params;
 
-    public function setParams($search, $cb1, $cb2)
+    public function setParams($search, $arr)
     {
-        $this->params = [
-                            'index' => 'insuraquest',
-                            'body' => [
-                                'query' => [
-                                    'match' => [
-                                        'content' => $search
-                                    ],
-                                    'match' => ['external.tag' => $cb1]
+
+// Match query based on content (full text search)
+/*         $this->params = [
+            'index' => 'insuraquest',
+            'body' => [
+                'query' => [
+                    'match' => [
+                        'content' => $search
+                    ]
+                ]
+            ]
+        ];
+ */
+// Bool query based only on content (full text search)
+/*         $this->params = [
+            'index' => 'insuraquest',
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'must' => [
+                            [ 'match' => [ 'content' => $search ] ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+ */
+// When you use only one match inside a bool must clause, there is no difference with the match query.
+// The bool clause is useful when you want to combine multiple (boolean) criteria. Bool supports criteria: must, must_not, filter, should.
+// - must means: Clauses that must match for the document to be included.
+// - should means: If these clauses match, they increase the _score; otherwise, they have no effect. They are simply used to refine the relevance score for each document.
+
+// Bool query
+/*        $this->params = [
+                    'index' => 'insuraquest',
+                    'body' => [
+                        'query' => [
+                            'bool' => [
+                                'must' => []
                                 ]
                             ]
-                        ];
+                        ]
+                    ];
+                    
+        foreach($arr as $key => $value)
+        {
+            array_push($this->params['body']['query']['bool']['must'], $value);
+        }
+*/
+/*      //voorbeeld van hardcoded parameters. Let wel: de must array is geen associative array, maar heeft als "keys" een klassieke index met als value opnieuw een array.
+        $params = [
+            'index' => 'insuraquest',
+            'body'  => [
+                'query' => [
+                    'bool' => [
+                        'must' => [
+                            [ 'match' => [ 'content' => $search ] ],
+                            [ 'match' => [ 'external.tag' => $cb1 ] ],
+                        ]
+                    ]
+                ]
+            ]
+        ];
+ */
     }
 }

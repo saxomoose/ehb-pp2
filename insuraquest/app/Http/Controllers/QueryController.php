@@ -48,15 +48,11 @@ class QueryController extends Controller
      */
     public function show(Query $query)
     {
-        //die($request);
         //dump(request()->all());
-        //dump(request('es'));
-        //dump(request('leven'));
-        //dump(request('Nederlands'));
-
         $search = request('es');
         $cb1 = request('leven');
         $cb2 = request('Nederlands');
+        $arr = [[ 'match' => [ 'content' => $search ] ], [ 'match' => [ 'external.tag' => $cb1 ] ]];
         //dump($search);
 
         $hosts = [
@@ -64,20 +60,19 @@ class QueryController extends Controller
             'port' => '9200',
             'scheme' => 'http',
             ];
-    
+
         $client = ClientBuilder::create()
                     ->setHosts($hosts)
                     ->build();
 
-        //$query = Query::create()
-        //            ->setParams($search);
-
         $query = new Query();
-        $query->setParams($search, $cb1, $cb2);
+        $query->setParams($search, $arr);
 
         $response = $client->search($query->params);
 
-        $string = $response['hits']['hits'][0]['_source']['content'];
+        print_r($query->params);
+
+/*         $string = $response['hits']['hits'][0]['_source']['content'];
 
         $term = $search;
 
@@ -90,34 +85,24 @@ class QueryController extends Controller
         $output = '...' . $before . '<b>' .$term . '</b>' . Str::words(Str::after($string, $term), 10);
         
         //return $output; 
-
+ */
         $results = $response['hits']['hits'];
         //return $results;
         return view('pages.query.show', [
                             'hits' => $response['hits']['total'],
                             'results' => $results
                     ]);
-        /*
-        return view('pages.query.show', [
-                            'hits' => $response['hits']['total'],
-                            'id' => $response['hits']['hits'][0]['_id'],
-                            'score' => $response['hits']['hits'][0]['_score'],
-                            'content' => $response['hits']['hits'][0]['_source']['content'],
-                    ]);
-        */
-        /*
-        echo('totaal aantal resultaten: '.$response['hits']['total']);
-  
-          $indices = $response['hits']['hits'];
-          foreach($indices as $index)
-          {
-              print_r($index['_source']['content']);
-          }
-        
 
+/*
+        //*Example based on libcurl, a library created by Daniel Stenberg, that allows you to connect and communicate to many different types of servers
+        //*with many different types of protocols. libcurl currently supports the http, https, ftp, gopher, telnet, dict, file, and ldap protocols. 
+        //*libcurl also supports HTTPS certificates, HTTP POST, HTTP PUT, FTP uploading (this can also be done with PHP's ftp extension), 
+        //*HTTP form based upload, proxies, cookies, and user+password authentication.
+        //*We, however, will use the Elasticsearch-PHP API, with predefined fuction specific for Elasticsearch.
 
+        // source: https://kb.objectrocket.com/elasticsearch/how-to-use-the-search-api-for-the-elasticsearch-php-client-175
+        //require __DIR__ . '/vendor/autoload.php';
 
-                /*
         // Initialization
         $ch=curl_init();
 
@@ -140,10 +125,7 @@ class QueryController extends Controller
         curl_close($ch);
         // Output, you can also save it locally on the server
         echo $lines_string;
-        */
-
-        // source: https://kb.objectrocket.com/elasticsearch/how-to-use-the-search-api-for-the-elasticsearch-php-client-175
-        //require __DIR__ . '/vendor/autoload.php';
+*/
     }
 
     /**
