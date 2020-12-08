@@ -20,54 +20,69 @@ Route::get('/', function () {
     return view('pages/welcome');
 });
 
-Route::get('/es', function () {
+
+//controleert of de user is ingelogd. Zoniet redirect hij naar de login page.
+Route::middleware(['auth:sanctum', 'verified'])->group(function(){
+  
+  // ES Routes
+  Route::get('/es', function () {
     return view('pages/elasticsearch');
+  });
+
+  Route::get('/create', 'QueryController@create');
+  Route::post('/create', 'QueryController@show');
+  //Route::get('/edit', 'DocumentsController@edit'); -> om de tags van een document te wijzigen
+  //Route::post('/edit', 'DocumentsController@store');
+  
+
+    //ADMIN routes - checks if user has admin type, otherwise throws 403 unauthorized
+    Route::middleware(['can:isAdmin,App\Models\User'])->group(function(){
+        Route::get('/admin', function(){
+            return view('pages/admin');
+        })->name('admin');
+
+        Route::get('/changetype/{id}/{newtype}', [
+            'uses' => 'AdminController@getType',
+            'as' => 'admin.type'
+        ]);
+
+        Route::get('/deleteuser/{id}', [
+            'uses' => 'AdminController@getDeleteUser',
+            'as' => 'admin.deleteuser'
+        ]);
+
+    });
+
+
+    //DASHBOARD route
+    Route::get('/dashboard', function(){
+        return view('pages/dashboard');
+    })->name('dashboard');
+
+    //SEARCH routes
+    Route::get('/search', function(){
+        return view('pages/search');
+    })->name('search')->middleware('can:isUser,App\Models\User');
+
+    //LIBRARIAN routes
+    Route::middleware(['can:isLibrarian,App\Models\User'])->group(function(){
+        Route::get('/librarian', function(){
+            return view('pages/librarian');
+        })->name('librarian');
+
+        // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
+        Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload.post');
+        Route::post('/librarian.blade', 'FileUploadController@fileUploadPost');
+    });
+
+    //DOCUMENTATION route
+    Route::get('/documentation', function(){
+        return view('pages/documentation');
+    })->name('documentation');
+
+    //TEAM route
+    Route::get('/team', function(){
+        return view('pages/team');
+    })->name('team');
+
 });
-
-Route::get('/create', 'QueryController@create');
-Route::post('/create', 'QueryController@show');
-//Route::get('/edit', 'DocumentsController@edit'); -> om de tags van een document te wijzigen
-//Route::post('/edit', 'DocumentsController@store');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('pages/dashboard');
-})->name('dashboard');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/search', function () {
-    return view('pages/search');
-})->name('search');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin', function () {
-    return view('pages/admin');
-})->name('admin');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/librarian', function () {
-    return view('pages/librarian');
-})->name('librarian');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/documentation', function () {
-    return view('pages/documentation');
-})->name('documentation');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
-    return view('pages/team');
-})->name('team');
-
-// Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
-Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload')->middleware('can:isLibrarian,App\Models\User');
-Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post')->middleware('can:isLibrarian,App\Models\User');
-
-// admin routes
- Route::name('admin.')->group(function() {
-
-    Route::get('/changetype/{id}/{newtype}', [
-        'uses' => 'AdminController@getType',
-        'as' => 'type'
-    ])->middleware('can:isAdmin,App\Models\User');
-
-    Route::get('/deleteuser/{id}', [
-        'uses' => 'AdminController@getDeleteUser',
-        'as' => 'deleteuser'
-    ])->middleware('can:isAdmin,App\Models\User');
- });
-
