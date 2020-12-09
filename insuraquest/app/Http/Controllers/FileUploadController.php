@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\UploadFile;
+
+use GuzzleHttp\Client;
 
 class FileUploadController extends Controller
 {
@@ -14,6 +16,7 @@ class FileUploadController extends Controller
         return view('librarian');
     }
 
+    //handler method sanitizes user input and posts uploaded file and tags to FSCrawler API for indexation
     public function fileUploadPost(Request $request)
 
     {
@@ -32,20 +35,43 @@ class FileUploadController extends Controller
             'issuer.required' => 'Issurer is required',
             'category.required' => 'Category is required',
             'keyword.required' => 'Keyword is required',
-            'file.required' => 'A file needs to be slected' 
+            'file.required' => 'A file needs to be slected'
         ]);
 
-        UploadFile::create($request->all());
-
-        $fileName = time().'.'.$request->file->extension();  
-    
-
-        $request->file->move(public_path('uploads'), $fileName);
+        $file = $request->file('file');
+        $pathname = $file->store('uploads');
+        $fully_qualified_pathname = storage_path('app/' . $pathname);
+        $client = new Client();
+        try {
+            $client->request('POST', 'http://127.0.0.1:8080/fscrawler/_upload',
+                ['multipart' =>
+                    [
+                        [
+                            'name' => 'file',
+                            'contents' => fopen($fully_qualified_pathname, 'r')
+                        ],
+                        [
+                            'name' => 'tags',
+                            'contents' => json_encode([
+                                'external' => [
+                                    'title' => $request->input('title'),
+                                    'language' => $request->input('language'),
+                                    'date_published' => $request->input('date'),
+                                    'issuer' => $request->input('issuer'),
+                                    'category' => $request->input('category'),
+                                    'keyword' => $request->input('keyword')
+                                ]
+                            ])
+                        ]
+                    ]
+                ]
+            );
+        } catch (GuzzleException $e) {
+            echo $e;
+        }
 
         return back()
 
-            ->with('success','File upload was successfully!')
-
-            ->with('file',$fileName);
+            ->with('success','File upload was successful!');
     }
 }
