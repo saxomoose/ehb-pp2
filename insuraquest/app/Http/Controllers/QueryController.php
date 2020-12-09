@@ -72,22 +72,10 @@ class QueryController extends Controller
 
         print_r($query->params);
 
-/*         $string = $response['hits']['hits'][0]['_source']['content'];
-
-        $term = $search;
-
-        $pos = strpos($string, $term);
-        $before = Str::substr($string, ($pos -50), 50);
-
-        $spacePos = strpos($before, ' ');
-        $before = Str::substr($before, $spacePos+1);
-
-        $output = '...' . $before . '<b>' .$term . '</b>' . Str::words(Str::after($string, $term), 10);
-        
-        //return $output; 
- */
+        //dump($response);
+        //dump($response['hits']['hits'][0]['highlight']['content']);
         $results = $response['hits']['hits'];
-        //return $results;
+        //dump($results);
         return view('pages.query.show', [
                             'hits' => $response['hits']['total'],
                             'results' => $results

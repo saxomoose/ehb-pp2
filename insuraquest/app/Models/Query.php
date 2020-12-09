@@ -51,10 +51,9 @@ $this->params = [
         'highlight' => [
             'fields' => [ 
                 'content' => [
-                    '<em>leven</em>',
                     'require_field_match' => false,
-                    'number_of_fragments' => 1,
-                    'fragment_size' => 10
+                    'number_of_fragments' => 5,
+                    'fragment_size' => 200
                 ]
             ]
         ]

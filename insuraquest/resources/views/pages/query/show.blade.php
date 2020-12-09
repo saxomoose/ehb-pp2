@@ -19,7 +19,9 @@
                 <h1 class="display-4">Doc id: {{ $result['_id'] }}</h1>
                 <h1 class="display-4">Score: {{ $result['_score'] }}</h1>
                 <hr class="my-4">
-                <p class="lead">{{ $result['_source']['content'] }}</p>
+                @foreach ($result['highlight']['content'] as $highlight)
+                <p class="lead">{!! $highlight !!}</p>
+                @endforeach
                 <div class="container col text-right">
                     <a class="btn btn-primary btn-sm " href="#" role="button">Read the full document</a>
                     <a class="btn btn-primary btn-sm " href="#" role="button">Modify tags</a>
