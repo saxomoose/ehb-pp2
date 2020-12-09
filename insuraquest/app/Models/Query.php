@@ -11,7 +11,7 @@ class Query extends Model
 
     var $params;
 
-    public function setParams($search, $arr)
+    public function setParams($search, $arr, $exclude)
     {
 
 // Match query based on content (full text search)
@@ -61,32 +61,40 @@ $this->params = [
     ]
 ];
  */
-$this->params = [
+
+
+/* $this->params = [
     'index' => 'insuraquest',
     'body' => [
         'query' => [
             'match' => [
                 'content' => $search
-            ]
+            ], 
+            ['must_not' => 
+                ['match' => ['content' => 'komaan seg']]
+            
+            ] 
         ]
     ]
-];
+]; */
 
 
 // Bool query based only on content (full text search)
-/*         $this->params = [
+         $this->params = [
             'index' => 'insuraquest',
             'body' => [
                 'query' => [
                     'bool' => [
                         'must' => [
                             [ 'match' => [ 'content' => $search ] ]
-                        ]
+                        ],
+                        'must_not' => 
+                            ['match' => ['content' => $exclude]]            
                     ]
                 ]
             ]
         ];
- */
+ 
 // When you use only one match inside a bool must clause, there is no difference with the match query.
 // The bool clause is useful when you want to combine multiple (boolean) criteria. Bool supports criteria: must, must_not, filter, should.
 // - must means: Clauses that must match for the document to be included.

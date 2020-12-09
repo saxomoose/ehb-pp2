@@ -53,6 +53,7 @@ class QueryController extends Controller
         $cb1 = request('leven');
         $cb2 = request('Nederlands');
         $arr = [[ 'match' => [ 'content' => $search ] ], [ 'match' => [ 'external.tag' => $cb1 ] ]];
+        $exclude = request('mustNot');
         //dump($search);
 
         $hosts = [
@@ -66,7 +67,7 @@ class QueryController extends Controller
                     ->build();
 
         $query = new Query();
-        $query->setParams($search, $arr);
+        $query->setParams($search, $arr, $exclude);
 
         $response = $client->search($query->params);
 

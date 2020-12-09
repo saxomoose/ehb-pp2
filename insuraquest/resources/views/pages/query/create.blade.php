@@ -9,6 +9,9 @@
 @csrf
     <label for="elastic-search">Ask ElasticSearch: </label>
     <input type="search" id="elastic-search" name="es" aria-label="elasticsearch">
+</br>
+    <label for="elastic-search">Exclude:  </label>
+    <input type="exclude" id="mustNot" name="mustNot" aria-label="mustNot">
         <button type="submit">Get it boy!</button>
     </br>
     <input type="checkbox" id="leven" name="leven" value="leven">
