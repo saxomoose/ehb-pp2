@@ -1,6 +1,7 @@
 
 <div>
-    <input  style="width: 100%" wire:model="search" type="text" placeholder="Search- Filter users by name or mail..."/>
+    {{-- rendert insuraquest/app/Livewire/SearchUsers.php --}}
+    <input  style="width: 100%" wire:model="search" type="text" placeholder="Search users by name, mail or type..."/>
 <hr>
 <hr>
     <ul style="padding-left: 2%">
