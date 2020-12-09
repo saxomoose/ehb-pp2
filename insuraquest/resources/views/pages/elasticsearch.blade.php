@@ -25,90 +25,93 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     -->
 
-    <?php
-        /*
-        // Initialization
-        $ch=curl_init();
+    <form method="get" action="/estest">
+@csrf
 
-        //$url='10.3.50.7:9200/_search?pretty';
-        $url='10.3.50.7:9200/_search?pretty';
-        $timeout=5;
+                <div class="container my-4">
 
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_HTTPGET, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-          'Content-Type: application/json'
-        ));
+            <p class="font-weight-bold">Bootstrap dropdown checkbox is a component which combines dropdown and checkbox. See the working example below.</p>
 
-        // Get URL content
-        $lines_string=curl_exec($ch);
-        // Close handle to release resources
-        curl_close($ch);
-        // Output, you can also save it locally on the server
-        echo $lines_string;
-        */
+            <p><strong>Detailed documentation and more examples you can find in our <a href="https://mdbootstrap.com/docs/jquery/forms/checkbox/"
+                                                                                      target="_blank">Bootstrap Checkbox Docs</a> </p>
 
-        // source: https://kb.objectrocket.com/elasticsearch/how-to-use-the-search-api-for-the-elasticsearch-php-client-175
-        //require __DIR__ . '/vendor/autoload.php';
+            <hr>
 
-        use Elasticsearch\ClientBuilder;
+            <p class="font-weight-bold">Basic example</p>
 
-        $hosts = [
-          'host' => '10.3.50.7',
-          'port' => '9200',
-          'scheme' => 'http',
-          ];
+            <!-- Basic dropdown -->
+            <button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Basic dropdown</button>
 
-        $client = ClientBuilder::create()
-        ->setHosts($hosts)
-        ->build();
+            <div class="dropdown-menu" name="drop">
+              <a class="dropdown-item">
+                <!-- Default unchecked -->
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkbox1" name="cb1">
+                  <label class="custom-control-label" for="checkbox1">Check me</label>
+                </div>
+              </a>
+              <a class="dropdown-item" href="#">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkbox2" name="cb2">
+                  <label class="custom-control-label" for="checkbox2">Check me</label>
+                </div>
+              </a>
+              <a class="dropdown-item" href="#">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkbox3" name="cb3">
+                  <label class="custom-control-label" for="checkbox3">Check me</label>
+                </div>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checkbox4" name="cb4">
+                  <label class="custom-control-label" for="checkbox4">Check me</label>
+                </div>
+              </a>
+            </div>
+            <!-- Basic dropdown -->
 
-/*        $params = [
-          'index' => 'test-api',
-          'type' => '_doc',
-          'id' => '66c8b2693fa7d4a737beec8b9ad2726' // let op --> id is hier zonder underscore!!!
-          ];
-
-        //These parameters are translated to the following command in the Kibana console: GET /test-api/_doc/66c8b2693fa7d4a737beec8b9ad2726
-        // or alternatively (note the similar structure): curl -X GET "localhost:9200/children/child/child3?human&pretty"
-
-        $response = $client->get($params);
-*/
-/*
-        $params = [
-          'index' => 'insuraquest',
-          'body' => [
-            'query' => [
-              'bool' => [
-                'must' => [
-                  ['match' => ['_id' => '3a5ff5beea3bf83f0b4bb7c6d33e921']] // let op --> id_ is hier met underscore!!!
-                ]
-              ]
-            ]
-          ]
-        ];
-*/
-        $params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'match' => [
-                        'content' => 'specifieke verzekering levensverzekering'
-                    ]
-                ]
-            ]
-        ];
-
-        //print_r(json_encode($params['body']));
-        $response = $client->search($params);
+            </div>
 
 
+            <div class="container my-4">
+
+<p class="font-weight-bold">Bootstrap dropdown checkbox is a component which combines dropdown and checkbox. See the working example below.</p>
+
+<p><strong>Detailed documentation and more examples you can find in our <a href="https://mdbootstrap.com/docs/jquery/forms/checkbox/"
+                                                                          target="_blank">Bootstrap Checkbox Docs</a> </p>
+
+<hr>
+
+<p class="font-weight-bold">Basic example</p>
+
+<!-- Basic dropdown -->
+<button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">Basic dropdown</button>
+
+<div class="dropdown-menu" name="dropx">
+  <a class="dropdown-item">
+    <!-- Default unchecked -->
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="checkbox5" name="cb5">
+      <label class="custom-control-label" for="checkbox1">Check me</label>
+    </div>
+  </a>
+  <a class="dropdown-item" href="#">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="checkbox6" name="cb6">
+      <label class="custom-control-label" for="checkbox2">Check me</label>
+    </div>
+  </a>
+</div>
+<!-- Basic dropdown -->
+
+</div>
 
 
-        print_r($response);
-    ?>
+            <button type="submit">Get it boy!</button>
+      </form>
   </body>
 </html>

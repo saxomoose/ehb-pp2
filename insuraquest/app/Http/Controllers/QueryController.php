@@ -52,12 +52,17 @@ class QueryController extends Controller
         $search = request('es');
         $cb1 = request('leven');
         $cb2 = request('Nederlands');
-        $arr = [[ 'match' => [ 'content' => $search ] ], [ 'match' => [ 'external.tag' => $cb1 ] ]];
+        $arr = [[ 'match' => [ 'external.tag' => $cb1 ] ], [ 'match' => [ 'external.language' => $cb2 ] ]];
         
-        if(request('mustNot')==null){
+/*         if(request('mustNot')==null)
+        {
             $exclude = 'ietsOnwaarschijnlijkOnozel';
-        } else {
-        $exclude = request('mustNot');}
+        }
+        else 
+        {
+        $exclude = request('mustNot');
+        } */
+        $exclude = request('mustNot');
        
         //$exclude = request('mustNot');
 

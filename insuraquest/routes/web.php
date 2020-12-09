@@ -23,6 +23,9 @@ Route::get('/', function () {
 Route::get('/es', function () {
     return view('pages/elasticsearch');
 });
+Route::get('/estest', function () {
+    return view('pages/elasticsearchtest');
+});
 
 Route::get('/create', 'QueryController@create');
 Route::post('/create', 'QueryController@show');

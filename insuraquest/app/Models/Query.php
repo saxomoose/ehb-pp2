@@ -80,27 +80,39 @@ $this->params = [
 
 
 // Bool query based only on content (full text search)
-         $this->params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'bool' => [
-                        'must' => [
-                            [ 'match' => [ 'content' => $search ] ]
-                        ],
-                        'must_not' => 
-                            ['match' => ['content' => $exclude]]            
-                    ]
+/* $this->params = [
+    'index' => 'insuraquest',
+    'body' => [
+        'query' => [
+            'bool' => [
+                'must' => [
+                    [ 'match' => [ 'content' => $search ] ]
                 ]
             ]
-        ];
- 
+        ]
+    ]
+];
+  */
+/* $this->params = [
+    'index' => 'insuraquest',
+    'body' => [
+        'query' => [
+            'bool' => [
+            ]
+        ]
+    ]
+];
+if($search!=null)
+{
+    $this->params['body']['query']['bool'] += ['must' => ['match' => ['content' => $search]]];
+}
+  */
 // When you use only one match inside a bool must clause, there is no difference with the match query.
 // The bool clause is useful when you want to combine multiple (boolean) criteria. Bool supports criteria: must, must_not, filter, should.
 // - must means: Clauses that must match for the document to be included.
 // - should means: If these clauses match, they increase the _score; otherwise, they have no effect. They are simply used to refine the relevance score for each document.
 
-// Bool query
+// Bool query with 2 must statements
 /*        $this->params = [
                     'index' => 'insuraquest',
                     'body' => [
@@ -117,6 +129,68 @@ $this->params = [
             array_push($this->params['body']['query']['bool']['must'], $value);
         }
 */
+// Bool query with must and must_not statement
+/* $this->params = [
+    'index' => 'insuraquest',
+    'body' => [
+        'query' => [
+            'bool' => [
+                'must' => [
+                    [ 'match' => [ 'content' => $search ] ]
+                ],
+                'must_not' => 
+                    ['match' => ['content' => $exclude]]            
+            ]
+        ]
+    ]
+];
+ */
+// Bool query with must statement and must_not embedded in if-statement 
+/* $this->params = [
+    'index' => 'insuraquest',
+    'body' => [
+        'query' => [
+            'bool' => [
+                'must' => [
+                    [ 'match' => [ 'content' => $search ] ]
+                ]     
+            ]
+        ]
+    ]
+];
+
+if($exclude!=null)
+{
+    $this->params['body']['query']['bool'] += ['must_not' => ['match' => ['content' => $exclude]]];
+}
+ */
+
+$this->params = [
+    'index' => 'insuraquest',
+    'body' => [
+        'query' => [
+            'bool' => [
+            ]
+        ]
+    ]
+];
+if($search!=null)
+{
+    $this->params['body']['query']['bool'] += ['must' => []];
+    array_push($this->params['body']['query']['bool']['must'], ['match' => ['content' => $search]]);
+/*     if($arr!=null)
+    {
+        foreach($arr as $key => $value)
+        {
+            array_push($this->params['body']['query']['bool']['must'], $value);
+        }
+    } */
+}
+if($exclude!=null)
+{
+    $this->params['body']['query']['bool'] += ['must_not' => ['match' => ['content' => $exclude]]];
+}
+ 
 /*      //voorbeeld van hardcoded parameters. Let wel: de must array is geen associative array, maar heeft als "keys" een klassieke index met als value opnieuw een array.
         $params = [
             'index' => 'insuraquest',
