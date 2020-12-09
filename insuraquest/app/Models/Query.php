@@ -40,6 +40,7 @@ class Query extends Model
             ]
         ];
 */
+/* 
 $this->params = [
     'index' => 'insuraquest',
     'body' => [
@@ -59,6 +60,19 @@ $this->params = [
         ]
     ]
 ];
+ */
+$this->params = [
+    'index' => 'insuraquest',
+    'body' => [
+        'query' => [
+            'match' => [
+                'content' => $search
+            ]
+        ]
+    ]
+];
+
+
 // Bool query based only on content (full text search)
 /*         $this->params = [
             'index' => 'insuraquest',
@@ -110,5 +124,23 @@ $this->params = [
             ]
         ];
  */
+        $this->addHighlight();
     }
+
+    public function addHighlight()
+    {
+        $highlight = [
+            'highlight' => [
+            'fields' => [ 
+                'content' => [
+                    'require_field_match' => false,
+                    'number_of_fragments' => 5,
+                    'fragment_size' => 300
+                    ]
+                ]
+            ]
+        ];
+        $this->params['body'] += $highlight;
+    }
+
 }
