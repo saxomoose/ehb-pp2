@@ -53,7 +53,18 @@ class QueryController extends Controller
         $cb1 = request('leven');
         $cb2 = request('Nederlands');
         $arr = [[ 'match' => [ 'content' => $search ] ], [ 'match' => [ 'external.tag' => $cb1 ] ]];
-        $exclude = request('mustNot');
+        
+        if(request('mustNot')==null){
+            $exclude = 'ietsOnwaarschijnlijkOnozel';
+        } else {
+        $exclude = request('mustNot');}
+       
+        //$exclude = request('mustNot');
+
+        //Kan ook?:
+        //[[ 'match' => [ 'must_not' => $exclude ] ]
+        
+        
         //dump($search);
 
         $hosts = [
