@@ -15,7 +15,7 @@ class CreateIssuersTable extends Migration
     public function up()
     {
         Schema::create('issuers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->string('value');
         });

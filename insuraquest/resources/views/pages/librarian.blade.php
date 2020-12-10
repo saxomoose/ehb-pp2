@@ -2,6 +2,8 @@
 use Illuminate\Support\Facades\DB;
 $languages = DB::select('select * from languages');
 $issuers = DB::select('select * from issuers');
+$categories = DB::select('select * from categories');
+$keywords = DB::select('select * from keywords');
 ?>
 
 <x-app-layout>
@@ -89,25 +91,21 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 
                                     <label class="block">
                                         <span class="text-gray-700">Category</span>
-                                        <select class="form-select block w-full mt-1" name="category">
-                                            <option value="wetgeving">Wetgeving</option>
-                                            <option value="rechtspraak">Rechtspraak</option>
-                                            <option value="rechtsleer">Rechtsleer</option>
+                                        <select class="form-select block w-full mt-1 " name="categorie" id="categorie">
+                                       
+                                        @foreach($categories as $category )
+                                        <option value="{{ $category->name }}">{{ $category->value }}</option>
+                                        @endforeach
                                         </select>
                                     </label>
 
                                     <label class="block">
                                         <span class="text-gray-700">Keyword</span>
-                                        <select class="form-select block w-full mt-1" name="keyword">
-                                            <option value="auto">Auto</option>
-                                            <option value="brand">Brand</option>
-                                            <option value="leven">Leven</option>
-                                            <option value="gezondheidszorgen">Gezondheidszorgen</option>
-                                            <option value="rechtsbijstand">Rechtsbijstand</option>
-                                            <option value="annulatie">Annulatie</option>
-                                            <option value="bijstand">Bijstand</option>
-                                            <option value="nvt">NVT</option>
-
+                                        <select class="form-select block w-full mt-1 " name="keyword" id="keyword">
+                                       
+                                        @foreach($keywords as $keyword )
+                                        <option value="{{ $keyword->name }}">{{ $keyword->value }}</option>
+                                        @endforeach
                                         </select>
                                     </label>
 
