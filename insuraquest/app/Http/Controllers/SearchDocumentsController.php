@@ -24,7 +24,7 @@ class SearchDocumentsController extends Controller
         $datefrom = $request->input('date-from');
         $dateuntil = $request->input('date-until');
 
-        $response = 'You searched for: ' .$searchtext .',' .implode(",", $language) .',' .implode(",", $issuer).',' .implode(",", $category).',' .implode(",", $keyword) .',' .$datefrom .$dateuntil;
+        //$response = 'You searched for: ' .$searchtext .',' .implode(",", $language) .',' .implode(",", $issuer).',' .implode(",", $category).',' .implode(",", $keyword) .',' .$datefrom .$dateuntil;
 
         // curl -XGET 'localhost:9200/my_index/_search' -d '{"query" : { "match" : {
         //             "testField" : "abc"

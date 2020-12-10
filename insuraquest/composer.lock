@@ -3180,6 +3180,16 @@
             "license": [
                 "MIT"
             ],
+
+
+            "description": "A PHP library for generating and working with universally unique identifiers (UUIDs).",
+            "homepage": "https://github.com/ramsey/uuid",
+            "keywords": [
+                "guid",
+                "identifier",
+                "uuid"
+            ],
+
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
                 "rss": "https://github.com/ramsey/uuid/releases.atom",
@@ -3191,17 +3201,7 @@
                     "homepage": "https://snapappointments.com"
                 }
             ],
-            "description": "The jQuery plugin that brings select elements into the 21st century with intuitive multiselection, searching, and much more. Now with Bootstrap 4 support.",
-            "homepage": "https://developer.snapappointments.com/bootstrap-select",
-            "keywords": [
-                "bootstrap",
-                "dropdown",
-                "form",
-                "javascript",
-                "jquery",
-                "replacement",
-                "select"
-            ],
+
             "time": "2020-06-26T18:04:14+00:00"
         },
         {
