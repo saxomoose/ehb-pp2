@@ -7,3 +7,31 @@ Plugin toegevoegd (tailwind.config.js) om de layout van forms in Tailwind te kun
 https://tailwindcss-custom-forms.netlify.app/
 
 
+#2
+
+Team pagina aangemaakt
+
+#3
+
+Mail feature toegevoegd.
+
+Bijgevoegde files zijn
+- MailController.php
+- EmailInsuraquest.php
+- insuraEmail.blade.php
+- web.php
+
+Commands used
+Laravel Mailable Markdown class
+used for creating emails.
+collects data we need to send and passes to the view
+ php artisan make:mail EmailInsuraquest --markdown=Email.insuraEmail
+
+Mail controller, essentially we will define the have the logic to display the user’s list. Run the command to create the controller.
+ php artisan make:controller MailController
+
+Om mailfunctionaliteit te testen
+ http://localhost:8000/send-email
+ -> stuurt mail naar mailTrap (account Bart)
+
+ //todo: implementatie in edit document elasticsearch met aangemaakte pdf

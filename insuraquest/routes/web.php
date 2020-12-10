@@ -71,8 +71,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         })->name('librarian');
 
         // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
-        Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload.post');
-        Route::post('/librarian.blade', 'FileUploadController@fileUploadPost');
+        Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload');
+        Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
     });
 
     //DOCUMENTATION route
@@ -84,5 +84,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/team', function(){
         return view('pages/team');
     })->name('team');
+
+    //EMAIL route
+    Route::get('/send-email', 'MailController@sendEmail')->name('send.email');
 
 });
