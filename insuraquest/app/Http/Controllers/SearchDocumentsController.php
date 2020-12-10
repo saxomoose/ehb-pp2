@@ -13,6 +13,7 @@ class SearchDocumentsController extends Controller
 
     {
         $input = $request->all();
+        dump(request()->all());
         // bij het imploden van $input krijg ik een error want er zitten arrays in de array
         // daarom gekozen om elke value apart te gaan uitpakken.
         $searchtext = $request->input('searchtext');
@@ -38,8 +39,8 @@ class SearchDocumentsController extends Controller
     $page = (new Collection($jsonResponse))->paginate(5);
 
 
-        return back()
-            ->with('success', $response)
-            ->with('result', $page);
+        //return back()
+            //->with('success', $response)
+            //->with('result', $page);
     }
 }
