@@ -49,28 +49,23 @@ class QueryController extends Controller
     public function show(Query $query)
     {
         //dump(request()->all());
-        $search = request('es');
-        $cb1 = request('leven');
-        $cb2 = request('Nederlands');
-        $arr = [[ 'match' => [ 'external.tag' => $cb1 ] ], [ 'match' => [ 'external.language' => $cb2 ] ]];
-        
-/*         if(request('mustNot')==null)
+        $search = request('searchtext');
+        $exclude = request('excludetext');
+        //$cb1 = request('leven');
+        //$cb2 = request('Nederlands');
+        //$arr = [[ 'match' => [ 'external.tag' => $cb1 ] ], [ 'match' => [ 'external.language' => $cb2 ] ]];
+        //$languages = request('language');
+        $languages = [ 'dutch', 'french' ];
+/*         $arr = [];
+        if ($languages != null)
         {
-            $exclude = 'ietsOnwaarschijnlijkOnozel';
-        }
-        else 
-        {
-        $exclude = request('mustNot');
+            foreach($languages as $key => $value)
+            {
+                array_push($arr, [ 'match' => [ 'external.language' => $value ] ]);
+            }
         } */
-        $exclude = request('mustNot');
-       
-        //$exclude = request('mustNot');
-
-        //Kan ook?:
-        //[[ 'match' => [ 'must_not' => $exclude ] ]
-        
-        
-        //dump($search);
+        //print_r($languages);
+        //print_r($arr);
 
         $hosts = [
             'host' => '10.3.50.7',
@@ -83,20 +78,20 @@ class QueryController extends Controller
                     ->build();
 
         $query = new Query();
-        $query->setParams($search, $arr, $exclude);
+        $query->setParams($search, $languages, $exclude);
 
-        $response = $client->search($query->params);
+//        $response = $client->search($query->params);
 
         print_r($query->params);
 
         //dump($response);
         //dump($response['hits']['hits'][0]['highlight']['content']);
-        $results = $response['hits']['hits'];
+//        $results = $response['hits']['hits'];
         //dump($results);
-        return view('pages.query.show', [
+/*         return view('pages.query.show', [
                             'hits' => $response['hits']['total'],
                             'results' => $results
-                    ]);
+                    ]); */
 
 /*
         //*Example based on libcurl, a library created by Daniel Stenberg, that allows you to connect and communicate to many different types of servers

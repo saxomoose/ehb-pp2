@@ -11,7 +11,7 @@ class Query extends Model
 
     var $params;
 
-    public function setParams($search, $arr, $exclude)
+    public function setParams($search, $languages, $exclude)
     {
 
 // Match query based on content (full text search)
@@ -164,6 +164,26 @@ if($exclude!=null)
     $this->params['body']['query']['bool'] += ['must_not' => ['match' => ['content' => $exclude]]];
 }
  */
+/* 
+$this->params = [
+    'index' => 'insuraquest',
+    'body' => [
+        'query' => [
+            'bool' => [
+            ]
+        ]
+    ]
+];
+if($search!=null)
+{
+    $this->params['body']['query']['bool'] += ['must' => []];
+    array_push($this->params['body']['query']['bool']['must'], ['match' => ['content' => $search]]);
+}
+if($exclude!=null)
+{
+    $this->params['body']['query']['bool'] += ['must_not' => ['match' => ['content' => $exclude]]];
+}
+ */
 
 $this->params = [
     'index' => 'insuraquest',
@@ -178,13 +198,13 @@ if($search!=null)
 {
     $this->params['body']['query']['bool'] += ['must' => []];
     array_push($this->params['body']['query']['bool']['must'], ['match' => ['content' => $search]]);
-/*     if($arr!=null)
+    if ($languages != null)
     {
-        foreach($arr as $key => $value)
+        foreach($languages as $key => $value)
         {
-            array_push($this->params['body']['query']['bool']['must'], $value);
+            array_push($this->params['body']['query']['bool']['must'], [ 'match' => [ 'external.language' => $value ] ]);
         }
-    } */
+    }
 }
 if($exclude!=null)
 {
