@@ -39,13 +39,18 @@ class FileUploadController extends Controller
 
         $fileName = time().'.'.$request->file->extension();  
     
+        $request->file->move(public_path('uploads/pdf'), $fileName);
 
-        $request->file->move(public_path('uploads'), $fileName);
+        // crrate json form UploadForm and store in uploads/json folder
+        $data = UploadFile::create($request->all());
+        $jsonData = json_encode($data);
+        file_put_contents("./uploads/json/".time().'.json', $jsonData);
+        
 
         return back()
 
             ->with('success','File upload was successfully!')
-
             ->with('file',$fileName);
+
     }
 }
