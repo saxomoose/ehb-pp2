@@ -25,7 +25,7 @@
                         <input type="text" class="form-control" name="excludetext" placeholder="Words to exclude from search">
                     </div>
                 </div>
-                <p> Select filters before quering search. Press shift to select multiple values. </p>
+                <p> Select filters before quering search. </p>
 
                 <div class="form-row">
                      <div class="form-group col-auto">

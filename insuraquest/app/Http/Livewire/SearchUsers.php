@@ -22,7 +22,7 @@ class SearchUsers extends Component
             ->where('name', 'LIKE', "%{$this->search}%")
             ->orWhere('email', 'LIKE', "%{$this->search}%")
             ->orWhere('type', 'LIKE', "%{$this->search}%")
-            ->paginate(10),
+            ->paginate(5),
         ]);
     }
 }
