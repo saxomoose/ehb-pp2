@@ -21,6 +21,7 @@ class SearchUsers extends Component
             'users' => DB::table('users')
             ->where('name', 'LIKE', "%{$this->search}%")
             ->orWhere('email', 'LIKE', "%{$this->search}%")
+            ->orWhere('type', 'LIKE', "%{$this->search}%")
             ->paginate(10),
         ]);
     }

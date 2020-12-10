@@ -5,11 +5,11 @@
         </h2>
     </x-slot>
     <div class="container mx-auto px-32">
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     {{-- create component for librarian page --}}
-
                     @can('isLibrarian', App\Models\User::class)
                     <p>You are authorized to view librarian page</p>
                     <!-- The Current User Can Upload files -->
@@ -18,8 +18,10 @@
                     <p>You are not authorized to view librarian page</p>
                     @endcannot
                 </div>
+               
 
-                {{-- Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
+{{-- 
+Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 <> : html element -> voor de labels  ("title", "language", "date of publication", "issuer", "category", "keywords")
 " " : name
 [ ] : value
@@ -29,10 +31,12 @@
  "date_published": <input type="date"> (YYYY-MM-DD);
  "issuer": <select><option> [ EU, BE, Vlaams Gewest, Waals Gewest, Brussels Hoofdstedelijk Gewest, Grondwettelijk hof, Hof van cassatie, Raad van state, Hof van beroep, Arbeidshof, Rechtbank van eerste aanleg, Arbeidsrechtbank, Ondernemingsrechtbank, Politierechtbank, Vredegerecht];
  "category": <select><option>[wetgeving, rechtspraak, rechtsleer];
- "keyword": <select><option>[auto, brand, leven, gezondheidszorgen, rechtsbijstand, annulatie en bijstand, nvt] --}}
+ "keyword": <select><option>[auto, brand, leven, gezondheidszorgen, rechtsbijstand, annulatie en bijstand, nvt] 
+--}}
 
             </div>
         </div>
+
         <div class="py-12">
             <form action="{{ route('file.upload.post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -82,6 +86,7 @@
                                             <option value="ondernemingsrechtbank">Ondernemingsrechtbank</option>
                                             <option value="politierechtbank">Politierechtbank</option>
                                             <option value="vredegerecht">Vredegerecht</option>
+
                                         </select>
                                     </label>
 
