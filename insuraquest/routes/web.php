@@ -85,4 +85,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         return view('pages/team');
     })->name('team');
 
+
+ //SEARCH route
+
+Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')->middleware('can:isUser,App\Models\User');
+
+
 });
