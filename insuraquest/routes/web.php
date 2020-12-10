@@ -21,47 +21,6 @@ Route::get('/', function () {
 });
 
 
-<<<<<<< HEAD
-Route::middleware(['auth:sanctum', 'verified'])->get('/search', function () {
-    return view('pages/search');
-})->name('search');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/admin', function () {
-    return view('pages/admin');
-})->name('admin');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/librarian', function () {
-    return view('pages/librarian');
-})->name('librarian');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/documentation', function () {
-    return view('pages/documentation');
-})->name('documentation');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/team', function () {
-    return view('pages/team');
-})->name('team');
-
-// Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
-// Middleware acts as a bridge between a request and a response. It is a type of filtering mechanism.
-// hier gebruiken we het om de librarian page enkel toe te laten voor profiel 'librarian'
-Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload')->middleware('can:isLibrarian,App\Models\User');
-Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post')->middleware('can:isLibrarian,App\Models\User');
-
-// admin routes
- Route::name('admin.')->group(function() {
-
-    Route::get('/changetype/{id}/{newtype}', [
-        'uses' => 'AdminController@getType',
-        'as' => 'type'
-    ])->middleware('can:isAdmin,App\Models\User');
-
-    Route::get('/deleteuser/{id}', [
-        'uses' => 'AdminController@getDeleteUser',
-        'as' => 'deleteuser'
-    ])->middleware('can:isAdmin,App\Models\User');
- });
-=======
 //controleert of de user is ingelogd. Zoniet redirect hij naar de login page.
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
   
@@ -125,6 +84,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/team', function(){
         return view('pages/team');
     })->name('team');
->>>>>>> e5d6a6936d46621b37d76d086e83c4813dfb3b99
 
 });
