@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 //controleert of de user is ingelogd. Zoniet redirect hij naar de login page.
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
-  
+
   // ES Routes
   Route::get('/es', function () {
     return view('pages/elasticsearch');
@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
   Route::post('/create', 'QueryController@show');
   //Route::get('/edit', 'DocumentsController@edit'); -> om de tags van een document te wijzigen
   //Route::post('/edit', 'DocumentsController@store');
-  
+
 
     //ADMIN routes - checks if user has admin type, otherwise throws 403 unauthorized
     Route::middleware(['can:isAdmin,App\Models\User'])->group(function(){
@@ -84,5 +84,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/team', function(){
         return view('pages/team');
     })->name('team');
+
+
+ //SEARCH route
+
+Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')->middleware('can:isUser,App\Models\User');
+
 
 });
