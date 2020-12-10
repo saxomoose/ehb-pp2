@@ -8,7 +8,6 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-<<<<<<< HEAD
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     {{-- create component for librarian page --}}
                     @can('isLibrarian', App\Models\User::class)
@@ -19,9 +18,7 @@
                     <p>You are not authorized to view librarian page</p>
                     @endcannot
                 </div>
-=======
                
->>>>>>> e5d6a6936d46621b37d76d086e83c4813dfb3b99
 
 {{-- 
 Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
