@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Elasticsearch\ClientBuilder;
+use Illuminate\Session\Store;
 
 class DocumentsController extends Controller
 {
@@ -42,43 +43,36 @@ class DocumentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Document  $document
+     * @param Store $session
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-
         $hosts = [
-          'host' => '10.3.50.7',
-          'port' => '9200',
-          'scheme' => 'http',
-          ];
+            'host' => '10.3.50.7',
+            'port' => '9200',
+            'scheme' => 'http',
+        ];
 
         $client = ClientBuilder::create()
-        ->setHosts($hosts)
-        ->build();
+            ->setHosts($hosts)
+            ->build();
 
         $params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'match' => [
-                        'content' => 'specifieke verzekering levensverzekering'
+                'index' => 'insuraquest',
+                'body' => [
+                    'query' => [
+                        'match' => [
+                            '_id' => $id
                     ]
                 ]
             ]
         ];
 
         $response = $client->search($params);
-        echo('totaal aantal resultaten: '.$response['hits']['total']);
+        $result = $response['hits']['hits'][0];
 
-        $indices = $response['hits']['hits'];
-        foreach($indices as $index)
-        {
-            print_r($index['_source']['content']);
-        }
-
-        return view('documents.show', ['document' => $response]); //te checken hoe deze structuur in elkaar zit!!!
+        return view('pages.document.show', ['result' => $result]);
 
 
     }

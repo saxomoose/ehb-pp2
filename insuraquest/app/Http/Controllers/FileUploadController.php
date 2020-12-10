@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 use GuzzleHttp\Client;
 
@@ -39,7 +38,7 @@ class FileUploadController extends Controller
         ]);
 
         $file = $request->file('file');
-        $pathname = $file->store('uploads');
+        $pathname = $file->store('public');
         $fully_qualified_pathname = storage_path('app/' . $pathname);
         $client = new Client();
         try {
