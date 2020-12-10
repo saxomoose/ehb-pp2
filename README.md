@@ -3,12 +3,9 @@
 Insuraquest
 ===========
 
-Project in the context of a school project: Erasmumshogeschool Brussel, Toegepaste Informatica, Programming Project 2, Group 2.
-
+Project in the context of studies at Erasmumshogeschool Brussel, Toegepaste Informatica - Programming Project 2, Group 2.
 Search engine application for insurance documents.
-
 Insurance companies store documents on legislation, jurisprudence and legal doctrine in their particular field.
-
 The goal is to provide employees an easy-to-use search engine application based on the algorythms of the Elasticsearch framework.
 
 
@@ -40,38 +37,34 @@ Table of Contents
 Features
 --------
 
- - One-to-one mapping with REST API and other language clients
- - Configurable, automatic discovery of cluster nodes
- - Persistent, Keep-Alive connections (within the lifetime of the script)
- - Load balancing (with pluggable selection strategy) across all available nodes. Defaults to round-robin
- - Pluggable connection pools to offer different connection strategies
- - Generalized, pluggable architecture - most components can be replaced with your own custom class if specialized behavior is required
- - Option to use asynchronous future, which enables parallel execution of curl requests to multiple nodes
-
-
-**Note:** [X-Pack](https://www.elastic.co/what-is/open-x-pack) endpoints are included from elasticsearch-php 7.7+.
-
+ - Registry and login of users
+ - Management of roles and authorisations: guest, user, librarian, admin, superadmin
+ - Upload of documents in .pdf, .png or .jpeg format on server location
+ - At upload, the librarian enters all metadata (tags) with the upload
+ - Documents are picked up by fsCrawler, converted to json and presented, together with all the manual metadata, to the Elasticsearch stack for indexing
+ - Elasticsearch stores all documents on index "insuraquest" in json format  
+ - All users (except for guests) can perform ful text searches on content and add filters based on criteria such as language, issuer, insurance type, etc.
+ - Search results are shown in order of relevance (highest scores are shown on top); highlighting leads to rendering only some fragments of the content 
+ - Full reading of the document is only a click away.
+ - Modification of tags 
+ - Tables related to users and auhorisations as well as metadata options are stored in a SQL database
 
 Components
 ----------
 
-| Elasticsearch Version | Elasticsearch-PHP Branch |
+| Component             | Version                  |
 | --------------------- | ------------------------ |
-| >= 7.x                | 7.x                      |
-| >= 6.6, < 7.0         | 6.7.x                    |
-| >= 6.0, < 6.6         | 6.5.x                    |
-| >= 5.0, < 6.0         | 5.0                      |
-| >= 2.0, < 5.0         | 1.0 or 2.0               |
-| >= 1.0, < 2.0         | 1.0 or 2.0               |
-| <= 0.90.x             | 0.4                      |
+| Linux Ubuntu          |                          |
+| FsCrawler             |                          |
+| Elasticsearch         | 6.8                      |
+| Elasticsearch-PHP     | 6.7                      |
+| PHP                   | 7.4.10 (cli)             |
+| Composer              | 2.0.6                    |
+| Laravel Installer     | 4.1.0                    |
+| MySQL                 |                          |
 
- - If you are using Elasticsearch 7.x you can use use Elasticsearch-PHP 7.x branch
- - If you are using Elasticsearch 6.6 to 6.7, use Elasticsearch-PHP 6.7.x branch.
- - If you are using Elasticsearch 6.0 to 6.5, use Elasticsearch-PHP 6.5.x branch.
- - If you are using Elasticsearch 5.x, use Elasticsearch-PHP 5.0 branch.
- - If you are using Elasticsearch 1.x or 2.x, prefer using the Elasticsearch-PHP 2.0 branch.  The 1.0 branch is compatible however.
- - If you are using a version older than 1.0, you must install the `0.4` Elasticsearch-PHP branch. Since ES 0.90.x and below is now EOL, the corresponding `0.4` branch will not receive any more development or bugfixes.  Please upgrade.
- - You should never use Elasticsearch-PHP Master branch, as it tracks Elasticsearch master and may contain incomplete features or breaks in backwards compatibility. Only use ES-PHP master if you are developing against ES master for some reason.
+**Note:** fsCrawler vXXXX is only compatible with Elasticsearch 6.8. Consequently, require package Elasticsearch-PHP v6.7 in your Laravel composer.json file 
+
 
 Documentation
 --------------
@@ -417,16 +410,6 @@ $client = $builder->build();
 // Do a request and you'll get back the 'body' response above
 ```
 
-Contributing
-============
-
-If you want to contribute to this project you need to subscribe a [Contributor Agreement](https://www.elastic.co/contributor-agreement).
-If you want to send a PR for version `Y` please use the `Y.x` branch. For instance if you want to send a PR for **elasticsearch-php 7** use the `7.x` branch.
-
-Never send PR to `master` unless you want to contribute to the development version of the client (`master` represents the next major version).
-
-Each PR should include a **unit test** using [PHPUnit](https://phpunit.de/). If you are not familiar with PHPUnit you can have a look at this [reference](https://phpunit.readthedocs.io/en/7.0/). 
-
 Wrap up
 =======
 
@@ -437,47 +420,11 @@ You'll also notice that the client is configured in a manner that facilitates ea
 Check out the rest of the [Documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html) to see how the entire client works.
 
 
-Available Licenses
+License
 -------
 
-Starting with version 1.3.1, Elasticsearch-PHP is available under two licenses: Apache v2.0 and LGPL v2.1.  Versions
-prior to 1.3.1 are still licensed with only Apache v2.0.
-
+Please note that this project is for use within the school context.
+For further development, please contact te  
 The user may choose which license they wish to use.  Since there is no discriminating executable or distribution bundle
 to differentiate licensing, the user should document their license choice externally, in case the library is re-distributed.
 If no explicit choice is made, assumption is that redistribution obeys rules of both licenses.
-
-### Contributions
-All contributions to the library are to be so that they can be licensed under both licenses.
-
-Apache v2.0 License:
->Copyright 2013-2016 Elasticsearch
->
->Licensed under the Apache License, Version 2.0 (the "License");
->you may not use this file except in compliance with the License.
->You may obtain a copy of the License at
->
->    http://www.apache.org/licenses/LICENSE-2.0
->
->Unless required by applicable law or agreed to in writing, software
->distributed under the License is distributed on an "AS IS" BASIS,
->WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
->See the License for the specific language governing permissions and
->limitations under the License.
-
-LGPL v2.1 Notice:
->Copyright (C) 2013-2016 Elasticsearch
->
->This library is free software; you can redistribute it and/or
->modify it under the terms of the GNU Lesser General Public
->License as published by the Free Software Foundation; either
->version 2.1 of the License, or (at your option) any later version.
->
->This library is distributed in the hope that it will be useful,
->but WITHOUT ANY WARRANTY; without even the implied warranty of
->MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
->Lesser General Public License for more details.
->
->You should have received a copy of the GNU Lesser General Public
->License along with this library; if not, write to the Free Software
->Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
