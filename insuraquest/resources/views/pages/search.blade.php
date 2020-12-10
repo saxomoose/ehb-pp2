@@ -7,10 +7,23 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                {{-- Create compenent for search page --}}
 
-            </div>
+            <div class=" p-8 bg-white overflow-hidden shadow-xl sm:rounded-lg border-8">
+                <div>
+                    {{-- Create compenent for search page --}}
+                    @livewire('show-search-doc')
+
+                        @if ($r = Session::get('result'))
+                        <div >
+                        @foreach($r as $item)
+                        <p>
+                        {{$item}}</p>
+                        @endforeach
+                        {{ $r->links() }}
+                        </div>
+                        @endif
+                </div>
+           </div>
         </div>
     </div>
 </x-app-layout>
