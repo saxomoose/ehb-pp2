@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Query;
 use Illuminate\Http\Request;
 use Elasticsearch\ClientBuilder;
+use App\Models\Language;
+use App\Models\Issuer;
+use App\Models\Category;
+use App\Models\Keyword;
 
 class QueryController extends Controller
 {
@@ -25,7 +29,17 @@ class QueryController extends Controller
      */
     public function create()
     {
-        return view('pages.query.create');
+        $languages = Language::get();
+        $issuers = Issuer::get();
+        $categories = Category::get();
+        $keywords = Keyword::get();
+        
+        return view('pages.query.create', [
+                'languages' => $languages,
+                'issuers' => $issuers,
+                'categories' => $categories,
+                'keywords' => $keywords
+                ]);
     }
 
     /**

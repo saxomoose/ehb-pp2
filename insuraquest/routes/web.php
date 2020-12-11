@@ -62,10 +62,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     //SEARCH routes
     Route::middleware(['can:isUser,App\Models\User'])->group(function(){
         //Once search page is asked for, we get the showSearch function to work
-            Route::get('/search', 'SearchDocumentsController@showSearch')->name('search');
+            Route::get('/search', 'QueryController@create')->name('search');
 
             //Once search button is clicked, we get the postSearch function to work
-            Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')
+            Route::post('/search', 'QueryController@show')->name('documentsearch')
             ;});
    
     //LIBRARIAN routes
