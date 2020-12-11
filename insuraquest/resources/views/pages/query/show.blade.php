@@ -23,8 +23,7 @@
                 <p class="lead">{!! $highlight !!}</p>
                 @endforeach
                 <div class="container col text-right">
-                    <a class="btn btn-primary btn-sm " href="#" role="button">Read the full document</a>
-                    <a class="btn btn-primary btn-sm " href="#" role="button">Modify tags</a>
+                    <a class="btn btn-primary btn-sm " href="{{route('document', ['id' => $result['_id']])}}" type="submit">Read the full document</a>
                 </div>
             </div>
         </div>

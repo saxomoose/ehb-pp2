@@ -3,14 +3,11 @@
 Insuraquest
 ===========
 
-Project in the context of studies at Erasmumshogeschool Brussel, Toegepaste Informatica - Programming Project 2, Group 2.
+A school project from course Programming Project 2, Group 2, Professional Bachelor "Applied IT" at Erasmumshogeschool Brussel.
+
 Search engine application for insurance documents.
 Insurance companies store documents on legislation, jurisprudence and legal doctrine in their particular field.
 The goal is to provide employees an easy-to-use search engine application based on the algorythms of the Elasticsearch framework.
-
-
-- [Usage](https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html)
-- [Watcher](https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api.html)
 
 Table of Contents
 =================
@@ -64,7 +61,6 @@ Components
 | MySQL                 |                          |
 
 **Note:** fsCrawler vXXXX is only compatible with Elasticsearch 6.8. Consequently, require package Elasticsearch-PHP v6.7 in your Laravel composer.json file 
-
 
 Documentation
 --------------

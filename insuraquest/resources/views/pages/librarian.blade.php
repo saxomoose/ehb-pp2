@@ -20,18 +20,20 @@
                 </div>
                
 
+
 {{-- 
+
 Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 <> : html element -> voor de labels  ("title", "language", "date of publication", "issuer", "category", "keywords")
 " " : name
 [ ] : value
-( ) : verplichte format 
+( ) : verplichte format
  "title": <textarea>;
 "language": <select><option>[Frans, Nederlands];
  "date_published": <input type="date"> (YYYY-MM-DD);
  "issuer": <select><option> [ EU, BE, Vlaams Gewest, Waals Gewest, Brussels Hoofdstedelijk Gewest, Grondwettelijk hof, Hof van cassatie, Raad van state, Hof van beroep, Arbeidshof, Rechtbank van eerste aanleg, Arbeidsrechtbank, Ondernemingsrechtbank, Politierechtbank, Vredegerecht];
  "category": <select><option>[wetgeving, rechtspraak, rechtsleer];
- "keyword": <select><option>[auto, brand, leven, gezondheidszorgen, rechtsbijstand, annulatie en bijstand, nvt] 
+ "keyword": <select><option>[auto, brand, leven, gezondheidszorgen, rechtsbijstand, annulatie en bijstand, nvt]
 --}}
 
             </div>
@@ -93,12 +95,14 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                     </label>
 
                                     <label class="block">
+
                                         <span class="text-gray-700">Keyword</span>
                                         <select class="form-select block w-full mt-1 " name="keyword" id="keyword">
                                        
                                         @foreach($keywords as $keyword )
                                         <option value="{{ $keyword->name }}">{{ $keyword->value }}</option>
                                         @endforeach
+
                                         </select>
                                     </label>
 

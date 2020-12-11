@@ -7,6 +7,8 @@ Plugin toegevoegd (tailwind.config.js) om de layout van forms in Tailwind te kun
 https://tailwindcss-custom-forms.netlify.app/
 
 
+
+
 #2
 
 Team pagina aangemaakt
@@ -15,7 +17,7 @@ Team pagina aangemaakt
 
 Mail feature toegevoegd.
 
-Bijgevoegde files zijn
+Bijgevoegde of aangepaste files zijn
 - MailController.php
 - EmailInsuraquest.php
 - insuraEmail.blade.php

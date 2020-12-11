@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\FileUploadController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,8 +29,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
   Route::get('/create', 'QueryController@create');
   Route::post('/create', 'QueryController@show');
+
+  Route::get('/document/{id}', [
+      'uses' => 'DocumentsController@show',
+      'as' => 'document'
+  ]);
+
   //Route::get('/edit', 'DocumentsController@edit'); -> om de tags van een document te wijzigen
   //Route::post('/edit', 'DocumentsController@store');
+
+
 
 
     //ADMIN routes - checks if user has admin type, otherwise throws 403 unauthorized
@@ -74,9 +80,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::middleware(['can:isLibrarian,App\Models\User'])->group(function(){
         Route::get('/librarian', 'FileUploadController@fileUpload')->name('librarian');
 
+
         // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
         Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
-    }); 
+
+        // Routes van librarian page naar Fileuploadcontroller voor het uitsturen van input (inc. file) naar FSCrawler API
+       
+        Route::post('/document/{id}', 'DocumentsController@update')->name('document.edit');
+    });
+
 
     //DOCUMENTATION route
     Route::get('/documentation', function(){
