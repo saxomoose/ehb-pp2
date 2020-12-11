@@ -25,6 +25,7 @@
                     <li>https://jetstream.laravel.com/1.x/stacks/livewire.html#components</li>
                     <li>https://laravel-livewire.com/</li>
                     <li><a href="https://www.itsolutionstuff.com/post/laravel-8-file-upload-example-tutorialexample.html">Laravel 8 file upload tutorial</a></li>
+                    <li>https://gist.github.com/simonhamp/549e8821946e2c40a617c85d2cf5af5e</li>
                 </ul>
             </div>
         </div>

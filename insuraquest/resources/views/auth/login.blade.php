@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            {{-- Logo insuraquest nog toe te voegen --}}
-        </x-slot>
+            <x-jet-authentication-card-logo />
+            </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
 
@@ -32,12 +32,21 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+            <div >
+                <div class="row">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
+                </div>
+
+                <div class="row">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('Register') }}
+                </a>
+            </div>
+
 
                 <x-jet-button class="ml-4">
                     {{ __('Login') }}

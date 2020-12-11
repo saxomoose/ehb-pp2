@@ -5,11 +5,11 @@
         </h2>
     </x-slot>
     <div class="container mx-auto px-32">
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     {{-- create component for librarian page --}}
-
                     @can('isLibrarian', App\Models\User::class)
                     <p>You are authorized to view librarian page</p>
                     <!-- The Current User Can Upload files -->
@@ -18,22 +18,28 @@
                     <p>You are not authorized to view librarian page</p>
                     @endcannot
                 </div>
+               
 
-                {{-- Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
+
+{{-- 
+
+Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 <> : html element -> voor de labels  ("title", "language", "date of publication", "issuer", "category", "keywords")
 " " : name
 [ ] : value
-( ) : verplichte format 
+( ) : verplichte format
  "title": <textarea>;
 "language": <select><option>[Frans, Nederlands];
  "date_published": <input type="date"> (YYYY-MM-DD);
  "issuer": <select><option> [ EU, BE, Vlaams Gewest, Waals Gewest, Brussels Hoofdstedelijk Gewest, Grondwettelijk hof, Hof van cassatie, Raad van state, Hof van beroep, Arbeidshof, Rechtbank van eerste aanleg, Arbeidsrechtbank, Ondernemingsrechtbank, Politierechtbank, Vredegerecht];
  "category": <select><option>[wetgeving, rechtspraak, rechtsleer];
- "keyword": <select><option>[auto, brand, leven, gezondheidszorgen, rechtsbijstand, annulatie en bijstand, nvt] --}}
+ "keyword": <select><option>[auto, brand, leven, gezondheidszorgen, rechtsbijstand, annulatie en bijstand, nvt]
+--}}
 
             </div>
         </div>
-        <div class="py-12">
+
+        <div class="py-12">            
             <form action="{{ route('file.upload.post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -53,9 +59,11 @@
 
                                     <label class="block">
                                         <span class="text-gray-700">Language</span>
-                                        <select class="form-select block w-full mt-1" name="language">
-                                            <option value="dutch">Dutch</option>
-                                            <option value="french">French</option>
+                                        <select class="form-select block w-full mt-1 " name="language" id="language">
+                                        
+                                        @foreach($languages as $language )
+                                        <option value="{{ $language->name }}">{{ $language->value }}</option>
+                                        @endforeach
                                         </select>
                                     </label>
 
@@ -66,45 +74,34 @@
 
                                     <label class="block">
                                         <span class="text-gray-700">Issuer</span>
-                                        <select class="form-select block w-full mt-1 " name="issuer">
-                                            <option value="eu">EU</option>
-                                            <option value="be">BE</option>
-                                            <option value="vlaamsgewest">Vlaams Gewest</option>
-                                            <option value="waalsgewest">Waals Gewest</option>
-                                            <option value="brusselshoofdstedelijkgewest">Brussels Hoofdstedelijk Gewest</option>
-                                            <option value="grondwettelijkhof">Grondwettelijk hof</option>
-                                            <option value="hofvancassatie">Hof van cassatie</option>
-                                            <option value="raadvanstaat">Raad van staat</option>
-                                            <option value="hofvanberoep">Hof van beroep</option>
-                                            <option value="arbeidshof">Arbeidshof</option>
-                                            <option value="rechtbankvaneersteaanleg">Rechtbank van eerste aanleg</option>
-                                            <option value="arbeidsrechtbank">Arbeidsrechtbank</option>
-                                            <option value="ondernemingsrechtbank">Ondernemingsrechtbank</option>
-                                            <option value="politierechtbank">Politierechtbank</option>
-                                            <option value="vredegerecht">Vredegerecht</option>
+                                        
+                                        <select class="form-select block w-full mt-1 " name="issuer" id="issuer">
+                                       
+                                        @foreach($issuers as $issuer )
+                                        <option value="{{ $issuer->name }}">{{ $issuer->value }}</option>
+                                        @endforeach
                                         </select>
                                     </label>
 
                                     <label class="block">
-                                        <span class="text-gray-700">Category</span>
-                                        <select class="form-select block w-full mt-1" name="category">
-                                            <option value="wetgeving">Wetgeving</option>
-                                            <option value="rechtspraak">Rechtspraak</option>
-                                            <option value="rechtsleer">Rechtsleer</option>
+                                    <span class="text-gray-700">Category</span>
+                                        
+                                        <select class="form-select block w-full mt-1 " name="category" id="category">
+                                       
+                                        @foreach($categories as $category )
+                                        <option value="{{ $category->name }}">{{ $category->value }}</option>
+                                        @endforeach
                                         </select>
                                     </label>
 
                                     <label class="block">
+
                                         <span class="text-gray-700">Keyword</span>
-                                        <select class="form-select block w-full mt-1" name="keyword">
-                                            <option value="auto">Auto</option>
-                                            <option value="brand">Brand</option>
-                                            <option value="leven">Leven</option>
-                                            <option value="gezondheidszorgen">Gezondheidszorgen</option>
-                                            <option value="rechtsbijstand">Rechtsbijstand</option>
-                                            <option value="annulatie">Annulatie</option>
-                                            <option value="bijstand">Bijstand</option>
-                                            <option value="nvt">NVT</option>
+                                        <select class="form-select block w-full mt-1 " name="tag" id="tag">
+                                       
+                                        @foreach($keywords as $keyword )
+                                        <option value="{{ $keyword->name }}">{{ $keyword->value }}</option>
+                                        @endforeach
 
                                         </select>
                                     </label>
@@ -159,6 +156,5 @@
                         </div>
                     </div>
             </form>
-
 
 </x-app-layout>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Query;
 use Illuminate\Http\Request;
 use Elasticsearch\ClientBuilder;
-use Illuminate\Support\Str;
 
 class QueryController extends Controller
 {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3acafabda16534f66cb6df02330d78a4",
+    "content-hash": "cdcbf0bb65e0465258b38d139469703e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3180,6 +3180,8 @@
             "license": [
                 "MIT"
             ],
+
+
             "description": "A PHP library for generating and working with universally unique identifiers (UUIDs).",
             "homepage": "https://github.com/ramsey/uuid",
             "keywords": [
@@ -3187,6 +3189,7 @@
                 "identifier",
                 "uuid"
             ],
+
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
                 "rss": "https://github.com/ramsey/uuid/releases.atom",
@@ -3194,11 +3197,12 @@
             },
             "funding": [
                 {
-                    "url": "https://github.com/ramsey",
-                    "type": "github"
+                    "name": "SnapAppointments, LLC",
+                    "homepage": "https://snapappointments.com"
                 }
             ],
-            "time": "2020-08-18T17:17:46+00:00"
+
+            "time": "2020-06-26T18:04:14+00:00"
         },
         {
             "name": "react/promise",
@@ -5695,8 +5699,8 @@
                     "type": "patreon"
                 },
                 {
-                    "url": "https://tidelift.com/funding/github/packagist/voku/portable-ascii",
-                    "type": "tidelift"
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
                 }
             ],
             "time": "2020-11-12T00:07:28+00:00"

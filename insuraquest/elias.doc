@@ -31,22 +31,4 @@ GET /insuraquest/_search
 
 }
 
----
 
-curl -XGET "http://localhost:9200/_search" -H 'Content-Type: application/json' -d'
-{
-  "query": {
-    "bool": {
-      "must": {
-        "match": {
-          "text": "apple"
-        }
-      },
-      "must_not": {
-        "match": {
-          "text": "pie tart fruit crumble tree"
-        }
-      }
-    }
-  }
-}'
