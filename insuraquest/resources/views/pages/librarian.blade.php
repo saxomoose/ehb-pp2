@@ -1,11 +1,3 @@
-<?php
-use Illuminate\Support\Facades\DB;
-$languages = DB::select('select * from languages');
-$issuers = DB::select('select * from issuers');
-$categories = DB::select('select * from categories');
-$keywords = DB::select('select * from keywords');
-?>
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -90,8 +82,9 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                     </label>
 
                                     <label class="block">
-                                        <span class="text-gray-700">Category</span>
-                                        <select class="form-select block w-full mt-1 " name="categorie" id="categorie">
+                                    <span class="text-gray-700">Category</span>
+                                        
+                                        <select class="form-select block w-full mt-1 " name="categories" id="categories">
                                        
                                         @foreach($categories as $category )
                                         <option value="{{ $category->name }}">{{ $category->value }}</option>
