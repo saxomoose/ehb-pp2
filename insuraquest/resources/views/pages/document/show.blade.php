@@ -30,7 +30,7 @@
                                             Category
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Keyword
+                                            Tag
                                         </th>
                                         <th scope="col" class="relative px-6 py-3">
                                             <span class="sr-only">Edit</span>
@@ -85,12 +85,14 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <hr>
-                                <div>
-                                    <iframe height="600px"
-                                            width="100%"
-                                            src= {{Storage::url($result['_source']['file']['filename'])}}>
-                                    </iframe>
+                                @can('isLibrarian', App\Models\User::class)
+                                    @include('partials.edit')
+                                @endcan
+
+                                <iframe height="600px"
+                                        width="100%"
+                                        src= {{Storage::url($result['_source']['file']['filename'])}}>
+                                </iframe>
                                 </div>
                             </div>
                         </div>
@@ -100,3 +102,4 @@
         </div>
     </div>
 </x-app-layout>
+<script src="{{url('/js/form.js')}}"></script>

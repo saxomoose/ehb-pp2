@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
         "snapappointments/bootstrap-select": "^1.13",
-        "elasticsearch/elasticsearch": "^6.7"
+        "elasticsearch/elasticsearch": "^6.7",
+        "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

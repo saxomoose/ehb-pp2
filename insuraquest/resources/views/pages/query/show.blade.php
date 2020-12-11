@@ -24,7 +24,6 @@
                 @endforeach
                 <div class="container col text-right">
                     <a class="btn btn-primary btn-sm " href="{{route('document', ['id' => $result['_id']])}}" type="submit">Read the full document</a>
-                    <a class="btn btn-primary btn-sm " href="#" role="button">Modify tags</a>
                 </div>
             </div>
         </div>
