@@ -18,14 +18,8 @@ Route::get('/', function () {
     return view('pages/welcome');
 });
 
-
 //controleert of de user is ingelogd. Zoniet redirect hij naar de login page.
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
-
-  // ES Routes
-  Route::get('/es', function () {
-    return view('pages/elasticsearch');
-  });
 
   Route::get('/create', 'QueryController@create');
   Route::post('/create', 'QueryController@show');
@@ -37,7 +31,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
   //Route::get('/edit', 'DocumentsController@edit'); -> om de tags van een document te wijzigen
   //Route::post('/edit', 'DocumentsController@store');
-
 
 
 

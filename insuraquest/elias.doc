@@ -31,21 +31,4 @@ GET /insuraquest/_search
 
 }
 
-----------
 
- <!-- <label class="block">
-                                        <span class="text-gray-700">Language</span>
-                                        <select class="form-select block w-full mt-1 " name="languages" id="languages">
-                                        
-                                        @foreach($languages as $language )
-                                        <option value="{{ $language->name }}">{{ $language->value }}</option>
-                                        @endforeach
-                                        </select>
-                                       
-                                    </label> -->
-
-                                    -------
-
--------
-
-{{ route('file.upload.post') }}
