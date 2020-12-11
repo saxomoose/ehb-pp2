@@ -59,6 +59,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     });
 
+    //Route::get('/librarian', 'FileUploadController@fileUpload')->name('librarian');
 
     //DASHBOARD route
     Route::get('/dashboard', function(){
@@ -66,23 +67,28 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     })->name('dashboard');
 
     //SEARCH routes
-    Route::get('/search', function(){
-        return view('pages/search');
-    })->name('search')->middleware('can:isUser,App\Models\User');
+    Route::middleware(['can:isUser,App\Models\User'])->group(function(){
+        //Once search page is asked for, we get the showSearch function to work
+            Route::get('/search', 'SearchDocumentsController@showSearch')->name('search');
 
+            //Once search button is clicked, we get the postSearch function to work
+            Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')
+            ;});
+   
     //LIBRARIAN routes
+    //Once librarian page is asked for, we get the fileUpload function to work
     Route::middleware(['can:isLibrarian,App\Models\User'])->group(function(){
-        Route::get('/librarian', function(){
-            return view('pages/librarian');
-        })->name('librarian');
+        Route::get('/librarian', 'FileUploadController@fileUpload')->name('librarian');
+
+
+        // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
+        Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
         // Routes van librarian page naar Fileuploadcontroller voor het uitsturen van input (inc. file) naar FSCrawler API
-        Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload.post');
-        Route::post('/librarian.blade', 'FileUploadController@fileUploadPost');
-
-
+       
         Route::post('/document/{id}', 'DocumentsController@update')->name('document.edit');
     });
+
 
     //DOCUMENTATION route
     Route::get('/documentation', function(){
@@ -93,11 +99,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/team', function(){
         return view('pages/team');
     })->name('team');
-
-
- //SEARCH route
-
-Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')->middleware('can:isUser,App\Models\User');
 
 
 });
