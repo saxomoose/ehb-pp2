@@ -85,12 +85,14 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <hr>
-                                <div>
-                                    <iframe height="600px"
-                                            width="100%"
-                                            src= {{Storage::url($result['_source']['file']['filename'])}}>
-                                    </iframe>
+                                @can('isLibrarian', App\Models\User::class)
+                                    @include('partials.edit')
+                                @endcan
+
+                                <iframe height="600px"
+                                        width="100%"
+                                        src= {{Storage::url($result['_source']['file']['filename'])}}>
+                                </iframe>
                                 </div>
                             </div>
                         </div>
@@ -100,3 +102,4 @@
         </div>
     </div>
 </x-app-layout>
+<script src="{{url('/js/form.js')}}"></script>
