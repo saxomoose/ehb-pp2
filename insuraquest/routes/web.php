@@ -61,9 +61,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     })->name('dashboard');
 
     //SEARCH routes
-    Route::get('/search', function(){
-        return view('pages/search');
-    })->name('search')->middleware('can:isUser,App\Models\User');
+    Route::middleware(['can:isUser,App\Models\User'])->group(function(){
+            Route::get('/search', 'SearchDocumentsController@showSearch')->name('search');
+            Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')
+            ;});
+   
 
     //LIBRARIAN routes
     Route::middleware(['can:isLibrarian,App\Models\User'])->group(function(){
@@ -71,8 +73,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
         // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
 
-        Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload.post');
-        Route::post('/librarian.blade', 'FileUploadController@fileUploadPost');
+        //Route::get('/librarian.blade', 'FileUploadController@fileUpload');
+        Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
     }); 
 
     //DOCUMENTATION route
@@ -88,7 +90,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
  //SEARCH route
 
-Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')->middleware('can:isUser,App\Models\User');
+
 
 
 });

@@ -18,18 +18,11 @@ class FileUploadController extends Controller
     public function fileUpload(Request $request)
 
     {
-        //$language = DB::select('select * from languages');
         $languages = Language::get();
         $issuers = Issuer::get();
         $categories = Category::get();
         $keywords = Keyword::get();
-        //dump($languages);
-        //dump($languages[0]['value']);
-       /*  foreach($languages as $key)
-        {
-            dump($key['value']);
-        } */
-
+        
         return view('pages/librarian', [
                 'languages' => $languages,
                 'issuers' => $issuers,

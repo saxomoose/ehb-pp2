@@ -5,9 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PHPUnit\Util\Json;
 use App\View\Components\Collection;
+use App\Models\Language;
+use App\Models\Issuer;
+use App\Models\Category;
+use App\Models\Keyword;
 
 class SearchDocumentsController extends Controller
 {
+
+    public function showSearch(Request $request)
+    {
+        $languages = Language::get();
+        $issuers = Issuer::get();
+        $categories = Category::get();
+        $keywords = Keyword::get();
+        
+        return view('pages/search', [
+                'languages' => $languages,
+                'issuers' => $issuers,
+                'categories' => $categories,
+                'keywords' => $keywords
+                ]);
+    }
+
 
     public function postSearch(Request $request)
 
