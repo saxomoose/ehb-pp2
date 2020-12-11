@@ -79,6 +79,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         // Routes van librarian page naar Fileuploadcontroller voor het uitsturen van input (inc. file) naar FSCrawler API
         Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload.post');
         Route::post('/librarian.blade', 'FileUploadController@fileUploadPost');
+
+
+        Route::post('/document/{id}', 'DocumentsController@update')->name('document.edit');
     });
 
     //DOCUMENTATION route

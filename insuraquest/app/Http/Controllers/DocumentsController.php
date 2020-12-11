@@ -95,9 +95,77 @@ class DocumentsController extends Controller
      * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Document $document)
+    public function update(Request $request, $id)
     {
-        //
+
+
+        $this->validate($request, [
+            'title' => 'required',
+            'language' => 'required',
+            'date' => 'required|date',
+            'issuer' => 'required',
+            'category' => 'required',
+            'tag' => 'required',
+        ], [
+            'title.required' => 'Title is required',
+            'language.required' => 'Language is required',
+            'date.required' => 'Published date is required',
+            'issuer.required' => 'Issuer is required',
+            'category.required' => 'Category is required',
+            'tag.required' => 'Tag is required',
+        ]);
+
+        $hosts = [
+            'host' => '10.3.50.7',
+            'port' => '9200',
+            'scheme' => 'http',
+        ];
+
+        $client = ClientBuilder::create()
+            ->setHosts($hosts)
+            ->build();
+
+        $params_update = [
+            'index' => 'insuraquest',
+            'type' => '_doc',
+            'id' => $id,
+            'body' => [
+                'doc' => [
+                    'external' => [
+                        'title' => $request->input('title'),
+                        'language' => $request->input('language'),
+                        'date_published' => $request->input('date'),
+                        'issuer' => $request->input('issuer'),
+                        'category' => $request->input('category'),
+                        'tag' => $request->input('tag')
+                    ]
+                ]
+            ]
+        ];
+
+        $client->update($params_update);
+
+        $params_query = [
+            'index' => 'insuraquest',
+            'body' => [
+                'query' => [
+                    'match' => [
+                        '_id' => $id
+                    ]
+                ]
+            ]
+        ];
+
+        $response = $client->search($params_query);
+        $result = $response['hits']['hits'][0];
+
+        return redirect()->route('document', ['id' => $result['_id']])
+
+            ->with('success','File edit was successful!');
+
+            //error message
+
+
     }
 
     /**

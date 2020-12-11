@@ -25,7 +25,7 @@ class FileUploadController extends Controller
             'date' => 'required|date',
             'issuer' => 'required',
             'category' => 'required',
-            'keyword' => 'required',
+            'tag' => 'required',
             'file' => 'required|mimes:pdf|max:2048'
         ], [
             'title.required' => 'Title is required',
@@ -33,7 +33,7 @@ class FileUploadController extends Controller
             'date.required' => 'Published date is required',
             'issuer.required' => 'Issurer is required',
             'category.required' => 'Category is required',
-            'keyword.required' => 'Keyword is required',
+            'tag.required' => 'Tag is required',
             'file.required' => 'A file needs to be slected'
         ]);
 
@@ -58,7 +58,7 @@ class FileUploadController extends Controller
                                     'date_published' => $request->input('date'),
                                     'issuer' => $request->input('issuer'),
                                     'category' => $request->input('category'),
-                                    'keyword' => $request->input('keyword')
+                                    'tag' => $request->input('tag')
                                 ]
                             ])
                         ]
@@ -72,5 +72,7 @@ class FileUploadController extends Controller
         return back()
 
             ->with('success','File upload was successful!');
+
+            //error message
     }
 }
