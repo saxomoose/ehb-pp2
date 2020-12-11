@@ -59,7 +59,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 
                                     <label class="block">
                                         <span class="text-gray-700">Language</span>
-                                        <select class="form-select block w-full mt-1 " name="languages" id="languages">
+                                        <select class="form-select block w-full mt-1 " name="language" id="language">
                                         
                                         @foreach($languages as $language )
                                         <option value="{{ $language->name }}">{{ $language->value }}</option>
@@ -86,7 +86,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                     <label class="block">
                                     <span class="text-gray-700">Category</span>
                                         
-                                        <select class="form-select block w-full mt-1 " name="categories" id="categories">
+                                        <select class="form-select block w-full mt-1 " name="category" id="category">
                                        
                                         @foreach($categories as $category )
                                         <option value="{{ $category->name }}">{{ $category->value }}</option>
@@ -97,7 +97,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                     <label class="block">
 
                                         <span class="text-gray-700">Keyword</span>
-                                        <select class="form-select block w-full mt-1 " name="keyword" id="keyword">
+                                        <select class="form-select block w-full mt-1 " name="tag" id="tag">
                                        
                                         @foreach($keywords as $keyword )
                                         <option value="{{ $keyword->name }}">{{ $keyword->value }}</option>
