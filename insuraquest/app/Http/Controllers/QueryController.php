@@ -55,8 +55,9 @@ class QueryController extends Controller
         //$cb2 = request('Nederlands');
         //$arr = [[ 'match' => [ 'external.tag' => $cb1 ] ], [ 'match' => [ 'external.language' => $cb2 ] ]];
         //$languages = request('language');
-        $languages = [ 'dutch', 'french' ];
-/*         $arr = [];
+        //$languages = [ 'dutch', 'french' ];
+        $languages = [ 'Nederlands' , 'french'];
+        /*         $arr = [];
         if ($languages != null)
         {
             foreach($languages as $key => $value)
@@ -80,18 +81,18 @@ class QueryController extends Controller
         $query = new Query();
         $query->setParams($search, $languages, $exclude);
 
-//        $response = $client->search($query->params);
+        $response = $client->search($query->params);
 
         print_r($query->params);
 
         //dump($response);
         //dump($response['hits']['hits'][0]['highlight']['content']);
-//        $results = $response['hits']['hits'];
+        $results = $response['hits']['hits'];
         //dump($results);
-/*         return view('pages.query.show', [
+        return view('pages.query.show', [
                             'hits' => $response['hits']['total'],
                             'results' => $results
-                    ]); */
+                    ]);
 
 /*
         //*Example based on libcurl, a library created by Daniel Stenberg, that allows you to connect and communicate to many different types of servers
