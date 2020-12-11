@@ -12,7 +12,7 @@ use App\Models\Keyword;
 
 class SearchDocumentsController extends Controller
 {
-
+    //we get the tables content and put them into variables to pass to the view, in this case, the search view
     public function showSearch(Request $request)
     {
         $languages = Language::get();

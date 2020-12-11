@@ -37,7 +37,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
             </div>
         </div>
 
-        <div class="py-12">
+        <div class="py-12">            
             <form action="{{ route('file.upload.post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

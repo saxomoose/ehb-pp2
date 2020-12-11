@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class FileUploadController extends Controller
 {
     public function fileUpload(Request $request)
-
+    //we get the tables content and put them into variables to pass to the view, in this case, the librarian view
     {
         $languages = Language::get();
         $issuers = Issuer::get();

@@ -62,18 +62,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     //SEARCH routes
     Route::middleware(['can:isUser,App\Models\User'])->group(function(){
+        //Once search page is asked for, we get the showSearch function to work
             Route::get('/search', 'SearchDocumentsController@showSearch')->name('search');
+
+            //Once search button is clicked, we get the postSearch function to work
             Route::post('/search', 'SearchDocumentsController@postSearch')->name('documentsearch')
             ;});
    
-
     //LIBRARIAN routes
+    //Once librarian page is asked for, we get the fileUpload function to work
     Route::middleware(['can:isLibrarian,App\Models\User'])->group(function(){
         Route::get('/librarian', 'FileUploadController@fileUpload')->name('librarian');
 
         // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
-
-        //Route::get('/librarian.blade', 'FileUploadController@fileUpload');
         Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
     }); 
 
@@ -86,11 +87,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/team', function(){
         return view('pages/team');
     })->name('team');
-
-
- //SEARCH route
-
-
 
 
 });
