@@ -20,13 +20,6 @@ Route::get('/', function () {
     return view('pages/welcome');
 });
 
-Route::get('/es', function () {
-    return view('pages/elasticsearch');
-});
-Route::get('/estest', function () {
-    return view('pages/elasticsearchtest');
-});
-
 Route::get('/create', 'QueryController@create');
 Route::post('/create', 'QueryController@show');
 //Route::get('/edit', 'DocumentsController@edit'); -> om de tags van een document te wijzigen

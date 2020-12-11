@@ -48,85 +48,53 @@ class QueryController extends Controller
      */
     public function show(Query $query)
     {
-        //dump(request()->all());
+        //Create variables coming from the http request
+            //dump(request()->all());
         $search = request('searchtext');
         $exclude = request('excludetext');
-        //$cb1 = request('leven');
-        //$cb2 = request('Nederlands');
-        //$arr = [[ 'match' => [ 'external.tag' => $cb1 ] ], [ 'match' => [ 'external.language' => $cb2 ] ]];
-        //$languages = request('language');
-        //$languages = [ 'dutch', 'french' ];
-        $languages = [ 'Nederlands' , 'french'];
-        /*         $arr = [];
-        if ($languages != null)
-        {
-            foreach($languages as $key => $value)
+            //$cb1 = request('leven');
+            //$cb2 = request('Nederlands');
+            //$arr = [[ 'match' => [ 'external.tag' => $cb1 ] ], [ 'match' => [ 'external.language' => $cb2 ] ]];
+            //$languages = request('language');
+            //$languages = [ 'dutch', 'french' ];
+        $languages = [ 'dutch' ];
+            /*         $arr = [];
+            if ($languages != null)
             {
-                array_push($arr, [ 'match' => [ 'external.language' => $value ] ]);
-            }
-        } */
-        //print_r($languages);
-        //print_r($arr);
+                foreach($languages as $key => $value)
+                {
+                    array_push($arr, [ 'match' => [ 'external.language' => $value ] ]);
+                }
+            } */
+            //print_r($languages);
+            //print_r($arr);
 
+        //Configure extended host for client
         $hosts = [
             'host' => '10.3.50.7',
             'port' => '9200',
-            'scheme' => 'http',
-            ];
+            'scheme' => 'http', // other option: 'https'
+            //'user' => 'username', // relevant when using https
+            //'pass' => 'password', // relevant when using https
+        ];
 
-        $client = ClientBuilder::create()
-                    ->setHosts($hosts)
-                    ->build();
+        $client = ClientBuilder::create() // Instantiate a new ClientBuilder
+                    ->setHosts($hosts) // Set the hosts
+                    ->build(); // Build the client object
 
-        $query = new Query();
-        $query->setParams($search, $languages, $exclude);
+        $query = new Query(); // Instantiate a new Query
+        $query->setParams($search, $languages, $exclude); // Set search parameters
 
         $response = $client->search($query->params);
 
         print_r($query->params);
 
         //dump($response);
-        //dump($response['hits']['hits'][0]['highlight']['content']);
-        $results = $response['hits']['hits'];
-        //dump($results);
         return view('pages.query.show', [
                             'hits' => $response['hits']['total'],
-                            'results' => $results
+                            'results' => $response['hits']['hits']
                     ]);
 
-/*
-        //*Example based on libcurl, a library created by Daniel Stenberg, that allows you to connect and communicate to many different types of servers
-        //*with many different types of protocols. libcurl currently supports the http, https, ftp, gopher, telnet, dict, file, and ldap protocols. 
-        //*libcurl also supports HTTPS certificates, HTTP POST, HTTP PUT, FTP uploading (this can also be done with PHP's ftp extension), 
-        //*HTTP form based upload, proxies, cookies, and user+password authentication.
-        //*We, however, will use the Elasticsearch-PHP API, with predefined fuction specific for Elasticsearch.
-
-        // source: https://kb.objectrocket.com/elasticsearch/how-to-use-the-search-api-for-the-elasticsearch-php-client-175
-        //require __DIR__ . '/vendor/autoload.php';
-
-        // Initialization
-        $ch=curl_init();
-
-        //$url='10.3.50.7:9200/_search?pretty';
-        $url='10.3.50.7:9200/_search?pretty';
-        $timeout=5;
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_HTTPGET, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-          'Content-Type: application/json'
-        ));
-
-        // Get URL content
-        $lines_string=curl_exec($ch);
-        // Close handle to release resources
-        curl_close($ch);
-        // Output, you can also save it locally on the server
-        echo $lines_string;
-*/
     }
 
     /**
@@ -161,10 +129,5 @@ class QueryController extends Controller
     public function destroy(Query $query)
     {
         //
-    }
-
-    public function shortText($string)
-    {
-        //code van Elias
     }
 }
