@@ -22,7 +22,7 @@ Table of Contents
     + [Index a document](#index-a-document)
     + [Get a document](#get-a-document)
     + [Search for a document](#search-for-a-document)
-    + [Search for a document](#upload-a-document)
+    + [Upload a document](#upload-a-document)
     + [Delete a document](#delete-a-document)
     + [Delete an index](#delete-an-index)
     + [Create an index](#create-an-index)
