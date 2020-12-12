@@ -61,25 +61,28 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     //SEARCH routes
     Route::middleware(['can:isUser,App\Models\User'])->group(function(){
-        //Once search page is asked for, we get the showSearch function to work
+            //Once search page is asked for, we get the showSearch function to work
             Route::get('/search', 'QueryController@create')->name('search');
 
             //Once search button is clicked, we get the postSearch function to work
             Route::post('/search', 'QueryController@show')->name('documentsearch')
             ;});
-   
+
     //LIBRARIAN routes
     //Once librarian page is asked for, we get the fileUpload function to work
     Route::middleware(['can:isLibrarian,App\Models\User'])->group(function(){
         Route::get('/librarian', 'FileUploadController@fileUpload')->name('librarian');
 
 
-        // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
+        // Routes van librarian page naar Fileuploadcontroller voor het uitsturen van input (inc. file) naar FSCrawler API
         Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
-        // Routes van librarian page naar Fileuploadcontroller voor het uitsturen van input (inc. file) naar FSCrawler API
-       
+
+        //Route tp update single document, redirects to document
         Route::post('/document/{id}', 'DocumentsController@update')->name('document.edit');
+
+        //Route to delete single document, redirects to search page
+        Route::get('/delete/{id}/{filename}', 'DocumentsController@destroy')->name('document.delete');
     });
 
 

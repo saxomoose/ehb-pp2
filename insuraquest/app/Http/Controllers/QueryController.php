@@ -59,8 +59,19 @@ class QueryController extends Controller
      * @param  \App\Models\Query  $query
      * @return \Illuminate\Http\Response
      */
-    public function show()
+
+    public function show(Request $request, Query $query)
     {
+        $this->validate($request, [
+            'searchtext' => 'required',
+        ], [
+            'searchtext.required' => 'You need to enter some text or a word to search for.',
+
+        ]);
+
+        //Create variables coming from the http request
+            //dump(request()->all());
+
         //fill searchform
         $language = Language::get();
         $issuer = Issuer::get();
@@ -86,6 +97,8 @@ class QueryController extends Controller
         $response = $client->search($query->params);
         //print_r($query->params);
         //dump($response);
+
+        $request->flash();
 
         return view('pages.query.create', [
                             'hits' => $response['hits']['total'],
