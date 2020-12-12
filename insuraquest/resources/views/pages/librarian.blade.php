@@ -1,4 +1,4 @@
-{{-- 
+{{--
 Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 <> : html element -> voor de labels  ("title", "language", "date of publication", "issuer", "category", "keywords")
 " " : name
