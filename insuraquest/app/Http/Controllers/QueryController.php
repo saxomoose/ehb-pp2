@@ -29,17 +29,18 @@ class QueryController extends Controller
      */
     public function create()
     {
+        // Fill search form
         $languages = Language::get();
         $issuers = Issuer::get();
         $categories = Category::get();
         $keywords = Tag::get();
 
         return view('pages.query.create', [
-                'languages' => $languages,
-                'issuers' => $issuers,
-                'categories' => $categories,
-                'keywords' => $keywords
-                ]);
+                        'languages' => $languages,
+                        'issuers' => $issuers,
+                        'categories' => $categories,
+                        'keywords' => $keywords
+                        ]);
     }
 
     /**
@@ -59,24 +60,22 @@ class QueryController extends Controller
      * @param  \App\Models\Query  $query
      * @return \Illuminate\Http\Response
      */
-    public function show(Query $query)
+
+    public function show(Request $request)
     {
-        //Create variables coming from the http request
-            //dump(request()->all());
-        //fill searchform
-        $language = Language::get();
-        $issuer = Issuer::get();
-        $categorie = Category::get();
-        $keyword = Tag::get();
+        // Fill search form
+        $languages = Language::get();
+        $issuers = Issuer::get();
+        $categories = Category::get();
+        $keywords = Tag::get();
 
-        $search = request('searchtext');
-        $exclude = request('excludetext');
-        $languages = request('language');
-        $issuers = request('issuer');
-        $categories = request('category');
-        $tags = request('tag');
+        // Searchtext field is required
+        $this->validate($request, [
+            'searchtext' => 'required'], [
+            'searchtext.required' => 'You need to enter some text or a word to search for.'
+        ]);
 
-        //Configure extended host for client
+        // Configure extended host for client
         $hosts = [
             'host' => '10.3.50.7',
             'port' => '9200',
@@ -90,20 +89,22 @@ class QueryController extends Controller
                     ->build(); // Build the client object
 
         $query = new Query(); // Instantiate a new Query
-        $query->setParams($search, $exclude, $languages, $issuers, $categories, $tags); // Set search parameters
+        $query->setParams(); // Set search parameters
 
         $response = $client->search($query->params);
         //print_r($query->params);
         //dump($response);
 
+        $request->flash();
+
         return view('pages.query.create', [
-                            'hits' => $response['hits']['total'],
-                            'results' => $response['hits']['hits'],
-                            'languages' => $language,
-                'issuers' => $issuer,
-                'categories' => $categorie,
-                'keywords' => $keyword
-                    ]);
+                        'languages' => $languages,
+                        'issuers' => $issuers,
+                        'categories' => $categories,
+                        'keywords' => $keywords,
+                        'hits' => $response['hits']['total'],
+                        'results' => $response['hits']['hits']
+                        ]);
     }
 
     /**

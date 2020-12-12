@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', function () {
     return view('pages/welcome');
 });
@@ -21,17 +20,13 @@ Route::get('/', function () {
 //controleert of de user is ingelogd. Zoniet redirect hij naar de login page.
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
-  Route::get('/create', 'QueryController@create');
-  Route::post('/create', 'QueryController@show');
+    Route::get('/create', 'QueryController@create');
+    Route::post('/create', 'QueryController@show');
 
-  Route::get('/document/{id}', [
-      'uses' => 'DocumentsController@show',
-      'as' => 'document'
-  ]);
-
-  //Route::get('/edit', 'DocumentsController@edit'); -> om de tags van een document te wijzigen
-  //Route::post('/edit', 'DocumentsController@store');
-
+    Route::get('/document/{id}', [
+        'uses' => 'DocumentsController@show',
+        'as' => 'document'
+        ]);
 
 
     //ADMIN routes - checks if user has admin type, otherwise throws 403 unauthorized
@@ -52,21 +47,22 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
     });
 
-    //Route::get('/librarian', 'FileUploadController@fileUpload')->name('librarian');
 
     //DASHBOARD route
     Route::get('/dashboard', function(){
         return view('pages/dashboard');
     })->name('dashboard');
 
+
     //SEARCH routes
     Route::middleware(['can:isUser,App\Models\User'])->group(function(){
-        //Once search page is asked for, we get the showSearch function to work
+            //Once search page is asked for, we get the showSearch function to work
             Route::get('/search', 'QueryController@create')->name('search');
 
             //Once search button is clicked, we get the postSearch function to work
-            Route::post('/search', 'QueryController@show')->name('documentsearch')
-            ;});
+            Route::post('/search', 'QueryController@show')->name('documentsearch');
+        });
+
 
     //LIBRARIAN routes
     //Once librarian page is asked for, we get the fileUpload function to work
@@ -91,10 +87,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         return view('pages/documentation');
     })->name('documentation');
 
+
     //TEAM route
     Route::get('/team', function(){
         return view('pages/team');
     })->name('team');
-
 
 });
