@@ -99,8 +99,8 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                         <span class="text-gray-700">Keyword</span>
                                         <select class="form-select block w-full mt-1 " name="tag" id="tag">
                                        
-                                        @foreach($keywords as $keyword )
-                                        <option value="{{ $keyword->name }}">{{ $keyword->value }}</option>
+                                        @foreach($tags as $tag )
+                                        <option value="{{ $tag->name }}">{{ $tag->value }}</option>
                                         @endforeach
 
                                         </select>
