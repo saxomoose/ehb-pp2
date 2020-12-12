@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class=" p-8 bg-white overflow-hidden shadow-xl sm:rounded-lg border-8">
-                <div>
+                <div style="margin: 20px">
                     {{-- Create compenent for search page --}}
                     @push('styles')
                     <!-- Latest compiled and minified CSS -->
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group col-auto">
                                     <label for="issuer[]">Issuer</label>
-                                    <select multiple="multiple" class="selectpicker" name="issuer[]">
+                                    <select multiple="multiple" data-size="5" class="selectpicker" name="issuer[]">
 
                                         @foreach($issuers as $issuer )
                                         <option value="{{ $issuer->name }}"
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="form-group col-auto">
                                     <label for="keyword[]">Keyword</label>
-                                    <select multiple="multiple" class="selectpicker" name="keyword[]">
+                                    <select multiple="multiple" data-size="5" class="selectpicker" name="keyword[]">
 
                                         @foreach($keywords as $keyword )
                                         <option value="{{ $keyword->name }}"
