@@ -92,7 +92,6 @@ class FileUploadController extends Controller
         return back()
 
             ->with('success','File upload was successful!');
-
             //error message
     }
 }
