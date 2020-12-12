@@ -103,15 +103,19 @@ class QueryController extends Controller
         //print_r($query->params);
         //dump($response);
 
+        $request->flash();
+
         return view('pages.query.create', [
-                            'hits' => $response['hits']['total'],
-                            'results' => $response['hits']['hits'],
-                            'languages' => $language,
+                'hits' => $response['hits']['total'],
+                'results' => $response['hits']['hits'],
+                'languages' => $language,
                 'issuers' => $issuer,
                 'categories' => $categorie,
                 'keywords' => $keyword
                     ]);
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
