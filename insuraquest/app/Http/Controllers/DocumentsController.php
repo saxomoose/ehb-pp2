@@ -162,7 +162,7 @@ class DocumentsController extends Controller
 
         return redirect()->route('document', ['id' => $result['_id']])
 
-            ->with('success','File edit was successful!');
+            ->with('success-edit','File edit was successful!');
 
             //error message
 
@@ -196,12 +196,12 @@ class DocumentsController extends Controller
         $response = $client->delete($params);
 
         if($response['result'] == 'deleted') {
-            Storage::delete($filename);
+            Storage::disk('local')->delete('public/' . $filename);
         }
 
         return redirect()->route('search')
 
-            -> with('Success', 'File deletion was successful');
+            -> with('success-delete', 'File deletion was successful');
 
 
     }

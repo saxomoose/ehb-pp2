@@ -20,6 +20,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script> @endpush
 
  <div>
+
     <form action="{{ route('documentsearch') }}" method="POST" enctype="multipart/form-data">
         @csrf
                 <div class="form-row">
@@ -43,9 +44,9 @@
                 <div class="form-row">
                      <div class="form-group col-auto">
                         <label  for="language[]">Language</label>
-                        
+
                          <select multiple="multiple"  class="selectpicker" name="language[]">
-                                        
+
                         @foreach($languages as $language )
                         <option value="{{ $language->name }}">{{ $language->value }}</option>
                         @endforeach
@@ -54,7 +55,7 @@
                     <div class="form-group col-auto">
                         <label for="issuer[]">Issuer</label>
                         <select multiple="multiple"  class="selectpicker" name="issuer[]">
-                                        
+
                         @foreach($issuers as $issuer )
                         <option value="{{ $issuer->name }}">{{ $issuer->value }}</option>
                         @endforeach
@@ -65,7 +66,7 @@
                     <div class="form-group col-auto">
                         <label for="category[]">Category</label>
                         <select multiple="multiple"  class="selectpicker" name="category[]">
-                                        
+
                         @foreach($categories as $category )
                         <option value="{{ $category->name }}">{{ $category->value }}</option>
                         @endforeach
@@ -74,7 +75,7 @@
                     <div class="form-group col-auto">
                         <label for="keyword[]">Keyword</label>
                         <select multiple="multiple"  class="selectpicker" name="keyword[]">
-                                        
+
                         @foreach($keywords as $keyword )
                         <option value="{{ $keyword->name }}">{{ $keyword->value }}</option>
                         @endforeach
@@ -115,6 +116,12 @@
                         </ul>
                      </div>
                     @endif
+                    @if ($message = Session::get('success-delete'))
+                        <div class="alert alert-success alert-block ">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
 
     </form>
 </div>
@@ -125,7 +132,7 @@
 @endpush
 
 
-                        
+
                 </div>
            </div>
         </div>
