@@ -388,12 +388,10 @@ Array
 
 ### Upload a document
 
-A Librarian account has the possibility to upload new files. <br>
-When uploading a document<br>
-    - It is possible to add tags to the uploaded document
-        - Title, Language, Date Published, Issuer, Category, Keyword.
-        - These values are required to be entered by the Librarian to upload a document.
-        - A file can be uploaded, which must be pdf and max 2048kb. A document is required for upload.
+A Librarian account has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document <br>
+        - Title, Language, Date Published, Issuer, Category, Keyword.<br>
+        - These values are required to be entered by the Librarian to upload a document.<br>
+        - A file can be uploaded, which must be pdf and max 2048kb. A document is required for upload.<br>
 
 ```php
  $this->validate($request, [
