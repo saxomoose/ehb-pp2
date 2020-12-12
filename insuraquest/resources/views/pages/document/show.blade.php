@@ -4,7 +4,17 @@
             {{ __('Document') }}
         </h2>
     </x-slot>
-    <div class="py-12">
+
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                @can('isLibrarian', App\Models\User::class)
+                    <p>You are authorized to edit and delete the document</p>
+                @endcan
+            </div>
+        </div>
+    </div>
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="flex flex-col">
@@ -89,6 +99,7 @@
                                     @include('partials.edit')
                                 @endcan
 
+                                <hr>
                                 <iframe height="600px"
                                         width="100%"
                                         src= {{Storage::url($result['_source']['file']['filename'])}}>

@@ -41,6 +41,51 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                 class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                 <div class="space-y-1 text-center">
 
+                                   
+
+                                    <div class="panel-body">
+
+                                        <label class="block">
+
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
+                                                viewBox="0 0 48 48" aria-hidden="true">
+                                                <path
+                                                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+    
+                                            <div class="panel panel-primary">
+                                                
+    
+                                                <p class="text-xs text-gray-500">
+                                                    pdf up to 2048kb
+                                                </p>
+                                        </label>
+                                        
+                                        @if ($message = Session::get('success'))
+                                        <div class="alert alert-success alert-block ">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <strong>{{ $message }}</strong>
+                                        </div>
+                                        @endif
+                                        @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <strong>Whoops!</strong><br> There were some problems with your input.
+                                            <ul><br>
+                                                @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input type="file" name="file" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <label class="block" for="title">
                                         <span class="text-gray-700">Title</span>
                                         <input class="form-input mt-1 block w-full" placeholder="Title" name="title" value="{{ old('title')}}">
@@ -95,45 +140,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                         </select>
                                     </label>
 
-                                    <label class="block">
-
-                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none"
-                                            viewBox="0 0 48 48" aria-hidden="true">
-                                            <path
-                                                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-
-                                        <div class="panel panel-primary">
-                                            <div class="panel-body">
-                                                @if ($message = Session::get('success'))
-                                                <div class="alert alert-success alert-block ">
-                                                    <button type="button" class="close" data-dismiss="alert">×</button>
-                                                    <strong>{{ $message }}</strong>
-                                                </div>
-                                                @endif
-                                                @if (count($errors) > 0)
-                                                <div class="alert alert-danger">
-                                                    <strong>Whoops!</strong><br> There were some problems with your input.
-                                                    <ul><br>
-                                                        @foreach ($errors->all() as $error)
-                                                        <li>{{ $error }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                                @endif
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <input type="file" name="file" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <p class="text-xs text-gray-500">
-                                                pdf up to 2048kb
-                                            </p>
-                                    </label>
+                                    
                                 </div>
                             </div>
                         </div>

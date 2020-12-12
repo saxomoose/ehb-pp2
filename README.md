@@ -388,12 +388,16 @@ Array
 
 ### Upload a document
 
-A Librarian account has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document <br>
+A Librarian account has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document. The content for the tags is pulled from a mySql table and added to the form. <br>
         - Title, Language, Date Published, Issuer, Category, Keyword.<br>
         - These values are required to be entered by the Librarian to upload a document.<br>
-        - A file can be uploaded, which must be pdf and max 2048kb. A document is required for upload.<br>
+        - A file can be uploaded, which must be pdf and max 2048kb.<br>
+        - A document is required for upload.<br>
+
 
 ```php
+FileUploadController.php
+
  $this->validate($request, [
             'title' => 'required',
             'language' => 'required',
@@ -402,14 +406,57 @@ A Librarian account has the possibility to upload new files. When uploading a do
             'category' => 'required',
             'tag' => 'required',
             'file' => 'required|mimes:pdf|max:2048'
+ ]
 ```
 
-Op de librarian page de mogelijkheid tot uploaden files toegevoegd.
-Routes toegeveoegd van librarian page naar nieuwe Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
-*** Momenteel nog naar lokale map in laravel- Moet naar folder waar FSCrawler zal gaan scannen voor ElasticSearch***
+When a document is uploaded, the file and tags are posted to fscrawler, which will index the document before adding to our ElasticSearch node.
 
-Plugin toegevoegd (tailwind.config.js) om de layout van forms in Tailwind te kunnen gebruiken.
+```php
+FileUploadController.php
+
+$file = $request->file('file');
+        $pathname = $file->store('public');
+        $fully_qualified_pathname = storage_path('app/' . $pathname);
+        $client = new Client();
+        try {
+            $client->request('POST', 'http://127.0.0.1:8080/fscrawler/_upload',
+                ['multipart' =>
+                    [
+                        [
+                            'name' => 'file',
+                            'contents' => fopen($fully_qualified_pathname, 'r')
+                        ],
+                        [
+                            'name' => 'tags',
+                            'contents' => json_encode([
+                                'external' => [
+                                    'title' => $request->input('title'),
+                                    'language' => $request->input('language'),
+                                    'date_published' => $request->input('date'),
+                                    'issuer' => $request->input('issuer'),
+                                    'category' => $request->input('category'),
+                                    'tag' => $request->input('tag')
+                                ]
+                            ])
+                        ]
+                    ]
+                ]
+            );
+        } catch (GuzzleException $e) {
+            echo $e;
+        }
+
+```
+
+A plugin is added for form layout -> tailwind.config.js<br>
 https://tailwindcss-custom-forms.netlify.app/
+
+```php
+ plugins: [
+        require('@tailwindcss/custom-forms'),
+      ]
+```
+
 
 ### Mail a document
 
