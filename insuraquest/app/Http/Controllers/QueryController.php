@@ -29,17 +29,18 @@ class QueryController extends Controller
      */
     public function create()
     {
+        // Fill search form
         $languages = Language::get();
         $issuers = Issuer::get();
         $categories = Category::get();
         $keywords = Tag::get();
 
         return view('pages.query.create', [
-                'languages' => $languages,
-                'issuers' => $issuers,
-                'categories' => $categories,
-                'keywords' => $keywords
-                ]);
+                        'languages' => $languages,
+                        'issuers' => $issuers,
+                        'categories' => $categories,
+                        'keywords' => $keywords
+                        ]);
     }
 
     /**
@@ -60,20 +61,19 @@ class QueryController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show(Request $request, Query $query)
+    public function show(Request $request)
     {
+        // Fill search form
+        $languages = Language::get();
+        $issuers = Issuer::get();
+        $categories = Category::get();
+        $keywords = Tag::get();
+
         // Searchtext field is required
         $this->validate($request, [
-            'searchtext' => 'required',
-        ], [
+            'searchtext' => 'required'], [
             'searchtext.required' => 'You need to enter some text or a word to search for.'
         ]);
-
-        // Fill searchform
-        $language = Language::get();
-        $issuer = Issuer::get();
-        $category = Category::get();
-        $keyword = Tag::get();
 
         // Configure extended host for client
         $hosts = [
@@ -98,13 +98,13 @@ class QueryController extends Controller
         $request->flash();
 
         return view('pages.query.create', [
-                            'hits' => $response['hits']['total'],
-                            'results' => $response['hits']['hits'],
-                            'languages' => $language,
-                            'issuers' => $issuer,
-                            'categories' => $category,
-                            'keywords' => $keyword
-                    ]);
+                        'languages' => $languages,
+                        'issuers' => $issuers,
+                        'categories' => $categories,
+                        'keywords' => $keywords,
+                        'hits' => $response['hits']['total'],
+                        'results' => $response['hits']['hits']
+                        ]);
     }
 
     /**
