@@ -6,12 +6,12 @@
     </x-slot>
     <div class="container mx-auto px-32">
 
-        
-            
-               
 
 
-{{-- 
+
+
+
+{{--
 
 Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 <> : html element -> voor de labels  ("title", "language", "date of publication", "issuer", "category", "keywords")
@@ -26,9 +26,9 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
  "keyword": <select><option>[auto, brand, leven, gezondheidszorgen, rechtsbijstand, annulatie en bijstand, nvt]
 --}}
 
-       
 
-        <div class="py-12">            
+
+        <div class="py-12">
             <form action="{{ route('file.upload.post') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -41,7 +41,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                 class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                 <div class="space-y-1 text-center">
 
-                                   
+
 
                                     <div class="panel-body">
 
@@ -53,15 +53,14 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                                     d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
-    
+
                                             <div class="panel panel-primary">
-                                                
-    
+
+
                                                 <p class="text-xs text-gray-500">
                                                     pdf up to 2048kb
                                                 </p>
                                         </label>
-                                        
                                         @if ($message = Session::get('success'))
                                         <div class="alert alert-success alert-block ">
                                             <button type="button" class="close" data-dismiss="alert">×</button>
@@ -94,7 +93,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                     <label class="block">
                                         <span class="text-gray-700">Language</span>
                                         <select class="form-select block w-full mt-1 " name="language" id="language">
-                                        
+
                                         @foreach($languages as $language )
                                         <option value="{{ $language->name }}">{{ $language->value }}</option>
                                         @endforeach
@@ -108,9 +107,9 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 
                                     <label class="block">
                                         <span class="text-gray-700">Issuer</span>
-                                        
+
                                         <select class="form-select block w-full mt-1 " name="issuer" id="issuer">
-                                       
+
                                         @foreach($issuers as $issuer )
                                         <option value="{{ $issuer->name }}">{{ $issuer->value }}</option>
                                         @endforeach
@@ -119,9 +118,9 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 
                                     <label class="block">
                                     <span class="text-gray-700">Category</span>
-                                        
+
                                         <select class="form-select block w-full mt-1 " name="category" id="category">
-                                       
+
                                         @foreach($categories as $category )
                                         <option value="{{ $category->name }}">{{ $category->value }}</option>
                                         @endforeach
@@ -132,7 +131,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
 
                                         <span class="text-gray-700">Keyword</span>
                                         <select class="form-select block w-full mt-1 " name="tag" id="tag">
-                                       
+
                                         @foreach($tags as $tag )
                                         <option value="{{ $tag->name }}">{{ $tag->value }}</option>
                                         @endforeach
@@ -140,7 +139,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                         </select>
                                     </label>
 
-                                    
+
                                 </div>
                             </div>
                         </div>
