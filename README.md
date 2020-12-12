@@ -389,11 +389,12 @@ Array
 ### Upload a document
 
 A Librarian account has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document. The content for the tags is pulled from a mySql table and added to the form. <br>
-        - Title, Language, Date Published, Issuer, Category, Keyword.<br>
-        - These values are required to be entered by the Librarian to upload a document.<br>
-        - A file can be uploaded, which must be pdf and max 2048kb.<br>
-        - A document is required for upload.<br>
-
+<ul>
+        <li>Title, Language, Date Published, Issuer, Category, Keyword.</li><br>
+        <li>These values are required to be entered by the Librarian to upload a document.</li><br>
+        <li>A file can be uploaded, which must be pdf and max 2048kb.</li><br>
+        <li>A document is required for upload.</li><br>
+</ul>
 
 ```php
 FileUploadController.php
@@ -420,27 +421,6 @@ $file = $request->file('file');
         $client = new Client();
         try {
             $client->request('POST', 'http://127.0.0.1:8080/fscrawler/_upload',
-                ['multipart' =>
-                    [
-                        [
-                            'name' => 'file',
-                            'contents' => fopen($fully_qualified_pathname, 'r')
-                        ],
-                        [
-                            'name' => 'tags',
-                            'contents' => json_encode([
-                                'external' => [
-                                    'title' => $request->input('title'),
-                                    'language' => $request->input('language'),
-                                    'date_published' => $request->input('date'),
-                                    'issuer' => $request->input('issuer'),
-                                    'category' => $request->input('category'),
-                                    'tag' => $request->input('tag')
-                                ]
-                            ])
-                        ]
-                    ]
-                ]
             );
         } catch (GuzzleException $e) {
             echo $e;
@@ -460,13 +440,29 @@ https://tailwindcss-custom-forms.netlify.app/
 
 ### Mail a document
 
+After a user gets all his search results, he can view more details on any of the results.<br>
 
-Op de librarian page de mogelijkheid tot uploaden files toegevoegd.
-Routes toegeveoegd van librarian page naar nieuwe Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
-*** Momenteel nog naar lokale map in laravel- Moet naar folder waar FSCrawler zal gaan scannen voor ElasticSearch***
 
-Plugin toegevoegd (tailwind.config.js) om de layout van forms in Tailwind te kunnen gebruiken.
-https://tailwindcss-custom-forms.netlify.app/
+Bijgevoegde of aangepaste files zijn
+- MailController.php
+- EmailInsuraquest.php
+- insuraEmail.blade.php
+- web.php
+
+Commands used
+Laravel Mailable Markdown class
+used for creating emails.
+collects data we need to send and passes to the view
+ php artisan make:mail EmailInsuraquest --markdown=Email.insuraEmail
+
+Mail controller, essentially we will define the have the logic to display the user’s list. Run the command to create the controller.
+ php artisan make:controller MailController
+
+Om mailfunctionaliteit te testen
+ http://localhost:8000/send-email
+ -> stuurt mail naar mailTrap (account Bart)
+
+ //todo: implementatie in edit document elasticsearch met aangemaakte pdf
 
 
 
