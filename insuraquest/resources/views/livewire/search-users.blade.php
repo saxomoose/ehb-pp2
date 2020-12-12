@@ -34,11 +34,6 @@
                     class="btn btn-outline-warning" id="admin"
                     href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"admin"])}}" role="button">Admin</a>
 
-                <a <?php if($user->type == "superadmin") echo 'class="btn btn-outline-warning active"'; ?>
-                    class="btn btn-outline-warning" id="superadmin"
-                    href="{{ Route('admin.type', ['id'=>$user->id, 'newtype'=>"superadmin"])}}"
-                    role="button">Superadmin</a>
-
                 <a class="btn btn-danger btn-sm" style="margin: 10px"
                     href="{{ Route('admin.deleteuser', ['id'=>$user->id])}}" role="button">Delete user</a>
             </div>

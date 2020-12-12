@@ -1,53 +1,42 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Search') }}
+        </h2>
+    </x-slot>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-  <div class="container mt-2 col-md-12">
-        <h1 class="display-4">Total search results: {{ $hits }}</h1>
-        @forelse ($results as $result)
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container container-fluid">
-                <h1 class="display-4">Doc id: {{ $result['_id'] }}</h1>
-                <h1 class="display-4">Score: {{ $result['_score'] }}</h1>
-                <hr class="my-4">
-                @foreach ($result['highlight']['content'] as $highlight)
-                <p class="lead">{!! $highlight !!}</p>
-                @endforeach
-                <div class="container col text-right">
-                    <a class="btn btn-primary btn-sm " href="{{route('document', ['id' => $result['_id']])}}" type="submit">Read the full document</a>
-                </div>
-            </div>
+            <div class=" p-8 bg-white overflow-hidden shadow-xl sm:rounded-lg border-8">
+                <div>
+
+                    <div class="container mt-2 col-md-12">
+                            <h1 class="display-4">Total search results: {{ $hits }}</h1>
+                            @forelse ($results as $result)
+                            <div class="jumbotron jumbotron-fluid">
+                                <div class="container container-fluid">
+                                    <h1 class="display-4">Doc id: {{ $result['_id'] }}</h1>
+                                    <h1 class="display-4">Score: {{ $result['_score'] }}</h1>
+                                    <hr class="my-4">
+                                    @foreach ($result['highlight']['content'] as $highlight)
+                                    <p class="lead">{!! $highlight !!}</p>
+                                    @endforeach
+                                    <div class="container col text-right">
+                                        <a class="btn btn-primary btn-sm " href="{{route('document', ['id' => $result['_id']])}}" type="submit">Read the full document</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @empty
+                            <div class="jumbotron jumbotron-fluid">
+                                <div class="container container-fluid">
+                                    <p class="lead">No relevant documents for your query</p>
+                                </div>
+                            </div>
+                            @endforelse
+                    </div>
+                <div>
+           </div>
         </div>
-        @empty
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container container-fluid">
-                <p class="lead">No relevant documents for your query</p>
-            </div>
-        </div>
-        @endforelse
     </div>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
-    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    -->
-
-
-  </body>
-</html>
+</x-app-layout>

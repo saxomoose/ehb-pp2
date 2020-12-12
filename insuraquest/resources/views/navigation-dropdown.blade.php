@@ -8,7 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
-                </div> 
+                </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-12 sm:-my-px sm:ml-10 sm:flex">
@@ -17,7 +17,7 @@
                     </x-jet-nav-link>
                 </div>
                 @can('isUser', App\Model\User::class)
-                
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('search') }}" :active="request()->routeIs('search')">
                         {{ __('Search') }}
@@ -27,14 +27,14 @@
                 @can('isAdmin', App\Models\User::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
-                        {{ __('Admin') }}
+                        {{ __('User administration') }}
                     </x-jet-nav-link>
                 </div>
                 @endcan
                 @can('isLibrarian', App\Models\User::class)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('librarian') }}" :active="request()->routeIs('librarian')">
-                        {{ __('Librarian') }}
+                        {{ __('Upload files') }}
                     </x-jet-nav-link>
                 </div>
                 @endcan

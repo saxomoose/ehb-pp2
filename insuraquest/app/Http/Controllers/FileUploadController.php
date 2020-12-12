@@ -5,14 +5,34 @@ namespace App\Http\Controllers;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+use App\Models\UploadFile;
+use App\Models\Language;
+use App\Models\Issuer;
+use App\Models\Category;
+use App\Models\Keyword;
+
+use Illuminate\Support\Facades\DB;
+
 use GuzzleHttp\Client;
+
 
 class FileUploadController extends Controller
 {
     public function fileUpload(Request $request)
-
+    //we get the tables content and put them into variables to pass to the view, in this case, the librarian view
     {
-        return view('librarian');
+        $languages = Language::get();
+        $issuers = Issuer::get();
+        $categories = Category::get();
+        $keywords = Keyword::get();
+        
+        return view('pages/librarian', [
+                'languages' => $languages,
+                'issuers' => $issuers,
+                'categories' => $categories,
+                'keywords' => $keywords
+                ]);
     }
 
     //handler method sanitizes user input and posts uploaded file and tags to FSCrawler API for indexation
