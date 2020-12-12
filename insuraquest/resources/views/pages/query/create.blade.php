@@ -43,9 +43,9 @@
                 <div class="form-row">
                      <div class="form-group col-auto">
                         <label  for="language[]">Language</label>
-                        
+
                          <select multiple="multiple"  class="selectpicker" name="language[]">
-                                        
+
                         @foreach($languages as $language )
                         <option value="{{ $language->name }}">{{ $language->value }}</option>
                         @endforeach
@@ -54,7 +54,7 @@
                     <div class="form-group col-auto">
                         <label for="issuer[]">Issuer</label>
                         <select multiple="multiple"  class="selectpicker" name="issuer[]">
-                                        
+
                         @foreach($issuers as $issuer )
                         <option value="{{ $issuer->name }}">{{ $issuer->value }}</option>
                         @endforeach
@@ -65,7 +65,7 @@
                     <div class="form-group col-auto">
                         <label for="category[]">Category</label>
                         <select multiple="multiple"  class="selectpicker" name="category[]">
-                                        
+
                         @foreach($categories as $category )
                         <option value="{{ $category->name }}">{{ $category->value }}</option>
                         @endforeach
@@ -74,7 +74,7 @@
                     <div class="form-group col-auto">
                         <label for="keyword[]">Keyword</label>
                         <select multiple="multiple"  class="selectpicker" name="keyword[]">
-                                        
+
                         @foreach($keywords as $keyword )
                         <option value="{{ $keyword->name }}">{{ $keyword->value }}</option>
                         @endforeach
@@ -117,6 +117,7 @@
                     @endif
 
     </form>
+    @include('pages.query.show')
 </div>
 @push('scripts')
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -125,7 +126,7 @@
 @endpush
 
 
-                        
+
                 </div>
            </div>
         </div>

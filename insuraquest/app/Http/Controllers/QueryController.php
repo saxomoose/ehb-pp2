@@ -8,7 +8,7 @@ use Elasticsearch\ClientBuilder;
 use App\Models\Language;
 use App\Models\Issuer;
 use App\Models\Category;
-use App\Models\Keyword;
+use App\Models\Tag;
 
 class QueryController extends Controller
 {
@@ -32,8 +32,8 @@ class QueryController extends Controller
         $languages = Language::get();
         $issuers = Issuer::get();
         $categories = Category::get();
-        $keywords = Keyword::get();
-        
+        $keywords = Tag::get();
+
         return view('pages.query.create', [
                 'languages' => $languages,
                 'issuers' => $issuers,
@@ -63,6 +63,12 @@ class QueryController extends Controller
     {
         //Create variables coming from the http request
             //dump(request()->all());
+        //fill searchform
+        $language = Language::get();
+        $issuer = Issuer::get();
+        $categorie = Category::get();
+        $keyword = Tag::get();
+
         $search = request('searchtext');
         $exclude = request('excludetext');
         $languages = request('language');
@@ -90,9 +96,13 @@ class QueryController extends Controller
         //print_r($query->params);
         //dump($response);
 
-        return view('pages.query.show', [
+        return view('pages.query.create', [
                             'hits' => $response['hits']['total'],
-                            'results' => $response['hits']['hits']
+                            'results' => $response['hits']['hits'],
+                            'languages' => $language,
+                'issuers' => $issuer,
+                'categories' => $categorie,
+                'keywords' => $keyword
                     ]);
     }
 
