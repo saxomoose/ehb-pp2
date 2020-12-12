@@ -54,7 +54,7 @@ class FileUploadController extends Controller
             'issuer.required' => 'Issurer is required',
             'category.required' => 'Category is required',
             'tag.required' => 'Tag is required',
-            'file.required' => 'A file needs to be slected'
+            'file.required' => 'A file needs to be selected'
         ]);
 
         $file = $request->file('file');
