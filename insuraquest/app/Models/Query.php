@@ -13,7 +13,7 @@ class Query extends Model
 
     public function setParams()
     {
-        //Create variables coming from the http request
+        //Create variables coming from the http POST request
         //dump(request()->all());
         $search = request('searchtext');
         $exclude = request('excludetext');
