@@ -469,7 +469,7 @@ Possibility to test email function
  http://localhost:8000/send-email
  -> sends mail to mailTrap (account Bart)
 
-
+<br>
  ***todo: implement the mail functionality into the one search result***
 <br>
 
