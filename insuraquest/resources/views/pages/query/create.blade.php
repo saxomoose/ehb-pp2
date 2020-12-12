@@ -45,6 +45,9 @@
                                 <div class="form-group col-9">
                                     <input type="text" class="form-control" name="searchtext"
                                         placeholder="Search for document..." value="{{ old('searchtext')}}">
+                                        @if ($errors->has('searchtext'))
+                                            <p class="help is-danger">{{ $errors->first('searchtext') }}</p>
+                                        @endif
                                 </div>
                             </div>
                             <div class="form-row">

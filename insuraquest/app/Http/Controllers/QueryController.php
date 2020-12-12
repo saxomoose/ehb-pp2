@@ -62,23 +62,20 @@ class QueryController extends Controller
 
     public function show(Request $request, Query $query)
     {
+        // Searchtext field is required
         $this->validate($request, [
             'searchtext' => 'required',
         ], [
-            'searchtext.required' => 'You need to enter some text or a word to search for.',
-
+            'searchtext.required' => 'You need to enter some text or a word to search for.'
         ]);
 
-        //Create variables coming from the http request
-            //dump(request()->all());
-
-        //fill searchform
+        // Fill searchform
         $language = Language::get();
         $issuer = Issuer::get();
         $category = Category::get();
         $keyword = Tag::get();
 
-        //Configure extended host for client
+        // Configure extended host for client
         $hosts = [
             'host' => '10.3.50.7',
             'port' => '9200',
