@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreateKeywordsTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +14,12 @@ class CreateKeywordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('keywords', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('value');
         });
-        DB::table('keywords')->insert(array(
+        DB::table('tags')->insert(array(
             array('name' => 'auto', 'value' => 'Auto'),  
             array('name' => 'brand', 'value' => 'Brand'),
             array('name' => 'leven', 'value' => 'Leven'),
@@ -40,6 +40,6 @@ class CreateKeywordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('keywords');
+        Schema::dropIfExists('tags');
     }
 }

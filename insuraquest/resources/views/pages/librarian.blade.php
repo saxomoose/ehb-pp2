@@ -6,18 +6,8 @@
     </x-slot>
     <div class="container mx-auto px-32">
 
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    {{-- create component for librarian page --}}
-                    @can('isLibrarian', App\Models\User::class)
-                    <p>You are authorized to view librarian page</p>
-                    <!-- The Current User Can Upload files -->
-                    @endcan
-                    @cannot('isLibrarian', App\Models\User::class)
-                    <p>You are not authorized to view librarian page</p>
-                    @endcannot
-                </div>
+        
+            
                
 
 
@@ -36,8 +26,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
  "keyword": <select><option>[auto, brand, leven, gezondheidszorgen, rechtsbijstand, annulatie en bijstand, nvt]
 --}}
 
-            </div>
-        </div>
+       
 
         <div class="py-12">            
             <form action="{{ route('file.upload.post') }}" method="POST" enctype="multipart/form-data">
@@ -99,8 +88,8 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                         <span class="text-gray-700">Keyword</span>
                                         <select class="form-select block w-full mt-1 " name="tag" id="tag">
                                        
-                                        @foreach($keywords as $keyword )
-                                        <option value="{{ $keyword->name }}">{{ $keyword->value }}</option>
+                                        @foreach($tags as $tag )
+                                        <option value="{{ $tag->name }}">{{ $tag->value }}</option>
                                         @endforeach
 
                                         </select>

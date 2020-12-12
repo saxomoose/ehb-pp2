@@ -10,7 +10,7 @@ use App\Models\UploadFile;
 use App\Models\Language;
 use App\Models\Issuer;
 use App\Models\Category;
-use App\Models\Keyword;
+use App\Models\Tag;
 
 use Illuminate\Support\Facades\DB;
 
@@ -25,13 +25,13 @@ class FileUploadController extends Controller
         $languages = Language::get();
         $issuers = Issuer::get();
         $categories = Category::get();
-        $keywords = Keyword::get();
+        $tags = Tag::get();
         
         return view('pages/librarian', [
                 'languages' => $languages,
                 'issuers' => $issuers,
                 'categories' => $categories,
-                'keywords' => $keywords
+                'tags' => $tags
                 ]);
     }
 

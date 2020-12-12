@@ -8,7 +8,7 @@ use Elasticsearch\ClientBuilder;
 use App\Models\Language;
 use App\Models\Issuer;
 use App\Models\Category;
-use App\Models\Keyword;
+use App\Models\Tag;
 
 class QueryController extends Controller
 {
@@ -32,8 +32,8 @@ class QueryController extends Controller
         $languages = Language::get();
         $issuers = Issuer::get();
         $categories = Category::get();
-        $keywords = Keyword::get();
-        
+        $keywords = Tag::get();
+
         return view('pages.query.create', [
                 'languages' => $languages,
                 'issuers' => $issuers,
@@ -63,24 +63,18 @@ class QueryController extends Controller
     {
         //Create variables coming from the http request
             //dump(request()->all());
+        //fill searchform
+        $language = Language::get();
+        $issuer = Issuer::get();
+        $categorie = Category::get();
+        $keyword = Tag::get();
+
         $search = request('searchtext');
         $exclude = request('excludetext');
-            //$cb1 = request('leven');
-            //$cb2 = request('Nederlands');
-            //$arr = [[ 'match' => [ 'external.tag' => $cb1 ] ], [ 'match' => [ 'external.language' => $cb2 ] ]];
-            //$languages = request('language');
-            //$languages = [ 'dutch', 'french' ];
-        $languages = [ 'dutch' ];
-            /*         $arr = [];
-            if ($languages != null)
-            {
-                foreach($languages as $key => $value)
-                {
-                    array_push($arr, [ 'match' => [ 'external.language' => $value ] ]);
-                }
-            } */
-            //print_r($languages);
-            //print_r($arr);
+        $languages = request('language');
+        $issuers = request('issuer');
+        $categories = request('category');
+        $tags = request('tag');
 
         //Configure extended host for client
         $hosts = [
@@ -96,18 +90,20 @@ class QueryController extends Controller
                     ->build(); // Build the client object
 
         $query = new Query(); // Instantiate a new Query
-        $query->setParams($search, $languages, $exclude); // Set search parameters
+        $query->setParams($search, $exclude, $languages, $issuers, $categories, $tags); // Set search parameters
 
         $response = $client->search($query->params);
-
-        print_r($query->params);
-
+        //print_r($query->params);
         //dump($response);
-        return view('pages.query.show', [
-                            'hits' => $response['hits']['total'],
-                            'results' => $response['hits']['hits']
-                    ]);
 
+        return view('pages.query.create', [
+                            'hits' => $response['hits']['total'],
+                            'results' => $response['hits']['hits'],
+                            'languages' => $language,
+                'issuers' => $issuer,
+                'categories' => $categorie,
+                'keywords' => $keyword
+                    ]);
     }
 
     /**
