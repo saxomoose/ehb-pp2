@@ -4,7 +4,7 @@
     @forelse ($results as $result)
     <div class="jumbotron jumbotron-fluid" style="padding: 10px">
 
-            <h5 class="display-8">{{ $result['_source']['external']['title'] }}</h5>
+            <h3 class="display-8">{{ $result['_source']['external']['title'] }}</h3>
             <span class="d-block p-0.1 text-right">id: {{ $result['_id'] }}</span>
             <span class="d-block p-0.1 text-right">score: {{ $result['_score'] }}</span>
             <hr>
