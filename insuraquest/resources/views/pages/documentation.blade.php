@@ -47,9 +47,11 @@
                         </div>
                         <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                             <div class="space-y-1">
-                            <h2> Vraag 3 </h2>
+                            <h2> Ik wil de tags bij een document editen of een nieuw document uploaden. </h2>
                             <p>
-                            Antwoord 3
+                            Om een document te kunnen uploaden, of de bijhorende tags te editen, heb je de juiste rechten nodig.
+                            Zie je bovenaan in de navigatiebalk niet 'Upload file' staan, dan heb je dit recht niet.
+                            Denk je dat je dit toch zou moeten kunnen, neem dan contact op met de admin.
                             </p>
                             </div>
                         </div>
