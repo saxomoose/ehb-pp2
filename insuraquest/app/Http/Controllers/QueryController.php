@@ -65,22 +65,10 @@ class QueryController extends Controller
             //dump(request()->all());
         $search = request('searchtext');
         $exclude = request('excludetext');
-            //$cb1 = request('leven');
-            //$cb2 = request('Nederlands');
-            //$arr = [[ 'match' => [ 'external.tag' => $cb1 ] ], [ 'match' => [ 'external.language' => $cb2 ] ]];
-            //$languages = request('language');
-            //$languages = [ 'dutch', 'french' ];
-        $languages = [ 'dutch' ];
-            /*         $arr = [];
-            if ($languages != null)
-            {
-                foreach($languages as $key => $value)
-                {
-                    array_push($arr, [ 'match' => [ 'external.language' => $value ] ]);
-                }
-            } */
-            //print_r($languages);
-            //print_r($arr);
+        $languages = request('language');
+        $issuers = request('issuer');
+        $categories = request('category');
+        $tags = request('tag');
 
         //Configure extended host for client
         $hosts = [
@@ -96,18 +84,16 @@ class QueryController extends Controller
                     ->build(); // Build the client object
 
         $query = new Query(); // Instantiate a new Query
-        $query->setParams($search, $languages, $exclude); // Set search parameters
+        $query->setParams($search, $exclude, $languages, $issuers, $categories, $tags); // Set search parameters
 
         $response = $client->search($query->params);
-
-        print_r($query->params);
-
+        //print_r($query->params);
         //dump($response);
+
         return view('pages.query.show', [
                             'hits' => $response['hits']['total'],
                             'results' => $response['hits']['hits']
                     ]);
-
     }
 
     /**
