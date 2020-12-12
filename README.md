@@ -388,12 +388,12 @@ Array
 
 ### Upload a document
 
-A Librarian account has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document. The content for the tags is pulled from a mySql table and added to the form. <br>
+A Librarian has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document. The content for the tags is pulled from a mySql table and added to the form. <br>
 <ul>
-        <li>Title, Language, Date Published, Issuer, Category, Keyword.</li><br>
-        <li>These values are required to be entered by the Librarian to upload a document.</li><br>
-        <li>A file can be uploaded, which must be pdf and max 2048kb.</li><br>
-        <li>A document is required for upload.</li><br>
+        <li>Title, Language, Date Published, Issuer, Category, Keyword.</li>
+        <li>These values are required to be entered by the Librarian to upload a document.</li>
+        <li>A file can be uploaded, which must be pdf and max 2048kb.</li>
+        <li>A document is required for upload.</li>
 </ul>
 
 ```php
@@ -441,28 +441,36 @@ https://tailwindcss-custom-forms.netlify.app/
 ### Mail a document
 
 After a user gets all his search results, he can view more details on any of the results.<br>
+Here he has the possibility to edit, delete or mail the pdf shown.
 
 
-Bijgevoegde of aangepaste files zijn
-- MailController.php
-- EmailInsuraquest.php
-- insuraEmail.blade.php
-- web.php
+Modified or created files for mail functionality are
+<ul>
+<li>MailController.php</li>
+<li>EmailInsuraquest.php</li>
+<li>insuraEmail.blade.php</li>
+<li>web.php</li>
+</ul>
 
 Commands used
-Laravel Mailable Markdown class
-used for creating emails.
-collects data we need to send and passes to the view
+Laravel Mailable Markdown class used for creating emails.
+
+```
  php artisan make:mail EmailInsuraquest --markdown=Email.insuraEmail
+```
 
 Mail controller, essentially we will define the have the logic to display the user’s list. Run the command to create the controller.
+
+``` 
  php artisan make:controller MailController
+```
 
-Om mailfunctionaliteit te testen
+Possibility to test email function
  http://localhost:8000/send-email
- -> stuurt mail naar mailTrap (account Bart)
+ -> sends mail to mailTrap (account Bart)
+ 
 
- //todo: implementatie in edit document elasticsearch met aangemaakte pdf
+ ***todo: implement the mail functionality into the one search result***
 
 
 
