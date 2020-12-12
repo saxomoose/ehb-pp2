@@ -389,7 +389,21 @@ Array
 ### Upload a document
 
 A Librarian account has the possibility to upload new files. When uploading a document
-    -   It is possible to add tags
+    - It is possible to add tags to the uploaded document
+        - Title, Language, Date Published, Issuer, Category, Keyword.
+        - These values are required to be entered by the Librarian to upload a document.
+        - A file can be uploaded, which must be pdf and max 2048kb. A document is required for upload.
+
+``` $this->validate($request, [
+            'title' => 'required',
+            'language' => 'required',
+            'date' => 'required|date',
+            'issuer' => 'required',
+            'category' => 'required',
+            'tag' => 'required',
+            'file' => 'required|mimes:pdf|max:2048'
+```
+
 Op de librarian page de mogelijkheid tot uploaden files toegevoegd.
 Routes toegeveoegd van librarian page naar nieuwe Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
 *** Momenteel nog naar lokale map in laravel- Moet naar folder waar FSCrawler zal gaan scannen voor ElasticSearch***
