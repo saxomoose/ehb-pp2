@@ -59,6 +59,7 @@ class QueryController extends Controller
      * @param  \App\Models\Query  $query
      * @return \Illuminate\Http\Response
      */
+
     public function show(Request $request, Query $query)
     {
         $this->validate($request, [
@@ -70,18 +71,12 @@ class QueryController extends Controller
 
         //Create variables coming from the http request
             //dump(request()->all());
+
         //fill searchform
         $language = Language::get();
         $issuer = Issuer::get();
-        $categorie = Category::get();
+        $category = Category::get();
         $keyword = Tag::get();
-
-        $search = request('searchtext');
-        $exclude = request('excludetext');
-        $languages = request('language');
-        $issuers = request('issuer');
-        $categories = request('category');
-        $tags = request('tag');
 
         //Configure extended host for client
         $hosts = [
@@ -97,7 +92,7 @@ class QueryController extends Controller
                     ->build(); // Build the client object
 
         $query = new Query(); // Instantiate a new Query
-        $query->setParams($search, $exclude, $languages, $issuers, $categories, $tags); // Set search parameters
+        $query->setParams(); // Set search parameters
 
         $response = $client->search($query->params);
         //print_r($query->params);
@@ -106,16 +101,14 @@ class QueryController extends Controller
         $request->flash();
 
         return view('pages.query.create', [
-                'hits' => $response['hits']['total'],
-                'results' => $response['hits']['hits'],
-                'languages' => $language,
-                'issuers' => $issuer,
-                'categories' => $categorie,
-                'keywords' => $keyword
+                            'hits' => $response['hits']['total'],
+                            'results' => $response['hits']['hits'],
+                            'languages' => $language,
+                            'issuers' => $issuer,
+                            'categories' => $category,
+                            'keywords' => $keyword
                     ]);
     }
-
-
 
     /**
      * Show the form for editing the specified resource.

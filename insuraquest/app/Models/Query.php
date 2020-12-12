@@ -11,190 +11,51 @@ class Query extends Model
 
     var $params;
 
-    public function setParams($search, $exclude, $languages, $issuers, $categories, $tags)
+    public function setParams()
     {
-        // Match query based on content (full text search)
-        /*         $this->params = [
-                    'index' => 'insuraquest',
-                    'body' => [
-                        'query' => [
-                            'match' => [
-                                'content' => $search
-                            ]
-                        ]
-                    ]
-                ];
-        */
-        /*         $this->params = [
-                    'index' => 'insuraquest',
-                    'body' => [
-                        'query' => [
-                            'match' => [
-                                'content' => $search
-                            ]
-                        ],
-                        'highlight' => [
-                            'fields' => [ 'content' => new \stdClass() ]
-                        ]
-                    ]
-                ];
-        */
-        /* 
-        $this->params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'match' => [
-                        'content' => $search
-                    ]
-                ],
-                'highlight' => [
-                    'fields' => [ 
-                        'content' => [
-                            'require_field_match' => false,
-                            'number_of_fragments' => 5,
-                            'fragment_size' => 200
-                        ]
-                    ]
-                ]
-            ]
-        ];
-        */
-        /* $this->params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'match' => [
-                        'content' => $search
-                    ], 
-                    ['must_not' => 
-                        ['match' => ['content' => 'komaan seg']]
-                    
-                    ] 
-                ]
-            ]
-        ]; */
-        // Bool query based only on content (full text search)
-        /* $this->params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'bool' => [
-                        'must' => [
-                            [ 'match' => [ 'content' => $search ] ]
-                        ]
-                    ]
-                ]
-            ]
-        ];
-        */
-        /* $this->params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'bool' => [
-                    ]
-                ]
-            ]
-        ];
-        if($search!=null)
-        {
-            $this->params['body']['query']['bool'] += ['must' => ['match' => ['content' => $search]]];
-        }
-        */
-        // When you use only one match inside a bool must clause, there is no difference with the match query.
-        // The bool clause is useful when you want to combine multiple (boolean) criteria. Bool supports criteria: must, must_not, filter, should.
-        // - must means: Clauses that must match for the document to be included.
-        // - should means: If these clauses match, they increase the _score; otherwise, they have no effect. They are simply used to refine the relevance score for each document.
+        //Create variables coming from the http request
+        //dump(request()->all());
+        $search = request('searchtext');
+        $exclude = request('excludetext');
+        $languages = request('language');
+        $issuers = request('issuer');
+        $categories = request('category');
+        $tags = request('tag');
 
-        // Bool query with 2 must statements
-        /*        $this->params = [
-                            'index' => 'insuraquest',
-                            'body' => [
-                                'query' => [
-                                    'bool' => [
-                                        'must' => []
-                                        ]
-                                    ]
-                                ]
-                            ];
-                            
-                foreach($arr as $key => $value)
-                {
-                    array_push($this->params['body']['query']['bool']['must'], $value);
-                }
-        */
-        // Bool query with must and must_not statement
-        /* $this->params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'bool' => [
-                        'must' => [
-                            [ 'match' => [ 'content' => $search ] ]
-                        ],
-                        'must_not' => 
-                            ['match' => ['content' => $exclude]]            
-                    ]
-                ]
-            ]
-        ];
-        */
-        // Bool query with must statement and must_not embedded in if-statement 
-        /* $this->params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'bool' => [
-                        'must' => [
-                            [ 'match' => [ 'content' => $search ] ]
-                        ]     
-                    ]
-                ]
-            ]
-        ];
-
-        if($exclude!=null)
-        {
-            $this->params['body']['query']['bool'] += ['must_not' => ['match' => ['content' => $exclude]]];
-        }
-        */
-        /* 
+        // We have 2 types of queries: 'match' query and 'bool' query.
+        // When we use only one 'match' statement inside a 'bool'=>'must' clause, there is no difference with the 'match' query.
+        // The bool clause is useful when we want to combine multiple (boolean) criteria and make more complex queries.
+        // Bool supports the following criteria: 'must', 'must_not', 'filter', 'should'.
+        // - must means: The clause (query) must appear in matching documents and will contribute to the score. These clauses must match, like logical AND.
+        // - filter: The clause (query) must appear in matching documents. However unlike must the score of the query will be ignored. 
+        //   Filter clauses are executed in filter context, meaning that scoring is ignored and clauses are considered for caching.
+        // - must_not means: The clause (query) must not appear in matching documents. These clauses must match, like logical NOT.
+        // - should means: At least one of these clauses must match, like logical OR. 
+        //   If these clauses match, they increase the _score; otherwise, they have no effect. They are simply used to refine the relevance score for each document.
+        
+        // The parameters are a complex array. We start with a base array and continue to build from there.
         $this->params = [
             'index' => 'insuraquest',
             'body' => [
+                'from' => 0, 
+                'size' => 100, // to retrieve max 100 hits on the page
                 'query' => [
-                    'bool' => [
+                    'bool' => [ //
                     ]
                 ]
             ]
         ];
+        // Although the Search page requires the search field, we doublecheck on $search. If $search is not empty, we complete $params for $search 
         if($search!=null)
         {
-            $this->params['body']['query']['bool'] += ['must' => []];
+            $this->params['body']['query']['bool'] += ['must' => []]; // we use 'must': the documents must match with the terms of $search
             array_push($this->params['body']['query']['bool']['must'], ['match' => ['content' => $search]]);
-        }
-        if($exclude!=null)
-        {
-            $this->params['body']['query']['bool'] += ['must_not' => ['match' => ['content' => $exclude]]];
-        }
-        */
-        $this->params = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'bool' => [
-                    ]
-                ]
-            ]
-        ];
-        if($search!=null)
-        {
-            $this->params['body']['query']['bool'] += ['must' => []];
-            array_push($this->params['body']['query']['bool']['must'], ['match' => ['content' => $search]]);
+            // if one of the metadata have been selected in te Search page, we prepare $params with 'bool' 
             if ($languages || $issuers || $categories || $tags)
             {
-                $this->params['body']['query']['bool'] += ['should' => []];
+                $this->params['body']['query']['bool'] += ['should' => []]; // we use 'should': the score will increase when matching with these metadata 
+                // Note: de should array is no associative array. It has "keys" with a classic index and havin again an array value.
+                // if metadata 'language' have been selected, we complete $params with the values of the $languages array 
                 if ($languages)
                 {
                     foreach($languages as $key => $value)
@@ -202,6 +63,7 @@ class Query extends Model
                         array_push($this->params['body']['query']['bool']['should'], [ 'match' => [ 'external.language' => $value ] ]);
                     }
                 }
+                // if metadata 'issuer' have been selected, we complete $params with the values of the $issuers array 
                 if ($issuers)
                 {
                     foreach($issuers as $key => $value)
@@ -209,6 +71,7 @@ class Query extends Model
                         array_push($this->params['body']['query']['bool']['should'], [ 'match' => [ 'external.issuer' => $value ] ]);
                     }
                 }
+                // if metadata 'category' have been selected, we complete $params with the values of the $categories array 
                 if ($categories)
                 {
                     foreach($categories as $key => $value)
@@ -216,6 +79,7 @@ class Query extends Model
                         array_push($this->params['body']['query']['bool']['should'], [ 'match' => [ 'external.category' => $value ] ]);
                     }
                 }
+                // if metadata 'tag' have been selected, we complete $params with the values of the $tags array 
                 if ($tags)
                 {
                     foreach($tags as $key => $value)
@@ -225,26 +89,13 @@ class Query extends Model
                 }
             }
         }
+        // if the exclude from search has been filled in, we complete $params with extra arrays to include the must_not clause 
         if($exclude!=null)
         {
             $this->params['body']['query']['bool'] += ['must_not' => ['match' => ['content' => $exclude]]];
         }
         
-        /*      //voorbeeld van hardcoded parameters. Let wel: de must array is geen associative array, maar heeft als "keys" een klassieke index met als value opnieuw een array.
-                $params = [
-                    'index' => 'insuraquest',
-                    'body'  => [
-                        'query' => [
-                            'bool' => [
-                                'must' => [
-                                    [ 'match' => [ 'content' => $search ] ],
-                                    [ 'match' => [ 'external.tag' => $cb1 ] ],
-                                ]
-                            ]
-                        ]
-                    ]
-                ];
-        */
+        // add suffix to $params array for highlighting feature
         $this->addHighlight();
     }
 
@@ -254,9 +105,9 @@ class Query extends Model
             'highlight' => [
             'fields' => [ 
                 'content' => [
-                    'require_field_match' => false,
-                    'number_of_fragments' => 5,
-                    'fragment_size' => 300
+                    'require_field_match' => false, // we want to retrieve all matching fields 
+                    'number_of_fragments' => 5, // number of fragments matching with the must clause
+                    'fragment_size' => 300 // default of 100 characters increased to 300
                     ]
                 ]
             ]
