@@ -388,7 +388,7 @@ Array
 
 ### Upload a document
 
-A Librarian account has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document <br>
+A Librarian account has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document. The content for the tags is pulled from a mySql table and added to the form. <br>
         - Title, Language, Date Published, Issuer, Category, Keyword.<br>
         - These values are required to be entered by the Librarian to upload a document.<br>
         - A file can be uploaded, which must be pdf and max 2048kb.<br>
@@ -409,7 +409,7 @@ FileUploadController.php
  ]
 ```
 
-Also, when a document is uploaded, the file and tags are posted to fscrawler, which will index the document before adding to our ElasticSearch node.
+When a document is uploaded, the file and tags are posted to fscrawler, which will index the document before adding to our ElasticSearch node.
 
 ```php
 FileUploadController.php
