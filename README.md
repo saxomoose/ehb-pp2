@@ -468,10 +468,10 @@ Mail controller, essentially we will define the have the logic to display the us
 Possibility to test email function
  http://localhost:8000/send-email
  -> sends mail to mailTrap (account Bart)
- 
+
 
  ***todo: implement the mail functionality into the one search result***
-
+<br>
 
 
 Unit Testing using Mock a Elastic Client
