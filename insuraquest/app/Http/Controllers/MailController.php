@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
+
+// import van de EmailInsuraquest mailable class
 use App\Mail\EmailInsuraquest;
+
+// zal een response geven aan de user als de mail succesvol verstuurd is via deze API
 use Symfony\Component\HttpFoundation\Response;
 
 class MailController extends Controller
