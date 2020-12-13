@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
