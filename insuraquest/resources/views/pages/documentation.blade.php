@@ -78,12 +78,14 @@
                                 <p>
                                     Op de zoekpagina vind je een aantal velden terug waarmee je je zoekopdracht kan
                                     verfijnen.
-                                    <ul>
-                                        <li><b>Verplichte velden:</b></li>
+                                    <br/>
+                                    <ul class="list-disc">
+                                        <b>Verplichte velden:</b>
                                         <li>Search for: hierin geef je je trefwoord in waarop je wenst te zoeken. vb.
                                             Brussel. </li>
-                                        <li><b>Optionele parameters:</b></li>
-                                        <li>Exclude from search: hierin geef je de trefwoorden in die <b>niet</b> mogen
+                                            <br/>
+                                        <b>Optionele parameters: Je kan meerdere opties aanklikken.</b>
+                                         <li>Exclude from search: hierin geef je de trefwoorden in die <b>niet</b> mogen
                                             voorkomen in de zoekresultaten.</li>
                                         <li>Language: de taal waarin het document is opgesteld</li>
                                         <li>Issuer: de instantie die het document heeft opgesteld</li>
@@ -93,6 +95,11 @@
                                         </li>
                                         <li>Date until: de datum tot en met wanneer het document werd gepubliceerd</li>
                                     </ul>
+                                    <p>Ter info: De documenten die gevonden worden worden getoond in volgorde van de relevantie volgens de opties die
+                                        je hebt aangeklikt.
+                                        Het is niet verplicht voor de zoekopdracht dat alle opties die je aanduidde moeten gevonden worden
+                                        in elk document. De parameters worden gezocht volgens de logica : optie of optie of optie. </p>
+
                                 </p>
                             </div>
                         </div>
