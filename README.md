@@ -9,6 +9,7 @@ Search engine application for insurance documents.
 Insurance companies store documents on legislation, jurisprudence and legal doctrine in their particular field.
 The goal is to provide employees an easy-to-use search engine application based on the algorythms of the Elasticsearch framework.
 
+
 Table of Contents
 =================
 
@@ -18,6 +19,7 @@ Table of Contents
   * [Documentation](#documentation)
   * [Installation via Composer](#installation-via-composer)
   * [PHP Version Requirement](#php-version-requirement)
+  * [Authorisation and Authentication](#authorisation-and-authentication)
   * [Quickstart](#quickstart)
     + [Index a document](#index-a-document)
     + [Get a document](#get-a-document)
@@ -37,12 +39,12 @@ Features
 --------
 
  - Registry and login of users
- - Management of roles and authorisations: guest, user, librarian, admin, superadmin
+ - Management of roles and authorisations: guest, user, librarian, admin
  - Upload of documents in .pdf, .png or .jpeg format on server location
  - At upload, the librarian enters all metadata (tags) with the upload
  - Documents are picked up by fsCrawler, converted to json and presented, together with all the manual metadata, to the Elasticsearch stack for indexing
  - Elasticsearch stores all documents on index "insuraquest" in json format  
- - All users (except for guests) can perform ful text searches on content and add filters based on criteria such as language, issuer, insurance type, etc.
+ - All users (except for guests) can perform full text searches on content and add filters based on criteria such as language, issuer, insurance type, etc.
  - Search results are shown in order of relevance (highest scores are shown on top); highlighting leads to rendering only some fragments of the content 
  - Full reading of the document is only a click away.
  - Modification of tags 
@@ -125,6 +127,38 @@ extension to be version 1.3.7 or higher.
 | 5.0         | >= 5.6.6                 |
 | 2.0         | >= 5.4.0                 |
 | 0.4, 1.0    | >= 5.3.9                 |
+
+
+## Authorisation and Authentication
+
+### Authentication
+
+Since InsuraQuest uses Laravel Jetstream, it includes login, registration, email verification, two-factor authentication and session management out of the box. 
+Jetstream uses Laravel Fortify, which is a front-end agnostic authentication backend for Laravel.
+
+In the config/fortify.php configuration file you can customize the different aspects, choose which aspects you wish to implement on your project etc.
+
+The logic to be executed on authorisation request, can be found and modified in App\Actions\Fortify.
+
+More info and documentation on Jetstream can be found on <a href=https://jetstream.laravel.com> the jetstream website </a>.
+
+### Authorisation
+
+InsuraQuest implements authorisation through the attribute 'type' which is included in each user-instance. There are four types: guest, user, librarian and admin. Types are made cascading. Each new level has the permissions of the level below + additional permissions.
+
+Authorisation is enforced on the different routes (web.php). On mixed views, it is also enforced on view-level by implementing the native Laravel @can and @cannot.
+
+#### Adjusting types
+
+Types can be adjusted in the database directly, or on the 'user administration'-page when you are signed in with an adminaccount.
+
+#### Types 
+When a visitor is not yet signed in, he will get rerouted to the login-screen.
+By default - when a new user gets registered - he is assigned the type 'guest'.
+He will be able to see the landingpage and the documentation, but cannot query any documents.
+A user can query documents, open them and mail them.
+A librarian can upload new files, delete files and change the tags on them.
+An admin can view all the users, their information, and adjust their type.
 
 
 Quickstart
