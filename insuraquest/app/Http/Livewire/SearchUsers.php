@@ -20,6 +20,7 @@ class SearchUsers extends Component
         return view('livewire.search-users', [
             'users' => DB::table('users')
             ->where('name', 'LIKE', "%{$this->search}%")
+            ->orWhere('firstname', 'LIKE', "%{$this->search}%")
             ->orWhere('email', 'LIKE', "%{$this->search}%")
             ->orWhere('type', 'LIKE', "%{$this->search}%")
             ->paginate(5),
