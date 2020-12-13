@@ -6,6 +6,7 @@ use App\Models\Document;
 use Illuminate\Http\Request;
 use Elasticsearch\ClientBuilder;
 use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentsController extends Controller
 {
@@ -161,7 +162,7 @@ class DocumentsController extends Controller
 
         return redirect()->route('document', ['id' => $result['_id']])
 
-            ->with('success','File edit was successful!');
+            ->with('success-edit','File edit was successful!');
 
             //error message
 
@@ -174,8 +175,34 @@ class DocumentsController extends Controller
      * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Document $document)
+    public function destroy($id, $filename)
     {
-        //
+        $hosts = [
+            'host' => '10.3.50.7',
+            'port' => '9200',
+            'scheme' => 'http',
+        ];
+
+        $client = ClientBuilder::create()
+            ->setHosts($hosts)
+            ->build();
+
+        $params = [
+            'index' => 'insuraquest',
+            'type' => '_doc',
+            'id' => $id
+        ];
+
+        $response = $client->delete($params);
+
+        if($response['result'] == 'deleted') {
+            Storage::disk('local')->delete('public/' . $filename);
+        }
+
+        return redirect()->route('search')
+
+            -> with('success-delete', 'File deletion was successful');
+
+
     }
 }
