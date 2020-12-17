@@ -19,8 +19,9 @@
 <!-- (Optional) Latest compiled and minified JavaScript translation files -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script> @endpush
 
-{{-- TO DO: validatie!!! Verplicht veld 'search for' --}}
+
  <div>
+
       @if (count($errors) > 0)
                                                 <div class="alert alert-danger">
                                                     <strong>Whoops!</strong><br> There were some problems with your input.
@@ -31,6 +32,7 @@
                                                     </ul>
                                                 </div>
                                                 @endif
+                                                
     <form action="{{ route('documentsearch') }}" method="POST" enctype="multipart/form-data">
         @csrf
                 <div class="form-row">
@@ -125,6 +127,12 @@
                             @endforeach
                         </ul>
                      </div>
+                    @endif
+                    @if ($message = Session::get('success-delete'))
+                        <div class="alert alert-success alert-block ">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
                     @endif
 
     </form>

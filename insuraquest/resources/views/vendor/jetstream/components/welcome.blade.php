@@ -5,7 +5,7 @@
 
     <div class="mt-8 text-2xl">
         Welcome to InsuraQuest!
-        <img class="w-auto h-1/2 mx-auto mb-2 full" src="/pictures/landingPage.jpg" alt="">
+        <img class="mx-auto mb-2 full" src="/pictures/landingPage.jpg" alt="">
     </div>
 </div>
 
