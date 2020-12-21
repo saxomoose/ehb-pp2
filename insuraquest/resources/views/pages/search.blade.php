@@ -7,7 +7,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
             <div class=" p-8 bg-white overflow-hidden shadow-xl sm:rounded-lg border-8">
                 <div>
                     {{-- Create compenent for search page --}}
@@ -32,8 +31,9 @@
                                                     </ul>
                                                 </div>
                                                 @endif
-                                                
-    <form action="{{ route('documentsearch') }}" method="POST" enctype="multipart/form-data">
+
+     {{print_r(Session::all())}}
+     <form action="{{ route('documentsearch') }}" method="POST" enctype="multipart/form-data">
         @csrf
                 <div class="form-row">
                      <div class="form-group col-auto">
@@ -110,32 +110,32 @@
                         Search
                     </button>
                 </div>
-            </div>
-            <div class="panel-body">
-                    @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-block ">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                    @endif
-                    @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <strong>Whoops!</strong><br> There were some problems with your input.
-                        <ul><br>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                     </div>
-                    @endif
-                    @if ($message = Session::get('success-delete'))
-                        <div class="alert alert-success alert-block ">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>{{ $message }}</strong>
-                        </div>
-                    @endif
-
     </form>
+</div>
+
+<div class="panel-body">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block ">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+        @endif
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong><br> There were some problems with your input.
+            <ul><br>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+         </div>
+        @endif
+        @if ($message = Session::get('success-delete'))
+            <div class="alert alert-success alert-block ">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
 </div>
 @push('scripts')
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

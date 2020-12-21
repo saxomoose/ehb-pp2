@@ -49,7 +49,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                             </ul>
                                         </div>
                                         @endif
-                                        
+
                                         <label class="block">
                                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor"
                                                 fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -61,6 +61,7 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                                                 <p class="text-xs text-gray-500">
                                                     pdf up to 2048kb
                                                 </p>
+                                            </div>
                                         </label>
                                         <div class="row">
                                             <div class="col-md-12">
@@ -135,5 +136,8 @@ Velden die toegevoegd moeten worden aan de form en mogelijke waarden:
                             </button>
                         </div>
                     </div>
+                </div>
             </form>
+        </div>
+    </div>
 </x-app-layout>
