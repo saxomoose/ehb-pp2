@@ -16,8 +16,6 @@ use App\Models\Tag;
 
 use Illuminate\Support\Facades\DB;
 
-use GuzzleHttp\Client;
-
 
 class FileUploadController extends Controller
 {
@@ -28,7 +26,7 @@ class FileUploadController extends Controller
         $issuers = Issuer::get();
         $categories = Category::get();
         $tags = Tag::get();
-        
+
         return view('pages/librarian', [
                 'languages' => $languages,
                 'issuers' => $issuers,

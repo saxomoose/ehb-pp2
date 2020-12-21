@@ -94,7 +94,7 @@ class DocumentsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Document  $document
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function update(Request $request, $id)
     {
@@ -173,7 +173,7 @@ class DocumentsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Document  $document
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function destroy($id, $filename)
     {
