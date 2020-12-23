@@ -291,7 +291,7 @@ git remote add live 'student@10.3.50.7:/home/student/insuraquest/bare_project.gi
 git push --set-upstream live main
 ```
 
-###Laravel
+### Laravel
 
 - After project is pushed to /var/www/insuraquest_production, composer update is called to update all dependencies:
 

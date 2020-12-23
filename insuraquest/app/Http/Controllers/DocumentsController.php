@@ -45,7 +45,7 @@ class DocumentsController extends Controller
      * Display the specified resource.
      *
      * @param Store $session
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function show($id)
     {
@@ -93,12 +93,11 @@ class DocumentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Document  $document
-     * @return mixed
+     * @param string
+     *
      */
     public function update(Request $request, $id)
     {
-
 
         $this->validate($request, [
             'title' => 'required',
@@ -146,26 +145,9 @@ class DocumentsController extends Controller
 
         $client->update($params_update);
 
-        $params_query = [
-            'index' => 'insuraquest',
-            'body' => [
-                'query' => [
-                    'match' => [
-                        '_id' => $id
-                    ]
-                ]
-            ]
-        ];
+        return redirect()->route('document', ['id' => $id])
 
-        $response = $client->search($params_query);
-        $result = $response['hits']['hits'][0];
-
-        return redirect()->route('document', ['id' => $result['_id']])
-
-            ->with('success-edit','File edit was successful!');
-
-            //error message
-
+            -> with('success-edit', 'File edit was successful');
 
     }
 
