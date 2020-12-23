@@ -20,6 +20,13 @@ Table of Contents
   * [Installation via Composer](#installation-via-composer)
   * [PHP Version Requirement](#php-version-requirement)
   * [Authorisation and Authentication](#authorisation-and-authentication)
+  * [Back-end - deployment](#back-end---deployment)  
+    + [Elasticsearch](#elasticsearch)
+    + [Kibana](#kibana)
+    + [FSCrawler](#fscrawler)
+    + [LEMP stack](#lemp-stack)
+    + [Git deployment](#git-deployment)
+    + [Laravel](#laravel)  
   * [Quickstart](#quickstart)
     + [Index a document](#index-a-document)
     + [Get a document](#get-a-document)
@@ -160,6 +167,147 @@ A user can query documents, open them and mail them.
 A librarian can upload new files, delete files and change the tags on them.
 An admin can view all the users, their information, and adjust their type.
 
+Back-end - deployment
+----
+
+Description of deployment set-up.
+
+### Elasticsearch
+
+- v. 6.8.13
+- 1 shard
+- 1 replica
+- single node
+- analyzer: fscrawler_path
+- production index: insuraquest
+- custom fields in index mapping:
+  ```json 
+  "external": {
+      "properties": {
+          "title": {
+          "type": "text"
+          },
+          "language": {
+          "type": "keyword"
+          },
+          "date_published": {
+          "type": "date"
+          },
+          "issuer": {
+          "type": "keyword"
+          },
+          "category": {
+          "type": "keyword"
+          },
+          "tag": {
+          "type": "keyword"
+          }
+      }
+  }
+  ```
+- insuraquest index created on first run of FSCrawler
+
+### Kibana
+
+- v. 6.8.13
+
+### FSCrawler
+
+- v. 6-2.6
+- utility has been converted in systemd unit to be used as a service -> /etc/systemd/system/fscrawler.service
+- utility run by dedicated user fscrawler
+- analyzer of FSCrawler makes use of Apache Tika to parse and tokenize binary documents, including pdfs 
+- fscrawler exposes a REST API running at http://127.0.0.1:8080/fscrawler
+- custom fields added to mapping defined under /home/student/.fscrawler/_default/6/_settings.json
+    
+### LEMP stack
+
+Considered more robust than built-in Laravel server.
+
+#### Ngin-x
+
+- Configuration file -> /etc/nginx/sites-available/default:
+```shell
+server {
+        listen 80;
+        server_name 10.3.50.7;
+        root /var/www/insuraquest_production/insuraquest/public;
+
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-XSS-Protection "1; mode=block";
+        add_header X-Content-Type-Options "nosniff";
+
+        index index.php;
+
+        charset utf-8;
+
+        location / {
+        try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+
+        error_page 404 /index.php;
+
+        location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
+
+#### Mysql
+
+- Default configuration
+- Populated after deployment of git repo with:
+```shell
+php artisan migrate:fresh --seed
+```
+
+### Git deployment
+- Deployment via bare git repo living under /home/student/insuraquest/bare_project.git
+```shell
+git init --bare /home/student/insuraquest/bare_project.init
+```
+- Post-receive hook allows to push changes to working directory living under /var/www/insuraquest_production
+```shell
+#!/bin/bash
+
+#check out the files
+git --work-tree=/var/www/insuraquest_production --git-dir=/home/student/insuraquest/bare_project.git checkout -f
+
+chmod +x /path/to/bare_project.git/hooks/post-receive
+```
+- Configuration of local repo to push to the server
+
+```shell
+git remote add live 'student@10.3.50.7:/home/student/insuraquest/bare_project.git'
+git push --set-upstream live main
+```
+
+###Laravel
+
+- After project is pushed to /var/www/insuraquest_production, composer update is called to update all dependencies:
+
+```shell
+composer update 
+```
+- Set the ownership of /var/www/insuraquest_production to www-data group to grant Ngin-x read and execute permissions. 
+```shell
+chgrp -R www-data insuraquest_production
+```
+- Fix broken storage symbolic links
+```shell
+php artisan storage:link
+```
+
+#### 
 
 Quickstart
 ----
