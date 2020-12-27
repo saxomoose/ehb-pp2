@@ -21,6 +21,8 @@ class Query extends Model
         $issuers = request('issuer');
         $categories = request('category');
         $tags = request('tag');
+        $dateFrom = request('date-from');
+        $dateUntil = request('date-until');
 
         // We have 2 types of queries: 'match' query and 'bool' query.
         // When we use only one 'match' statement inside a 'bool'=>'must' clause, there is no difference with the 'match' query.
@@ -88,7 +90,44 @@ class Query extends Model
                     }
                 }
             }
+/*             if ($dateFrom || $dateUntil)
+            {
+                $this->params['body']['query'] += ['range' => []];
+                if ($dateFrom && !$dateUntil)
+                {
+                    array_push($this->params['body']['query']['range'], [ 'date_published' => [ 'gte' => $dateFrom ] ]);
+                }
+                if (!$dateFrom && $dateUntil)
+                {
+                    array_push($this->params['body']['query']['range'], [ 'date_published' => [ 'lte' => $dateUntil ] ]);
+                }
+                if ($dateFrom && $dateUntil)
+                {
+                    array_push($this->params['body']['query']['range'], [ 'date_published' => [ 'gte' => $dateFrom ] ]);
+                    array_push($this->params['body']['query']['range'], [ 'date_published' => [ 'lte' => $dateUntil ] ]);
+                }
+            } */
+            //TO BE TESTED!!!
+            if ($dateFrom || $dateUntil)
+            {
+                $this->params['body']['query'] += ['range' => []];
+                $this->params['body']['query']['range'] += ['date_published' => []];
+                if ($dateFrom && !$dateUntil)
+                {
+                    $this->params['body']['query']['range']['date_published'] += [ 'gte' => $dateFrom ];
+                }
+                if (!$dateFrom && $dateUntil)
+                {
+                    $this->params['body']['query']['range']['date_published'] += [ 'lte' => $dateUntil ];
+                }
+                if ($dateFrom && $dateUntil)
+                {
+                    $this->params['body']['query']['range']['date_published'] += [ 'gte' => $dateFrom ];
+                    $this->params['body']['query']['range']['date_published'] += [ 'lte' => $dateUntil ];
+                }
+            }
         }
+        
         // if the exclude from search has been filled in, we complete $params with extra arrays to include the must_not clause 
         if($exclude!=null)
         {

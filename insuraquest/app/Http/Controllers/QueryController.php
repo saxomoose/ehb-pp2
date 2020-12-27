@@ -26,6 +26,7 @@ class QueryController extends Controller
     //
     public function show(Request $request)
     {
+        //dd($request);
         // Searchtext field is required
         $this->validate($request, [
             'searchtext' => 'required'], [
@@ -48,6 +49,7 @@ class QueryController extends Controller
         $query = new Query(); // Instantiate a new Query
         $query->setParams(); // Set search parameters
 
+        //dd($query->params);
         $response = $client->search($query->params);
         //print_r($query->params);
         //dump($response);
