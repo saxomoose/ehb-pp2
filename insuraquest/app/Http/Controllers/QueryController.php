@@ -12,64 +12,20 @@ use App\Models\Tag;
 
 class QueryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return mixed
-     */
+    // Show the form to create a new query
     public function create()
     {
-        // Fill search form
-        $languages = Language::get();
-        $issuers = Issuer::get();
-        $categories = Category::get();
-        $keywords = Tag::get();
-
         return view('pages.query.create', [
-                        'languages' => $languages,
-                        'issuers' => $issuers,
-                        'categories' => $categories,
-                        'keywords' => $keywords
+                        'languages' => Language::all(),
+                        'issuers' => Issuer::all(),
+                        'categories' => Category::all(),
+                        'keywords' => Tag::all(),
                         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Query  $query
-     * @return mixed
-     */
-
-
+    //
     public function show(Request $request)
     {
-        // Fill search form
-        $languages = Language::get();
-        $issuers = Issuer::get();
-        $categories = Category::get();
-        $keywords = Tag::get();
-
         // Searchtext field is required
         $this->validate($request, [
             'searchtext' => 'required'], [
@@ -99,46 +55,13 @@ class QueryController extends Controller
         $request->flash();
 
         return view('pages.query.create', [
-                        'languages' => $languages,
-                        'issuers' => $issuers,
-                        'categories' => $categories,
-                        'keywords' => $keywords,
+                        'languages' => Language::all(),
+                        'issuers' => Issuer::all(),
+                        'categories' => Category::all(),
+                        'keywords' => Tag::all(),
                         'hits' => $response['hits']['total'],
                         'results' => $response['hits']['hits']
                         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Query  $query
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Query $query)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Query  $query
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Query $query)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Query  $query
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Query $query)
-    {
-        //
-    }
 }
