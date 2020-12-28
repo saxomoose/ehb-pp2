@@ -78,27 +78,30 @@
                                 <p>
                                     Op de zoekpagina vind je een aantal velden terug waarmee je je zoekopdracht kan
                                     verfijnen. </p>
-                                    <br/>
-                                    <ul class="list-disc">
-                                        <b>Verplichte velden:</b>
-                                        <li>Search for: hierin geef je je trefwoord in waarop je wenst te zoeken. vb.
-                                            Brussel. </li>
-                                            <br/>
-                                        <b>Optionele parameters: Je kan meerdere opties aanklikken.</b>
-                                         <li>Exclude from search: hierin geef je de trefwoorden in die <b>niet</b> mogen
-                                            voorkomen in de zoekresultaten.</li>
-                                        <li>Language: de taal waarin het document is opgesteld</li>
-                                        <li>Issuer: de instantie die het document heeft opgesteld</li>
-                                        <li>Category: de categorie waartoe het document behoort</li>
-                                        <li>Keyword: het soort van tak waartoe het document behoort. vb. brand</li>
-                                        <li>Date published from: de datum vanaf wanneer het document werd gepubliceerd
-                                        </li>
-                                        <li>Date until: de datum tot en met wanneer het document werd gepubliceerd</li>
-                                    </ul>
-                                    <p>Ter info: De documenten die gevonden worden worden getoond in volgorde van de relevantie volgens de opties die
-                                        je hebt aangeklikt.
-                                        Het is niet verplicht voor de zoekopdracht dat alle opties die je aanduidde moeten gevonden worden
-                                        in elk document. De parameters worden gezocht volgens de logica : optie of optie of optie. </p>
+                                <br />
+                                <ul class="list-disc">
+                                    <b>Verplichte velden:</b>
+                                    <li>Search for: hierin geef je je trefwoord in waarop je wenst te zoeken. vb.
+                                        Brussel. </li>
+                                    <br />
+                                    <b>Optionele parameters: Je kan meerdere opties aanklikken.</b>
+                                    <li>Exclude from search: hierin geef je de trefwoorden in die <b>niet</b> mogen
+                                        voorkomen in de zoekresultaten.</li>
+                                    <li>Language: de taal waarin het document is opgesteld</li>
+                                    <li>Issuer: de instantie die het document heeft opgesteld</li>
+                                    <li>Category: de categorie waartoe het document behoort</li>
+                                    <li>Keyword: het soort van tak waartoe het document behoort. vb. brand</li>
+                                    <li>Date published from: de datum vanaf wanneer het document werd gepubliceerd
+                                    </li>
+                                    <li>Date until: de datum tot en met wanneer het document werd gepubliceerd</li>
+                                </ul>
+                                <p>Ter info: De documenten die gevonden worden worden getoond in volgorde van de
+                                    relevantie volgens de opties die
+                                    je hebt aangeklikt.
+                                    Het is niet verplicht voor de zoekopdracht dat alle opties die je aanduidde moeten
+                                    gevonden worden
+                                    in elk document. De parameters worden gezocht volgens de logica : optie of optie of
+                                    optie. </p>
 
                                 </p>
                             </div>
@@ -111,21 +114,24 @@
                                 <h2> Hoe voeg ik een document toe aan de bibliotheek? </h2>
                                 <p>
                                     In de navigatiebalk bovenaan, vind je een knop 'Upload file'.
-                                    Wanneer je hierop klikt, dan kom je terecht op het formulier waar je een nieuw document kan uploaden.</p>
-                                    <br>
+                                    Wanneer je hierop klikt, dan kom je terecht op het formulier waar je een nieuw
+                                    document kan uploaden.</p>
+                                <br>
 
-                                    <ul  class="list-disc">
-                                        <li>Eerst kan je een document selecteren dat je wil uploaden. Dit kan enkel een pdf zijn met een maximale grootte van 2mb</ul>
-                                        <li>Geef een titel aan het document</li>
-                                        <li>Kies de taal van het document dat je wil uploaden</li>
-                                        <li>Kies de pulicatiedatum van het document</li>
-                                        <li>Kies de issuer van het document</li>
-                                        <li>Kies een categorie</li>
-                                        <li>Als laatste kan je nog een extra keywoord toevoegen om meer informatie toe te voegen</li>
-                                    </ul>
-                                    <br>
-                                    Hierna kan je op de Upload knop klikken en zal je document worden opgeslagen.
-                                </p>
+                                <ul class="list-disc">
+                                    <li>Eerst kan je een document selecteren dat je wil uploaden. Dit kan enkel een pdf
+                                        zijn met een maximale grootte van 2mb
+                                </ul>
+                                <li>Geef een titel aan het document</li>
+                                <li>Kies de taal van het document dat je wil uploaden</li>
+                                <li>Kies de pulicatiedatum van het document</li>
+                                <li>Kies de issuer van het document</li>
+                                <li>Kies een categorie</li>
+                                <li>Als laatste kan je nog een extra keywoord toevoegen om meer informatie toe te voegen
+                                </li>
+                                </ul>
+                                <br>
+                                <p>Hierna kan je op de Upload knop klikken en zal je document worden opgeslagen.</p>
                             </div>
                         </div>
                         <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -133,8 +139,21 @@
                                 <h2> Hoe wijzig ik de tags van een document? </h2>
                                 <p>
                                     Zoek eerst het document op via de 'Search' pagina.
-                                    Wanneer je het document openklikt, krijg je onderaan de knop 'edit' te zien, waarmee je een formulier opent om de tags te wijzigen.
+                                    Wanneer je het document opent door op 'Read the full document' te klikken, krijg je
+                                    onderaan de knop 'edit' te zien, waarmee je een formulier opent om de tags te
+                                    wijzigen.
                                 </p>
+                                <br>
+                                <ul class="list-disc">
+                                    <li>Wijzig de titel</li>
+                                    <li>Wijzig de taal</li>
+                                    <li>Wijzig de pulicatiedatum van het document</li>
+                                    <li>Wijzig de issuer van het document</li>
+                                    <li>Wijzig de categorie</li>
+                                    <li>Als laatste kan je nog de tag wijzigen</li>
+                                </ul>
+                                <br>
+                                <p>Hierna kan je bevestigen en zal je document worden gewijzigd.</p>
                             </div>
                         </div>
                         <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -142,7 +161,8 @@
                                 <h2> Hoe verwijder ik een document? </h2>
                                 <p>
                                     Zoek eerst het document op via de 'Search' pagina.
-                                    Wanneer je het document openklikt, krijg je onderaan de knop 'delete' te zien, waarmee je het document verwijderd.
+                                    Wanneer je het document openklikt, krijg je onderaan de knop 'delete' te zien,
+                                    waarmee je het document verwijderd.
                                 </p>
                             </div>
                         </div>
@@ -156,8 +176,9 @@
                                     In de navigatiebalk bovenaan, vind je een knop 'User administration'.
                                     Wanneer je hierop klikt, kom je terecht op het overzicht van alle gebruikers.
                                     Gebruik de navigatieknoppen onderaan, om naar de volgende pagina te gaan.
-                                    <br/>
-                                    Bovenaan in de zoekbalk kan je ook filteren op de gebruikers. Geef een woord of letter in
+                                    <br />
+                                    Bovenaan in de zoekbalk kan je ook filteren op de gebruikers. Geef een woord of
+                                    letter in
                                     om te filteren op 'naam', 'voornaam', 'e-mailadres' of 'type'.
                                 </p>
                             </div>
@@ -167,7 +188,8 @@
                                 <h2> Hoe zie ik welk type een gebruiker heeft? </h2>
                                 <p>
                                     Wanneer je in het overzicht van de gebruikers kijkt bij de betreffende gebruiker,
-                                    zie je langs de rechterzijde verschillende knoppen met types. De knop die ingekleurd is, duidt het type van de gebruiker aan.
+                                    zie je langs de rechterzijde verschillende knoppen met types. De knop die ingekleurd
+                                    is, duidt het type van de gebruiker aan.
                                 </p>
                             </div>
                         </div>
@@ -176,20 +198,24 @@
                                 <h2> Wat betekenen de verschillende types ? </h2>
                                 <p>
                                     Iemand die zich nieuw aanmeldt, krijgt automatisch het type guest.
-                                    Dit type kan nog geen zoekopdrachten uitvoeren. De ingelogde gebruiker kan echter wel het dashboard,
+                                    Dit type kan nog geen zoekopdrachten uitvoeren. De ingelogde gebruiker kan echter
+                                    wel het dashboard,
                                     de documentatie en de teampage bekijken. De overige pagina's zijn verborgen.
-                                    <br/>
+                                    <br />
                                     Een gebruiker die het type ‘user’ krijgt, kan gebruik maken van de ‘Search’ pagina.
-                                    Hij kan dus zoekopdrachten doen naar de documenten in de bibliotheek en deze ook bekijken.
+                                    Hij kan dus zoekopdrachten doen naar de documenten in de bibliotheek en deze ook
+                                    bekijken.
                                     Daarnaast kan hij de documenten ook doormailen.
-                                    <br/>
-                                    Een gebruiker die het type ‘librarian’ krijgt, kan gebruik maken de ‘Librarian’ pagina.
+                                    <br />
+                                    Een gebruiker die het type ‘librarian’ krijgt, kan gebruik maken de ‘Librarian’
+                                    pagina.
                                     Op deze pagina kan een nieuw document worden toegevoegd aan de bibliotheek.
                                     Bij het toevoegen van het document, dient ook de additionele informatie over het
                                     document te worden aangevuld.
                                     Ook de functies van een 'user' zijn beschikbaar.
-                                    <br/>
-                                    Een gebruiker die het type ‘admin’ krijgt kan naast de pagina’s die de ‘guest’, 'user' en 'librarian'
+                                    <br />
+                                    Een gebruiker die het type ‘admin’ krijgt kan naast de pagina’s die de ‘guest’,
+                                    'user' en 'librarian'
                                     te zien krijgt, ook nog de ‘Admin’ pagina bekijken. Op deze pagina worden alle
                                     gebruikers van de applicatie vermeld: zowel de gebruikers met type ‘guest’,
                                     ‘user’, ‘librarian’ als ‘admin’.
@@ -201,9 +227,11 @@
                                 <h2> Hoe wijzig ik het type een gebruiker ? </h2>
                                 <p>
                                     Wanneer je in het overzicht van de gebruikers kijkt bij de betreffende gebruiker,
-                                    zie je langs de rechterzijde verschillende knoppen met types. De knop die ingekleurd is, duidt het type van de gebruiker aan.
+                                    zie je langs de rechterzijde verschillende knoppen met types. De knop die ingekleurd
+                                    is, duidt het type van de gebruiker aan.
                                     Klik op de knop van het gewenste type om de gebruiker dit type toe te kennen.
-                                    De kleur van de knop zal wijzigen, dit wil zeggen dat je wijzigingen zijn doorgevoerd.
+                                    De kleur van de knop zal wijzigen, dit wil zeggen dat je wijzigingen zijn
+                                    doorgevoerd.
                                 </p>
                             </div>
                         </div>
