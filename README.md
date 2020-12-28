@@ -3,14 +3,12 @@
 Insuraquest
 ===========
 
-Project in the context of studies at Erasmumshogeschool Brussel, Toegepaste Informatica - Programming Project 2, Group 2.
+A school project from course Programming Project 2, Group 2, Professional Bachelor "Applied IT" at Erasmumshogeschool Brussel.
+
 Search engine application for insurance documents.
 Insurance companies store documents on legislation, jurisprudence and legal doctrine in their particular field.
 The goal is to provide employees an easy-to-use search engine application based on the algorythms of the Elasticsearch framework.
 
-
-- [Usage](https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html)
-- [Watcher](https://www.elastic.co/guide/en/elasticsearch/reference/current/watcher-api.html)
 
 Table of Contents
 =================
@@ -21,6 +19,14 @@ Table of Contents
   * [Documentation](#documentation)
   * [Installation via Composer](#installation-via-composer)
   * [PHP Version Requirement](#php-version-requirement)
+  * [Authorisation and Authentication](#authorisation-and-authentication)
+  * [Back-end - deployment](#back-end---deployment)  
+    + [Elasticsearch](#elasticsearch)
+    + [Kibana](#kibana)
+    + [FSCrawler](#fscrawler)
+    + [LEMP stack](#lemp-stack)
+    + [Git deployment](#git-deployment)
+    + [Laravel](#laravel)  
   * [Quickstart](#quickstart)
     + [Index a document](#index-a-document)
     + [Get a document](#get-a-document)
@@ -28,6 +34,8 @@ Table of Contents
     + [Delete a document](#delete-a-document)
     + [Delete an index](#delete-an-index)
     + [Create an index](#create-an-index)
+    + [Upload a document](#upload-a-document)
+    + [Mail a document](#mail-a-document)
 - [Unit Testing using Mock a Elastic Client](#unit-testing-using-mock-a-elastic-client)
 - [Contributing](#contributing)
 - [Wrap up](#wrap-up)
@@ -38,12 +46,12 @@ Features
 --------
 
  - Registry and login of users
- - Management of roles and authorisations: guest, user, librarian, admin, superadmin
+ - Management of roles and authorisations: guest, user, librarian, admin
  - Upload of documents in .pdf, .png or .jpeg format on server location
  - At upload, the librarian enters all metadata (tags) with the upload
  - Documents are picked up by fsCrawler, converted to json and presented, together with all the manual metadata, to the Elasticsearch stack for indexing
  - Elasticsearch stores all documents on index "insuraquest" in json format  
- - All users (except for guests) can perform ful text searches on content and add filters based on criteria such as language, issuer, insurance type, etc.
+ - All users (except for guests) can perform full text searches on content and add filters based on criteria such as language, issuer, insurance type, etc.
  - Search results are shown in order of relevance (highest scores are shown on top); highlighting leads to rendering only some fragments of the content 
  - Full reading of the document is only a click away.
  - Modification of tags 
@@ -64,7 +72,6 @@ Components
 | MySQL                 |                          |
 
 **Note:** fsCrawler vXXXX is only compatible with Elasticsearch 6.8. Consequently, require package Elasticsearch-PHP v6.7 in your Laravel composer.json file 
-
 
 Documentation
 --------------
@@ -129,6 +136,179 @@ extension to be version 1.3.7 or higher.
 | 0.4, 1.0    | >= 5.3.9                 |
 
 
+## Authorisation and Authentication
+
+### Authentication
+
+Since InsuraQuest uses Laravel Jetstream, it includes login, registration, email verification, two-factor authentication and session management out of the box. 
+Jetstream uses Laravel Fortify, which is a front-end agnostic authentication backend for Laravel.
+
+In the config/fortify.php configuration file you can customize the different aspects, choose which aspects you wish to implement on your project etc.
+
+The logic to be executed on authorisation request, can be found and modified in App\Actions\Fortify.
+
+More info and documentation on Jetstream can be found on <a href=https://jetstream.laravel.com> the jetstream website </a>.
+
+### Authorisation
+
+InsuraQuest implements authorisation through the attribute 'type' which is included in each user-instance. There are four types: guest, user, librarian and admin. Types are made cascading. Each new level has the permissions of the level below + additional permissions.
+
+Authorisation is enforced on the different routes (web.php). On mixed views, it is also enforced on view-level by implementing the native Laravel @can and @cannot.
+
+#### Adjusting types
+
+Types can be adjusted in the database directly, or on the 'user administration'-page when you are signed in with an adminaccount.
+
+#### Types 
+When a visitor is not yet signed in, he will get rerouted to the login-screen.
+By default - when a new user gets registered - he is assigned the type 'guest'.
+He will be able to see the landingpage and the documentation, but cannot query any documents.
+A user can query documents, open them and mail them.
+A librarian can upload new files, delete files and change the tags on them.
+An admin can view all the users, their information, and adjust their type.
+
+Back-end - deployment
+----
+
+Description of deployment set-up.
+
+### Elasticsearch
+
+- v. 6.8.13
+- 1 shard
+- 1 replica
+- single node
+- analyzer: fscrawler_path
+- production index: insuraquest
+- custom fields in index mapping:
+  ```json 
+  "external": {
+      "properties": {
+          "title": {
+          "type": "text"
+          },
+          "language": {
+          "type": "keyword"
+          },
+          "date_published": {
+          "type": "date"
+          },
+          "issuer": {
+          "type": "keyword"
+          },
+          "category": {
+          "type": "keyword"
+          },
+          "tag": {
+          "type": "keyword"
+          }
+      }
+  }
+  ```
+- insuraquest index created on first run of FSCrawler
+
+### Kibana
+
+- v. 6.8.13
+
+### FSCrawler
+
+- v. 6-2.6
+- utility has been converted in systemd unit to be used as a service -> /etc/systemd/system/fscrawler.service
+- utility run by dedicated user fscrawler
+- analyzer of FSCrawler makes use of Apache Tika to parse and tokenize binary documents, including pdfs 
+- fscrawler exposes a REST API running at http://127.0.0.1:8080/fscrawler
+- custom fields added to mapping defined under /home/student/.fscrawler/_default/6/_settings.json
+    
+### LEMP stack
+
+Considered more robust than built-in Laravel server.
+
+#### Ngin-x
+
+- Configuration file -> /etc/nginx/sites-available/default:
+```shell
+server {
+        listen 80;
+        server_name 10.3.50.7;
+        root /var/www/insuraquest_production/insuraquest/public;
+
+        add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-XSS-Protection "1; mode=block";
+        add_header X-Content-Type-Options "nosniff";
+
+        index index.php;
+
+        charset utf-8;
+
+        location / {
+        try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+
+        error_page 404 /index.php;
+
+        location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
+
+#### Mysql
+
+- Default configuration
+- Populated after deployment of git repo with:
+```shell
+php artisan migrate:fresh --seed
+```
+
+### Git deployment
+- Deployment via bare git repo living under /home/student/insuraquest/bare_project.git
+```shell
+git init --bare /home/student/insuraquest/bare_project.init
+```
+- Post-receive hook allows to push changes to working directory living under /var/www/insuraquest_production
+```shell
+#!/bin/bash
+
+#check out the files
+git --work-tree=/var/www/insuraquest_production --git-dir=/home/student/insuraquest/bare_project.git checkout -f
+
+chmod +x /path/to/bare_project.git/hooks/post-receive
+```
+- Configuration of local repo to push to the server
+
+```shell
+git remote add live 'student@10.3.50.7:/home/student/insuraquest/bare_project.git'
+git push --set-upstream live main
+```
+
+### Laravel
+
+- After project is pushed to /var/www/insuraquest_production, composer update is called to update all dependencies:
+
+```shell
+composer update 
+```
+- Set the ownership of /var/www/insuraquest_production to www-data group to grant Ngin-x read and execute permissions. 
+```shell
+chgrp -R www-data insuraquest_production
+```
+- Fix broken storage symbolic links
+```shell
+php artisan storage:link
+```
+
+#### 
+
 Quickstart
 ----
 
@@ -174,6 +354,7 @@ Array
     [_primary_term] => 1
 )
 ```
+
 
 ### Get a document
 
@@ -386,6 +567,94 @@ Array
     [acknowledged] => 1
 )
 ```
+
+### Upload a document
+
+A Librarian has the possibility to upload new files. When uploading a document it is possible to add tags to the uploaded document. The content for the tags is pulled from a mySql table and added to the form. <br>
+<ul>
+        <li>Title, Language, Date Published, Issuer, Category, Keyword.</li>
+        <li>These values are required to be entered by the Librarian to upload a document.</li>
+        <li>A file can be uploaded, which must be pdf and max 2048kb.</li>
+        <li>A document is required for upload.</li>
+</ul>
+
+```php
+FileUploadController.php
+
+ $this->validate($request, [
+            'title' => 'required',
+            'language' => 'required',
+            'date' => 'required|date',
+            'issuer' => 'required',
+            'category' => 'required',
+            'tag' => 'required',
+            'file' => 'required|mimes:pdf|max:2048'
+ ]
+```
+
+When a document is uploaded, the file and tags are posted to fscrawler, which will index the document before adding to our ElasticSearch node.
+
+```php
+FileUploadController.php
+
+$file = $request->file('file');
+        $pathname = $file->store('public');
+        $fully_qualified_pathname = storage_path('app/' . $pathname);
+        $client = new Client();
+        try {
+            $client->request('POST', 'http://127.0.0.1:8080/fscrawler/_upload',
+            );
+        } catch (GuzzleException $e) {
+            echo $e;
+        }
+
+```
+
+A plugin is added for form layout -> tailwind.config.js<br>
+https://tailwindcss-custom-forms.netlify.app/
+
+```php
+ plugins: [
+        require('@tailwindcss/custom-forms'),
+      ]
+```
+
+
+### Mail a document
+
+After a user gets all his search results, he can view more details on any of the results.<br>
+Here he has the possibility to edit, delete or mail the pdf shown.
+
+
+Modified or created files for mail functionality are
+<ul>
+<li>MailController.php</li>
+<li>EmailInsuraquest.php</li>
+<li>insuraEmail.blade.php</li>
+<li>web.php</li>
+</ul>
+
+Commands used
+Laravel Mailable Markdown class used for creating emails.
+
+```
+ php artisan make:mail EmailInsuraquest --markdown=Email.insuraEmail
+```
+
+Mail controller, essentially we will define the have the logic to display the user’s list. Run the command to create the controller.
+
+``` 
+ php artisan make:controller MailController
+```
+
+Possibility to test email function
+ http://localhost:8000/send-email
+ -> sends mail to mailTrap (account Bart)
+
+
+ ***todo: implement the mail functionality into the one search result***
+<br>
+
 
 Unit Testing using Mock a Elastic Client
 ========================================

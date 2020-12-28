@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function isLibrarian(User $user)
     {
-        return $user->type == 'librarian' || $user->type == 'superadmin';//
+        return $user->type == 'librarian' || $user->type == 'admin';//
     }
 
     /**
@@ -28,7 +28,7 @@ class UserPolicy
      */
     public function isAdmin(User $user)
     {
-        return $user->type == 'admin' || $user->type == 'superadmin';//
+        return $user->type == 'admin';//
     }
 
     /**
@@ -39,7 +39,7 @@ class UserPolicy
      */
     public function isUser(User $user)
     {
-        return $user->type == 'user' || $user->type == 'superadmin';//
+        return $user->type == 'user' || $user->type == 'librarian'|| $user->type == 'admin';//
     }
 
 

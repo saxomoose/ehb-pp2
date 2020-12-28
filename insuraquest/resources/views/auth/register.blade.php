@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            {{-- // logo insuraquest nog toe te voegen --}}
+            <x-jet-authentication-card-logo />
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -15,8 +15,8 @@
             </div>
 
             <div>
-                <x-jet-label for="surname" value="{{ __('Surname') }}" />
-                <x-jet-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autofocus autocomplete="surname" />
+                <x-jet-label for="firstname" value="{{ __('First name') }}" />
+                <x-jet-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus autocomplete="firstname" />
             </div>
 
             <div class="mt-4">

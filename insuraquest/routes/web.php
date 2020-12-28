@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\FileUploadController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,25 +13,21 @@ use App\Http\Controllers\FileUploadController;
 |
 */
 
-
 Route::get('/', function () {
     return view('pages/welcome');
 });
 
-
 //controleert of de user is ingelogd. Zoniet redirect hij naar de login page.
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
-  
-  // ES Routes
-  Route::get('/es', function () {
-    return view('pages/elasticsearch');
-  });
 
-  Route::get('/create', 'QueryController@create');
-  Route::post('/create', 'QueryController@show');
-  //Route::get('/edit', 'DocumentsController@edit'); -> om de tags van een document te wijzigen
-  //Route::post('/edit', 'DocumentsController@store');
-  
+    Route::get('/create', 'QueryController@create');
+    Route::post('/create', 'QueryController@show');
+
+    Route::get('/document/{id}', [
+        'uses' => 'DocumentsController@show',
+        'as' => 'document'
+        ]);
+
 
     //ADMIN routes - checks if user has admin type, otherwise throws 403 unauthorized
     Route::middleware(['can:isAdmin,App\Models\User'])->group(function(){
@@ -59,26 +53,40 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         return view('pages/dashboard');
     })->name('dashboard');
 
+
     //SEARCH routes
-    Route::get('/search', function(){
-        return view('pages/search');
-    })->name('search')->middleware('can:isUser,App\Models\User');
+    Route::middleware(['can:isUser,App\Models\User'])->group(function(){
+            //Once search page is asked for, we get the showSearch function to work
+            Route::get('/search', 'QueryController@create')->name('search');
+
+            //Once search button is clicked, we get the postSearch function to work
+            Route::post('/search', 'QueryController@show')->name('documentsearch');
+        });
+
 
     //LIBRARIAN routes
+    //Once librarian page is asked for, we get the fileUpload function to work
     Route::middleware(['can:isLibrarian,App\Models\User'])->group(function(){
-        Route::get('/librarian', function(){
-            return view('pages/librarian');
-        })->name('librarian');
+        Route::get('/librarian', 'FileUploadController@fileUpload')->name('librarian');
 
-        // Routes van librarian page naar Fileuploadcontroller voor het wegschrijven van files naar mapje public/uploads'
-        Route::get('/librarian.blade', 'FileUploadController@fileUpload')->name('file.upload');
+
+        // Routes van librarian page naar Fileuploadcontroller voor het uitsturen van input (inc. file) naar FSCrawler API
         Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
+
+
+        //Route tp update single document, redirects to document
+        Route::post('/document/{id}', 'DocumentsController@update')->name('document.edit');
+
+        //Route to delete single document, redirects to search page
+        Route::get('/delete/{id}/{filename}', 'DocumentsController@destroy')->name('document.delete');
     });
+
 
     //DOCUMENTATION route
     Route::get('/documentation', function(){
         return view('pages/documentation');
     })->name('documentation');
+
 
     //TEAM route
     Route::get('/team', function(){

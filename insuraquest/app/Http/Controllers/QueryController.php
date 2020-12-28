@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Query;
 use Illuminate\Http\Request;
 use Elasticsearch\ClientBuilder;
-use Illuminate\Support\Str;
+use App\Models\Language;
+use App\Models\Issuer;
+use App\Models\Category;
+use App\Models\Tag;
 
 class QueryController extends Controller
 {
@@ -22,11 +25,22 @@ class QueryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function create()
     {
-        return view('pages.query.create');
+        // Fill search form
+        $languages = Language::get();
+        $issuers = Issuer::get();
+        $categories = Category::get();
+        $keywords = Tag::get();
+
+        return view('pages.query.create', [
+                        'languages' => $languages,
+                        'issuers' => $issuers,
+                        'categories' => $categories,
+                        'keywords' => $keywords
+                        ]);
     }
 
     /**
@@ -44,76 +58,54 @@ class QueryController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Query  $query
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function show(Query $query)
-    {
-        //dump(request()->all());
-        $search = request('es');
-        $cb1 = request('leven');
-        $cb2 = request('Nederlands');
-        $arr = [[ 'match' => [ 'content' => $search ] ], [ 'match' => [ 'external.tag' => $cb1 ] ]];
-        //dump($search);
 
+
+    public function show(Request $request)
+    {
+        // Fill search form
+        $languages = Language::get();
+        $issuers = Issuer::get();
+        $categories = Category::get();
+        $keywords = Tag::get();
+
+        // Searchtext field is required
+        $this->validate($request, [
+            'searchtext' => 'required'], [
+            'searchtext.required' => 'You need to enter some text or a word to search for.'
+        ]);
+
+        // Configure extended host for client
         $hosts = [
             'host' => '10.3.50.7',
             'port' => '9200',
-            'scheme' => 'http',
-            ];
+            'scheme' => 'http', // other option: 'https'
+            //'user' => 'username', // relevant when using https
+            //'pass' => 'password', // relevant when using https
+        ];
 
-        $client = ClientBuilder::create()
-                    ->setHosts($hosts)
-                    ->build();
+        $client = ClientBuilder::create() // Instantiate a new ClientBuilder
+                    ->setHosts($hosts) // Set the hosts
+                    ->build(); // Build the client object
 
-        $query = new Query();
-        $query->setParams($search, $arr);
+        $query = new Query(); // Instantiate a new Query
+        $query->setParams(); // Set search parameters
 
         $response = $client->search($query->params);
-
-        print_r($query->params);
-
+        //print_r($query->params);
         //dump($response);
-        //dump($response['hits']['hits'][0]['highlight']['content']);
-        $results = $response['hits']['hits'];
-        //dump($results);
-        return view('pages.query.show', [
-                            'hits' => $response['hits']['total'],
-                            'results' => $results
-                    ]);
 
-/*
-        //*Example based on libcurl, a library created by Daniel Stenberg, that allows you to connect and communicate to many different types of servers
-        //*with many different types of protocols. libcurl currently supports the http, https, ftp, gopher, telnet, dict, file, and ldap protocols. 
-        //*libcurl also supports HTTPS certificates, HTTP POST, HTTP PUT, FTP uploading (this can also be done with PHP's ftp extension), 
-        //*HTTP form based upload, proxies, cookies, and user+password authentication.
-        //*We, however, will use the Elasticsearch-PHP API, with predefined fuction specific for Elasticsearch.
+        $request->flash();
 
-        // source: https://kb.objectrocket.com/elasticsearch/how-to-use-the-search-api-for-the-elasticsearch-php-client-175
-        //require __DIR__ . '/vendor/autoload.php';
-
-        // Initialization
-        $ch=curl_init();
-
-        //$url='10.3.50.7:9200/_search?pretty';
-        $url='10.3.50.7:9200/_search?pretty';
-        $timeout=5;
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_setopt($ch, CURLOPT_HTTPGET, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-          'Content-Type: application/json'
-        ));
-
-        // Get URL content
-        $lines_string=curl_exec($ch);
-        // Close handle to release resources
-        curl_close($ch);
-        // Output, you can also save it locally on the server
-        echo $lines_string;
-*/
+        return view('pages.query.create', [
+                        'languages' => $languages,
+                        'issuers' => $issuers,
+                        'categories' => $categories,
+                        'keywords' => $keywords,
+                        'hits' => $response['hits']['total'],
+                        'results' => $response['hits']['hits']
+                        ]);
     }
 
     /**
@@ -148,10 +140,5 @@ class QueryController extends Controller
     public function destroy(Query $query)
     {
         //
-    }
-
-    public function shortText($string)
-    {
-        //code van Elias
     }
 }

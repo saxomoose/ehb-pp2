@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'admin',
-            'surname' => 'test',
+            'firstname' => 'test',
             'email' => 'admin@insuraquest.com',
             'password' => Hash::make('admin'),
             'email_verified_at' => now(),
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => 'librarian',
-            'surname' => 'test',
+            'firstname' => 'test',
             'email' => 'librarian@insuraquest.com',
             'password' => Hash::make('librarian'),
             'email_verified_at' => now(),
@@ -38,22 +38,14 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'name' => 'user',
-            'surname' => 'test',
+            'firstname' => 'test',
             'email' => 'user@insuraquest.com',
             'password' => Hash::make('user'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
             'type' => 'user',
         ]);
-        DB::table('users')->insert([
-            'name' => 'superadmin',
-            'surname' => 'test',
-            'email' => 'superadmin@insuraquest.com',
-            'password' => Hash::make('superadmin'),
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
-            'type' => 'superadmin',
-        ]);
+
 
          \App\Models\User::factory(15)->create();
 
