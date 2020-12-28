@@ -45,9 +45,9 @@
                                 <div class="form-group col-9">
                                     <input type="text" class="form-control" name="searchtext"
                                         placeholder="Search for document..." value="{{ old('searchtext')}}">
-                                        @if ($errors->has('searchtext'))
-                                            <p class="help is-danger">{{ $errors->first('searchtext') }}</p>
-                                        @endif
+                                    @if ($errors->has('searchtext'))
+                                    <p class="help is-danger">{{ $errors->first('searchtext') }}</p>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-row">
@@ -134,7 +134,7 @@
                                     <a href="{{ Route('search')}}" role="button" style="align-items: flex-end"
                                         class="btn btn-warning inline-flex  py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Clear form
-                                </a>
+                                    </a>
                                 </div>
                             </div>
 
