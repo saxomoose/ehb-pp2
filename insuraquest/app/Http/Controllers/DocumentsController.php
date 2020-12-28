@@ -145,7 +145,7 @@ class DocumentsController extends Controller
 
         $client->update($params_update);
 
-        return redirect()->route('document', ['id' => $id])
+        return back()//redirect()->route('document', ['id' => $id])
 
             -> with('success-edit', 'File edit was successful');
 
