@@ -77,7 +77,7 @@
                                 <h2> Hoe zoek ik een document? </h2>
                                 <p>
                                     Op de zoekpagina vind je een aantal velden terug waarmee je je zoekopdracht kan
-                                    verfijnen.
+                                    verfijnen. </p>
                                     <br/>
                                     <ul class="list-disc">
                                         <b>Verplichte velden:</b>
@@ -111,7 +111,20 @@
                                 <h2> Hoe voeg ik een document toe aan de bibliotheek? </h2>
                                 <p>
                                     In de navigatiebalk bovenaan, vind je een knop 'Upload file'.
-                                    Wanneer je hierop klikt, dan kom je terecht op het formulier waar je een nieuw document kan uploaden.
+                                    Wanneer je hierop klikt, dan kom je terecht op het formulier waar je een nieuw document kan uploaden.</p>
+                                    <br>
+
+                                    <ul  class="list-disc">
+                                        <li>Eerst kan je een document selecteren dat je wil uploaden. Dit kan enkel een pdf zijn met een maximale grootte van 2mb</ul>
+                                        <li>Geef een titel aan het document</li>
+                                        <li>Kies de taal van het document dat je wil uploaden</li>
+                                        <li>Kies de pulicatiedatum van het document</li>
+                                        <li>Kies de issuer van het document</li>
+                                        <li>Kies een categorie</li>
+                                        <li>Als laatste kan je nog een extra keywoord toevoegen om meer informatie toe te voegen</li>
+                                    </ul>
+                                    <br>
+                                    Hierna kan je op de Upload knop klikken en zal je document worden opgeslagen.
                                 </p>
                             </div>
                         </div>
