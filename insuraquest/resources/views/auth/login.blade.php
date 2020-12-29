@@ -1,7 +1,5 @@
 <x-guest-layout>
-    @push('styles')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    @endpush
+
 
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -64,4 +62,3 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
-<script src="{{url('/js/pwd.js')}}"></script>
