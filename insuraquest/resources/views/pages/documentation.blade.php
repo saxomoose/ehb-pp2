@@ -56,54 +56,35 @@
                     <div class="tab-pane fade" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
                         <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                             <div class="space-y-1">
-                                <h2>Hoe zoek ik een document?</h2>
-                                <p class="p-2">Op de zoekpagina vind je een aantal velden terug waarmee je je zoekopdracht kan verfijnen.</p>
-                                    <ul class="pl-4 list-disc">
-                                        <b>Verplichte velden:</b>
-                                        <li>Search for: geef hier je trefwoord(en) die je document moeten bevatten. Vb. Brussel. </li>
-                                        <br/>
-                                        <b>Optionele parameters (meedere opties tegelijk mogelijk): </b>
-                                        <li>Exclude from search: geef hier je trefwoorden in die <b>niet</b> mogen
-                                            voorkomen in de zoekresultaten.</li>
-                                        <li>Language: de taal waarin het document is opgesteld</li>
-                                        <li>Issuer: de instantie die het document heeft opgesteld: Europese Unie, Federale overheid, ...</li>
-                                        <li>Category: behoort het document tot wetgeving, rechtspraak of rechtsleer</li>
-                                        <li>Keyword: het type verzekering waarover het document verteld. vb. brand</li>
-                                        <li>Date published from: de datum vanaf wanneer het document werd gepubliceerd</li>
-                                        <li>Date published until: de datum tot en met wanneer het document werd gepubliceerd</li>
-                                    </ul>
-                                    <br/>
-                                    <p>De zoekresultaten worden getoond in volgorde van relevantie. De relevantie hangt af van de trefwoorden en de geselecteerde opties.</p>
-                                    <p>Wat betreft de opties Language, Issuer, Category en Keyword is het niet verplicht dat alle opties geldig moeten zijn voor elk document. De betrokken zoekresultaten zullen enkel hoger in de lijst komen te staan (lees: hogere score hebben). De parameters worden gezocht volgens de logica : optie of optie of optie.</p>
-                                    <p>De velden "Search for", "Exclude from search" en "Date published" filteren de zoekresultaten daarentegen</p>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- tab Upload files --}}
-                    <div class="tab-pane fade" id="nav-upload" role="tabpanel" aria-labelledby="nav-upload-tab">
-                        <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                            <div class="space-y-1">
-                                <h2> Hoe voeg ik een document toe aan de bibliotheek? </h2>
+                                <h2> Hoe zoek ik een document? </h2>
                                 <p>
-                                    In de navigatiebalk bovenaan, vind je een knop 'Upload file'.
-                                    Wanneer je hierop klikt, dan kom je terecht op het formulier waar je een nieuw
-                                    document kan uploaden.</p>
-                                <br>
-
+                                    Op de zoekpagina vind je een aantal velden terug waarmee je je zoekopdracht kan
+                                    verfijnen. </p>
+                                <br />
                                 <ul class="list-disc">
-                                    <li>Eerst kan je een document selecteren dat je wil uploaden. Dit kan enkel een pdf
-                                        zijn met een maximale grootte van 2mb
+                                    <b>Verplichte velden:</b>
+                                    <li>Search for: hierin geef je je trefwoord in waarop je wenst te zoeken. vb.
+                                        Brussel. </li>
+                                    <br />
+                                    <b>Optionele parameters: Je kan meerdere opties aanklikken.</b>
+                                    <li>Exclude from search: hierin geef je de trefwoorden in die <b>niet</b> mogen
+                                        voorkomen in de zoekresultaten.</li>
+                                    <li>Language: de taal waarin het document is opgesteld</li>
+                                    <li>Issuer: de instantie die het document heeft opgesteld</li>
+                                    <li>Category: de categorie waartoe het document behoort</li>
+                                    <li>Keyword: het soort van tak waartoe het document behoort. vb. brand</li>
+                                    <li>Date published from: de datum vanaf wanneer het document werd gepubliceerd
+                                    </li>
+                                    <li>Date until: de datum tot en met wanneer het document werd gepubliceerd</li>
                                 </ul>
-                                <li>Geef een titel aan het document</li>
-                                <li>Kies de taal van het document dat je wil uploaden</li>
-                                <li>Kies de pulicatiedatum van het document</li>
-                                <li>Kies de issuer van het document</li>
-                                <li>Kies een categorie</li>
-                                <li>Als laatste kan je nog een extra keywoord toevoegen om meer informatie toe te voegen
-                                </li>
-                                </ul>
-                                <br>
-                                <p>Hierna kan je op de Upload knop klikken en zal je document worden opgeslagen.</p>
+                                <p>Ter info: De documenten die gevonden worden worden getoond in volgorde van de
+                                    relevantie volgens de opties die
+                                    je hebt aangeklikt.
+                                    Het is niet verplicht voor de zoekopdracht dat alle opties die je aanduidde moeten
+                                    gevonden worden
+                                    in elk document. De parameters worden gezocht volgens de logica : optie of optie of
+                                    optie. </p>
+                                </p>
                             </div>
                         </div>
                         <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -130,12 +111,51 @@
                         </div>
                         <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                             <div class="space-y-1">
+                                <h2>Hoe mail ik een document?</h2>
+                                <p>Zoek eerst het document op via de 'Search' pagina.
+                                    Wanneer je het document opent door op 'Read the full document' te klikken, krijg je
+                                    onderaan de knop 'mail' te zien, waarmee je een document kan doormailen.</p><br>
+                                    <ul class="list-disc">
+                                        <li>Als je op de mailknop klikt zal het opgevraagde document worden doorgemaild naar het
+                                            emailadres waarmee je bent ingelogd</li>
+                                    </ul>
+                            </div>
+                        </div>
+                        <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1">
                                 <h2> Hoe verwijder ik een document? </h2>
                                 <p>
                                     Zoek eerst het document op via de 'Search' pagina.
                                     Wanneer je het document openklikt, krijg je onderaan de knop 'delete' te zien,
                                     waarmee je het document verwijderd.
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- tab Upload files --}}
+                    <div class="tab-pane fade" id="nav-upload" role="tabpanel" aria-labelledby="nav-upload-tab">
+                        <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1">
+                                <h2> Hoe voeg ik een document toe aan de bibliotheek? </h2>
+                                <p>
+                                    In de navigatiebalk bovenaan, vind je een knop 'Upload file'.
+                                    Wanneer je hierop klikt, dan kom je terecht op het formulier waar je een nieuw
+                                    document kan uploaden.</p>
+                                <br>
+                                <ul class="list-disc">
+                                    <li>Eerst kan je een document selecteren dat je wil uploaden. Dit kan enkel een pdf
+                                        zijn met een maximale grootte van 2mb
+                                </ul>
+                                <li>Geef een titel aan het document</li>
+                                <li>Kies de taal van het document dat je wil uploaden</li>
+                                <li>Kies de pulicatiedatum van het document</li>
+                                <li>Kies de issuer van het document</li>
+                                <li>Kies een categorie</li>
+                                <li>Als laatste kan je nog een extra keywoord toevoegen om meer informatie toe te voegen
+                                </li>
+                                </ul>
+                                <br>
+                                <p>Hierna kan je op de Upload knop klikken en zal je document worden opgeslagen.</p>
                             </div>
                         </div>
                     </div>
@@ -209,8 +229,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
 
                 {{-- <h1> Used resources </h1>
