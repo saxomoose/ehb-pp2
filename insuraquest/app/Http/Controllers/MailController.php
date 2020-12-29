@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use PDF;
 use App\Models\User;
 use App\Models\Document;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class MailController extends Controller
         $mailData = [
             'title' => 'InsuraQuest Email',
             'url' => 'https://www.insuraQuest.io',
-            'pdf' => Storage::disk('local')->mail('public/' . $filename)
+            'pdf' => Storage::disk('local')->get('public/' . $filename)
+            
             
         ];
   
@@ -37,6 +39,6 @@ class MailController extends Controller
 
         -> with('success-mail', 'Mail was successfully sent');
 
-        //test
+        
     }
 }
