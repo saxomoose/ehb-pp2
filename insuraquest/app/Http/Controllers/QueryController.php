@@ -25,11 +25,8 @@ class QueryController extends Controller
 
     public function show(Request $request)
     {
-        // Searchtext field is required
-        $this->validate($request, [
-            'searchtext' => 'required'], [
-            'searchtext.required' => 'You need to enter some text or a word to search for.'
-        ]);
+        //dd($request);
+        $this->validateRequest();
 
         $query = new Query(); // Instantiate a new Query - required to invoke static method due to missing facade.
         $query->setParams(); // Set search parameters
@@ -54,4 +51,12 @@ class QueryController extends Controller
                         ]);
     }
 
+    protected function validateRequest()
+    {
+        return request()->validate([
+            'searchtext' => 'required',
+            'date-from' => 'date',
+            'date-until' => 'date|after:date-from',
+        ]);
+    }
 }
