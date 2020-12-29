@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Query;
 use Illuminate\Http\Request;
-use Elasticsearch\ClientBuilder;
+use App\Models\Connection;
 use App\Models\Language;
 use App\Models\Issuer;
 use App\Models\Category;
@@ -23,34 +23,22 @@ class QueryController extends Controller
                         ]);
     }
 
-    //
     public function show(Request $request)
     {
-        //dd($request);
         // Searchtext field is required
         $this->validate($request, [
             'searchtext' => 'required'], [
             'searchtext.required' => 'You need to enter some text or a word to search for.'
         ]);
 
-        // Configure extended host for client
-        $hosts = [
-            'host' => '10.3.50.7',
-            'port' => '9200',
-            'scheme' => 'http', // other option: 'https'
-            //'user' => 'username', // relevant when using https
-            //'pass' => 'password', // relevant when using https
-        ];
-
-        $client = ClientBuilder::create() // Instantiate a new ClientBuilder
-                    ->setHosts($hosts) // Set the hosts
-                    ->build(); // Build the client object
-
-        $query = new Query(); // Instantiate a new Query
+        $query = new Query(); // Instantiate a new Query - required to invoke static method due to missing facade.
         $query->setParams(); // Set search parameters
 
         //dd($query->params);
-        $response = $client->search($query->params);
+        //$response = $client->search($query->params);
+        $response = Connection::handle()
+                        ->search($query->params);
+
         //print_r($query->params);
         //dump($response);
 
