@@ -124,7 +124,7 @@
                         <?php
                         $collection = (new App\View\Components\Collection($results))->paginate(2);
                         ?>
-                        {{ $collection->links()}}
+                        {{ $collection->appends(Request::except('page'))->links()}}
                         @endisset
                         @include('pages.query.show')
                     </div>
