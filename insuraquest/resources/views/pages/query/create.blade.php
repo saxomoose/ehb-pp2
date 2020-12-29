@@ -22,7 +22,7 @@
             <div class=" p-8 bg-white overflow-hidden shadow-xl sm:rounded-lg border-8">
                 <div style="margin: 20px">
                     <div>
-                        <form action="{{ route('documentsearch') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('documentsearch') }}" method="GET" enctype="multipart/form-data">
                             @csrf
                             @if (count($errors) > 0)
                             <div class="form-row">

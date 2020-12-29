@@ -64,7 +64,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
             Route::get('/search', 'QueryController@create')->name('search');
 
             //Once search button is clicked, we get the postSearch function to work
-            Route::post('/search', 'QueryController@show')->name('documentsearch');
+            Route::get('/searchthis', 'QueryController@show')->name('documentsearch');
         });
 
 
