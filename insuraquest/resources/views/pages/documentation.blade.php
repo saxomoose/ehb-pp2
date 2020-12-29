@@ -102,36 +102,7 @@
                                     gevonden worden
                                     in elk document. De parameters worden gezocht volgens de logica : optie of optie of
                                     optie. </p>
-
                                 </p>
-                            </div>
-                        </div>
-                    </div>
-                    {{-- tab Upload files --}}
-                    <div class="tab-pane fade" id="nav-upload" role="tabpanel" aria-labelledby="nav-upload-tab">
-                        <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                            <div class="space-y-1">
-                                <h2> Hoe voeg ik een document toe aan de bibliotheek? </h2>
-                                <p>
-                                    In de navigatiebalk bovenaan, vind je een knop 'Upload file'.
-                                    Wanneer je hierop klikt, dan kom je terecht op het formulier waar je een nieuw
-                                    document kan uploaden.</p>
-                                <br>
-
-                                <ul class="list-disc">
-                                    <li>Eerst kan je een document selecteren dat je wil uploaden. Dit kan enkel een pdf
-                                        zijn met een maximale grootte van 2mb
-                                </ul>
-                                <li>Geef een titel aan het document</li>
-                                <li>Kies de taal van het document dat je wil uploaden</li>
-                                <li>Kies de pulicatiedatum van het document</li>
-                                <li>Kies de issuer van het document</li>
-                                <li>Kies een categorie</li>
-                                <li>Als laatste kan je nog een extra keywoord toevoegen om meer informatie toe te voegen
-                                </li>
-                                </ul>
-                                <br>
-                                <p>Hierna kan je op de Upload knop klikken en zal je document worden opgeslagen.</p>
                             </div>
                         </div>
                         <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
@@ -158,12 +129,51 @@
                         </div>
                         <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                             <div class="space-y-1">
+                                <h2>Hoe mail ik een document?</h2>
+                                <p>Zoek eerst het document op via de 'Search' pagina.
+                                    Wanneer je het document opent door op 'Read the full document' te klikken, krijg je
+                                    onderaan de knop 'mail' te zien, waarmee je een document kan doormailen.</p><br>
+                                    <ul class="list-disc">
+                                        <li>Als je op de mailknop klikt zal het opgevraagde document worden doorgemaild naar het
+                                            emailadres waarmee je bent ingelogd</li>
+                                    </ul>
+                            </div>
+                        </div>
+                        <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1">
                                 <h2> Hoe verwijder ik een document? </h2>
                                 <p>
                                     Zoek eerst het document op via de 'Search' pagina.
                                     Wanneer je het document openklikt, krijg je onderaan de knop 'delete' te zien,
                                     waarmee je het document verwijderd.
                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- tab Upload files --}}
+                    <div class="tab-pane fade" id="nav-upload" role="tabpanel" aria-labelledby="nav-upload-tab">
+                        <div class="mt-2 flex px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1">
+                                <h2> Hoe voeg ik een document toe aan de bibliotheek? </h2>
+                                <p>
+                                    In de navigatiebalk bovenaan, vind je een knop 'Upload file'.
+                                    Wanneer je hierop klikt, dan kom je terecht op het formulier waar je een nieuw
+                                    document kan uploaden.</p>
+                                <br>
+                                <ul class="list-disc">
+                                    <li>Eerst kan je een document selecteren dat je wil uploaden. Dit kan enkel een pdf
+                                        zijn met een maximale grootte van 2mb
+                                </ul>
+                                <li>Geef een titel aan het document</li>
+                                <li>Kies de taal van het document dat je wil uploaden</li>
+                                <li>Kies de pulicatiedatum van het document</li>
+                                <li>Kies de issuer van het document</li>
+                                <li>Kies een categorie</li>
+                                <li>Als laatste kan je nog een extra keywoord toevoegen om meer informatie toe te voegen
+                                </li>
+                                </ul>
+                                <br>
+                                <p>Hierna kan je op de Upload knop klikken en zal je document worden opgeslagen.</p>
                             </div>
                         </div>
                     </div>
@@ -237,8 +247,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
 
                 {{-- <h1> Used resources </h1>
