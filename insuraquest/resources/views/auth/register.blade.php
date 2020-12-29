@@ -1,4 +1,7 @@
 <x-guest-layout>
+    @push('styles')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    @endpush
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
@@ -26,8 +29,13 @@
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />
-                <x-jet-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
+                <div class="row" style="display: flex">
+                    <x-jet-input id="password" class="block mt-1 w-full pwd"  type="password" name="password" required autocomplete="new-password" />
+                    <span class="input-group-btn" >
+                    <button id="reveal" type="button"><img src="/pictures/eye.png"/></button>
+                    </span>
+                </div>
+               </div>
 
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
