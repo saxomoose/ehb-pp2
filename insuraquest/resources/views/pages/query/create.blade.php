@@ -43,8 +43,7 @@
                                     <label for="searchtext">SEARCH FOR : </label>
                                 </div>
                                 <div class="form-group col-9">
-                                    <input type="text" class="form-control" name="searchtext"
-                                        placeholder="Search for document..." value="{{ old('searchtext')}}">
+                                    <input type="text" class="form-control" name="searchtext" placeholder="Search for document..." value="{{ old('searchtext')}}">
                                     @if ($errors->has('searchtext'))
                                     <p class="help is-danger">{{ $errors->first('searchtext') }}</p>
                                     @endif
@@ -59,21 +58,16 @@
                                         placeholder="Words to exclude from search" value="{{ old('excludetext')}}">
                                 </div>
                             </div>
-                            <p> Select filters before quering search. </p>
-
+                            <p> Select filters before quering search: </p>
                             <div class="form-row">
                                 <div class="form-group col-auto">
                                     <label for="language[]">Language</label>
-
-                                    <select multiple="multiple" class="selectpicker" name="language[]"
-                                        value="{{ old('language[]')}}">
-
+                                    <select multiple="multiple" class="selectpicker" name="language[]" value="{{ old('language[]')}}">
                                         @foreach($languages as $language )
-                                        <option value="{{ $language->name }}"
-                                            {{in_array($language->name, old("language") ?: []) ? "selected": ""}}>
-                                            {{ $language->value }}</option>
-
-
+                                            <option value="{{ $language->name }}"
+                                                {{in_array($language->name, old("language") ?: []) ? "selected": ""}}>
+                                                {{ $language->value }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

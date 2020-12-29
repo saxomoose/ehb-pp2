@@ -20,7 +20,7 @@ class Connection extends Model
             'host' => '10.3.50.7',
             'port' => '9200',
             'scheme' => 'http', // other option: 'https'
-            //'user' => 'username', // relevant when using https
+            //'user' => 'username', // relevant when using https "non-interactive user?"
             //'pass' => 'password', // relevant when using https
         ];
 
