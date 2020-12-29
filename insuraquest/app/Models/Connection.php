@@ -17,11 +17,7 @@ class Connection extends Model
     public static function handle() {
         // Configure extended host for client
         $hosts = [
-            'host' => '10.3.50.7',
-            'port' => '9200',
-            'scheme' => 'http', // other option: 'https'
-            'user' => 'elastic', // relevant when using https
-            'pass' => 'insuraquest', // relevant when using https
+            'http://elastic:insuraquest@10.3.50.7:9200'
         ];
 
         $client = ClientBuilder::create() // Instantiate a new ClientBuilder
