@@ -19,20 +19,15 @@ use Illuminate\Support\Facades\DB;
 
 class FileUploadController extends Controller
 {
+    // Shows form to upload a file with metadata to be added in Elasticsearch
     public function fileUpload(Request $request)
-    //we get the tables content and put them into variables to pass to the view, in this case, the librarian view
     {
-        $languages = Language::get();
-        $issuers = Issuer::get();
-        $categories = Category::get();
-        $tags = Tag::get();
-
         return view('pages/librarian', [
-                'languages' => $languages,
-                'issuers' => $issuers,
-                'categories' => $categories,
-                'tags' => $tags
-                ]);
+                        'languages' => Language::all(),
+                        'issuers' => Issuer::all(),
+                        'categories' => Category::all(),
+                        'keywords' => Tag::all(),
+                        ]);
     }
 
     //handler method sanitizes user input and posts uploaded file and tags to FSCrawler API for indexation

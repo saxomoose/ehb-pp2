@@ -21,6 +21,8 @@ class Query extends Model
         $issuers = request('issuer');
         $categories = request('category');
         $tags = request('tag');
+        $dateFrom = request('date-from');
+        $dateUntil = request('date-until');
 
         // We have 2 types of queries: 'match' query and 'bool' query.
         // When we use only one 'match' statement inside a 'bool'=>'must' clause, there is no difference with the 'match' query.
@@ -86,6 +88,24 @@ class Query extends Model
                     {
                         array_push($this->params['body']['query']['bool']['should'], [ 'match' => [ 'external.tag' => $value ] ]);
                     }
+                }
+            }
+            // if some date filters are filled in, we complete $params with extra arrays to include a range clause (to include in the must clause)
+            if ($dateFrom || $dateUntil)
+            {
+                array_push($this->params['body']['query']['bool']['must'], ['range' => ['external.date_published' => []]]);
+                if ($dateFrom && !$dateUntil)
+                {
+                    $this->params['body']['query']['bool']['must'][1]['range']['external.date_published'] += ['gte' => $dateFrom];
+                }
+                if (!$dateFrom && $dateUntil)
+                {
+                    $this->params['body']['query']['bool']['must'][1]['range']['external.date_published'] += ['lte' => $dateUntil];
+                }
+                if ($dateFrom && $dateUntil)
+                {
+                    $this->params['body']['query']['bool']['must'][1]['range']['external.date_published'] += ['gte' => $dateFrom];
+                    $this->params['body']['query']['bool']['must'][1]['range']['external.date_published'] += ['lte' => $dateUntil];
                 }
             }
         }

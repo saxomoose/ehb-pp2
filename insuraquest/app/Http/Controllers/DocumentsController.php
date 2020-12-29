@@ -7,18 +7,13 @@ use Illuminate\Http\Request;
 use Elasticsearch\ClientBuilder;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Language;
+use App\Models\Issuer;
+use App\Models\Category;
+use App\Models\Tag;
 
 class DocumentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -49,6 +44,12 @@ class DocumentsController extends Controller
      */
     public function show($id)
     {
+
+        $languages = Language::get();
+        $issuers = Issuer::get();
+        $categories = Category::get();
+        $keywords = Tag::get();
+
         $hosts = [
             'host' => '10.3.50.7',
             'port' => '9200',
@@ -73,9 +74,12 @@ class DocumentsController extends Controller
         $response = $client->search($params);
         $result = $response['hits']['hits'][0];
 
-        return view('pages.document.show', ['result' => $result]);
-
-
+        return view('pages.document.show', [
+            'result' => $result, 
+            'languages' => $languages,
+            'issuers' => $issuers,
+            'categories' => $categories,
+            'keywords' => $keywords]);
     }
 
     /**

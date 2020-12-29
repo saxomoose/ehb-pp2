@@ -63,8 +63,13 @@
                                         <select class="form-select block w-full mt-1" name="language">
                                             <option value="{{$result['_source']['external']['language']}}" selected
                                                 hidden>{{$result['_source']['external']['language']}}</option>
-                                            <option value="dutch">Dutch</option>
-                                            <option value="french">French</option>
+                                            @foreach($languages as $language )
+                                            <option value="{{ $language->name }}"
+                                                {{in_array($language->name, old("language") ?: []) ? "selected": ""}}>
+                                                {{ $language->value }}</option>
+
+
+                                            @endforeach
                                         </select>
                                     </label>
 
@@ -79,23 +84,11 @@
                                         <select class="form-select block w-full mt-1 " name="issuer">
                                             <option value="{{$result['_source']['external']['issuer']}}" selected
                                                 hidden>{{$result['_source']['external']['issuer']}}</option>
-                                            <option value="eu">EU</option>
-                                            <option value="be">BE</option>
-                                            <option value="vlaamsgewest">Vlaams Gewest</option>
-                                            <option value="waalsgewest">Waals Gewest</option>
-                                            <option value="brusselshoofdstedelijkgewest">Brussels Hoofdstedelijk Gewest
-                                            </option>
-                                            <option value="grondwettelijkhof">Grondwettelijk hof</option>
-                                            <option value="hofvancassatie">Hof van cassatie</option>
-                                            <option value="raadvanstaat">Raad van staat</option>
-                                            <option value="hofvanberoep">Hof van beroep</option>
-                                            <option value="arbeidshof">Arbeidshof</option>
-                                            <option value="rechtbankvaneersteaanleg">Rechtbank van eerste aanleg
-                                            </option>
-                                            <option value="arbeidsrechtbank">Arbeidsrechtbank</option>
-                                            <option value="ondernemingsrechtbank">Ondernemingsrechtbank</option>
-                                            <option value="politierechtbank">Politierechtbank</option>
-                                            <option value="vredegerecht">Vredegerecht</option>
+                                            @foreach($issuers as $issuer )
+                                            <option value="{{ $issuer->name }}"
+                                                {{in_array($issuer->name, old("issuer") ?: []) ? "selected": ""}}>
+                                                {{ $issuer->value }}</option>
+                                            @endforeach
                                         </select>
                                     </label>
 
@@ -104,9 +97,11 @@
                                         <select class="form-select block w-full mt-1" name="category">
                                             <option value="{{$result['_source']['external']['category']}}" selected
                                                 hidden>{{$result['_source']['external']['category']}}</option>
-                                            <option value="wetgeving">Wetgeving</option>
-                                            <option value="rechtspraak">Rechtspraak</option>
-                                            <option value="rechtsleer">Rechtsleer</option>
+                                            @foreach($categories as $category )
+                                            <option value="{{ $category->name }}"
+                                                {{in_array($category->name, old("category") ?: []) ? "selected": ""}}>
+                                                {{ $category->value }}</option>
+                                            @endforeach
                                         </select>
                                     </label>
 
@@ -115,14 +110,11 @@
                                         <select class="form-select block w-full mt-1" name="tag">
                                             <option value="{{$result['_source']['external']['tag']}}" selected hidden>
                                                 {{$result['_source']['external']['tag']}}</option>
-                                            <option value="auto">Auto</option>
-                                            <option value="brand">Brand</option>
-                                            <option value="leven">Leven</option>
-                                            <option value="gezondheidszorgen">Gezondheidszorgen</option>
-                                            <option value="rechtsbijstand">Rechtsbijstand</option>
-                                            <option value="annulatie">Annulatie</option>
-                                            <option value="bijstand">Bijstand</option>
-                                            <option value="nvt">NVT</option>
+                                            @foreach($keywords as $keyword )
+                                            <option value="{{ $keyword->name }}"
+                                                {{in_array($keyword->name, old("keyword") ?: []) ? "selected": ""}}>
+                                                {{ $keyword->value }}</option>
+                                            @endforeach
                                         </select>
                                     </label>
                                 </div>
