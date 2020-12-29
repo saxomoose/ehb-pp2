@@ -10,7 +10,7 @@ use App\Models\Language;
 use App\Models\Issuer;
 use App\Models\Category;
 use App\Models\Tag;
-use APP\Models\Connection;
+use App\Models\Connection;
 
 class DocumentsController extends Controller
 {
