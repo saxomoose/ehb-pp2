@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function () {
+    return view('test');
+});
+
 Route::get('/', function () {
     return view('pages/welcome');
 });
@@ -74,11 +78,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
 
-        //Route tp update single document, redirects to document
+        //Route to update single document, redirects to document
         Route::post('/document/{id}', 'DocumentsController@update')->name('document.edit');
 
         //Route to delete single document, redirects to search page
         Route::get('/delete/{id}/{filename}', 'DocumentsController@destroy')->name('document.delete');
+
+        //Route to mail a single document, redirects to search page
+        Route::get('/mail/{id}/{filename}', 'MailController@sendEmail')->name('document.mail');
     });
 
 
@@ -92,5 +99,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/team', function(){
         return view('pages/team');
     })->name('team');
+
+    //EMAIL route
+    Route::get('/send-email', 'MailController@sendEmail')->name('send.email');
 
 });

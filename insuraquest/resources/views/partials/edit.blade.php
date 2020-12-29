@@ -3,6 +3,9 @@
         class="btn btn-success inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         Edit
     </button>
+    <a href="{{route('document.mail', ['id' => $result['_id'], 'filename' => $result['_source']['file']['filename']])}}"
+        class="btn btn-primary inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Mail
+    </a>
     <a href="{{route('document.delete', ['id' => $result['_id'], 'filename' => $result['_source']['file']['filename']])}}"
         class="btn btn-danger inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete
     </a>
