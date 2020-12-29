@@ -36,5 +36,7 @@ class MailController extends Controller
         return redirect()->route('search')
 
         -> with('success-mail', 'Mail was successfully sent');
+
+        //test
     }
 }
