@@ -1,7 +1,7 @@
 @isset($results)
 <div class="mt-2 px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
     <h3>Total search results: {{ $hits }}</h3>
-    @forelse ($results as $result)
+    @forelse ($collection as $result)
     <div class="jumbotron jumbotron-fluid" style="padding: 10px">
 
             <h3 class="display-8">{{ $result['_source']['external']['title'] }}</h3>
