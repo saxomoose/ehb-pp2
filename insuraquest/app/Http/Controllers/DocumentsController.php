@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Document;
 use Illuminate\Http\Request;
-use Elasticsearch\ClientBuilder;
 use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Language;
 use App\Models\Issuer;
 use App\Models\Category;
 use App\Models\Tag;
+use APP\Models\Connection;
 
 class DocumentsController extends Controller
 {
@@ -50,16 +50,6 @@ class DocumentsController extends Controller
         $categories = Category::get();
         $keywords = Tag::get();
 
-        $hosts = [
-            'host' => '10.3.50.7',
-            'port' => '9200',
-            'scheme' => 'http',
-        ];
-
-        $client = ClientBuilder::create()
-            ->setHosts($hosts)
-            ->build();
-
         $params = [
                 'index' => 'insuraquest',
                 'body' => [
@@ -71,11 +61,12 @@ class DocumentsController extends Controller
             ]
         ];
 
-        $response = $client->search($params);
+        $response = Connection::handle()->search($params);
+
         $result = $response['hits']['hits'][0];
 
         return view('pages.document.show', [
-            'result' => $result, 
+            'result' => $result,
             'languages' => $languages,
             'issuers' => $issuers,
             'categories' => $categories,
@@ -119,16 +110,6 @@ class DocumentsController extends Controller
             'tag.required' => 'Tag is required',
         ]);
 
-        $hosts = [
-            'host' => '10.3.50.7',
-            'port' => '9200',
-            'scheme' => 'http',
-        ];
-
-        $client = ClientBuilder::create()
-            ->setHosts($hosts)
-            ->build();
-
         $params_update = [
             'index' => 'insuraquest',
             'type' => '_doc',
@@ -147,7 +128,7 @@ class DocumentsController extends Controller
             ]
         ];
 
-        $client->update($params_update);
+        Connection::handle()->update($params_update);
 
         return redirect()->route('document', ['id' => $id])
 
@@ -163,15 +144,6 @@ class DocumentsController extends Controller
      */
     public function destroy($id, $filename)
     {
-        $hosts = [
-            'host' => '10.3.50.7',
-            'port' => '9200',
-            'scheme' => 'http',
-        ];
-
-        $client = ClientBuilder::create()
-            ->setHosts($hosts)
-            ->build();
 
         $params = [
             'index' => 'insuraquest',
@@ -179,7 +151,7 @@ class DocumentsController extends Controller
             'id' => $id
         ];
 
-        $response = $client->delete($params);
+        $response = Connection::handle()->delete($params);
 
         if($response['result'] == 'deleted') {
             Storage::disk('local')->delete('public/' . $filename);
