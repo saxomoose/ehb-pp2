@@ -1,12 +1,14 @@
 @component('mail::message')
-# Introduction
+# Mail van InsuraQuest
 
-The body of your message.
+Hallo, in bijlage vind je het gevraagde document.
+
+
 
 @component('mail::button', ['url' => ''])
 Button Text
 @endcomponent
 
-Thanks,<br>
+Met vriendelijke groeten,<br>
 {{ config('app.name') }}
 @endcomponent

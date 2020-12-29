@@ -74,11 +74,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
         Route::post('/librarian.blade', 'FileUploadController@fileUploadPost')->name('file.upload.post');
 
 
-        //Route tp update single document, redirects to document
+        //Route to update single document, redirects to document
         Route::post('/document/{id}', 'DocumentsController@update')->name('document.edit');
 
         //Route to delete single document, redirects to search page
         Route::get('/delete/{id}/{filename}', 'DocumentsController@destroy')->name('document.delete');
+
+        //Route to mail a single document, redirects to search page
+        Route::get('/mail/{id}/{filename}', 'MailController@sendEmail')->name('document.mail');
     });
 
 

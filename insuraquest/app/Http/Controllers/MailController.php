@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Mail;
 
@@ -13,18 +17,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MailController extends Controller
 {
-    public function sendEmail() {
-        $email = 'bart.tassignon@student.ehb.be';
+    public function sendEmail($id, $filename) {
+
+        $user = auth()->user();
+        $email = $user->email;
+
+       
    
         $mailData = [
-            'title' => 'Demo Email',
-            'url' => 'https://www.insuraQuest.io'
+            'title' => 'InsuraQuest Email',
+            'url' => 'https://www.insuraQuest.io',
+            'pdf' => Storage::disk('local')->mail('public/' . $filename)
+            
         ];
   
         Mail::to($email)->send(new EmailInsuraquest($mailData));
    
-        return response()->json([
-            'message' => 'Email has been sent.'
-        ], Response::HTTP_OK);
+        return redirect()->route('search')
+
+        -> with('success-mail', 'Mail was successfully sent');
     }
 }
