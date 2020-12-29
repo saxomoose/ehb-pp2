@@ -26,7 +26,7 @@ class FileUploadController extends Controller
                         'languages' => Language::all(),
                         'issuers' => Issuer::all(),
                         'categories' => Category::all(),
-                        'keywords' => Tag::all(),
+                        'tags' => Tag::all(),
                         ]);
     }
 
