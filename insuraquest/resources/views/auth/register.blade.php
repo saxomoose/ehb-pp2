@@ -39,7 +39,13 @@
 
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <div class="row" style="display: flex">
+                    <x-jet-input id="password_confirmation" class="block mt-1 w-full pwd"  type="password" name="password_confirmation" required autocomplete="new-password" />
+                    <span class="input-group-btn" >
+                    <button id="reveal2" type="button"><img src="/pictures/eye.png"/></button>
+                    </span>
+                </div>
+                {{-- <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" /> --}}
             </div>
 
             <div class="flex items-center justify-end mt-4">
