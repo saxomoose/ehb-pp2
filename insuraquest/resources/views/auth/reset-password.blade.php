@@ -32,7 +32,7 @@
                 <div class="row" style="display: flex">
                     <x-jet-input id="password_confirmation" class="block mt-1 w-full pwd"  type="password" name="password_confirmation" required autocomplete="new-password" />
                     <span class="input-group-btn" >
-                    <button id="reveal" type="button"><img src="/pictures/eye.png"/></button>
+                    <button id="reveal2" type="button"><img src="/pictures/eye.png"/></button>
                     </span>
                 </div>
                 {{-- <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" /> --}}

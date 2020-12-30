@@ -8,5 +8,13 @@ $(document).ready(function(){
             $pwd.attr('type', 'password');
         }
     });
+    $("#reveal2").on('click',function() {
+        var $pwd2 = $("#password_confirmation");
+        if ($pwd2.attr('type') === 'password') {
+            $pwd2.attr('type', 'text');
+        } else {
+            $pwd2.attr('type', 'password');
+        }
+    });
 
 });
