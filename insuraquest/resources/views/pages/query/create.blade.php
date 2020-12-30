@@ -120,8 +120,14 @@
                                 </div>
                             </div>
                         </form>
+                         @isset($results)
+                        <?php
+                        $collection = (new App\View\Components\Collection($results))->paginate(2);
+                        ?>
+                        {{ $collection->links()}}
+                        @endisset
+                        @include('pages.query.show')
                     </div>
-                    @include('pages.query.show')
                 </div>
             </div>
         </div>
