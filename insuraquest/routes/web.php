@@ -64,7 +64,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
             Route::get('/search', 'QueryController@create')->name('search');
 
             //Once search button is clicked, we get the postSearch function to work
-            Route::post('/search', 'QueryController@show')->name('documentsearch');
+            Route::get('/searchthis', 'QueryController@show')->name('documentsearch');
         });
 
 
@@ -83,9 +83,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
 
         //Route to delete single document, redirects to search page
         Route::get('/delete/{id}/{filename}', 'DocumentsController@destroy')->name('document.delete');
-
-        //Route to mail a single document, redirects to search page
-        Route::get('/mail/{id}/{filename}', 'MailController@sendEmail')->name('document.mail');
     });
 
 
@@ -101,6 +98,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     })->name('team');
 
     //EMAIL route
+    //Route to mail a single document, redirects to search page
+    Route::get('/mail/{filename}', 'MailController@sendEmail')->name('document.mail');
     Route::get('/send-email', 'MailController@sendEmail')->name('send.email');
 
 });

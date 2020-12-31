@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
 Laravel Mailable Markdown class
 used for creating emails.
 collects data we need to send and passes to the view
@@ -12,6 +12,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class EmailInsuraquest extends Mailable
 {
@@ -36,6 +37,6 @@ class EmailInsuraquest extends Mailable
     public function build()
     {
         return $this->markdown('Email.insuraEmail')
-                ->with('mailData', $this->maildata);
+                ->attach(storage_path('app/public/' . $this->maildata['attachment']));
     }
 }

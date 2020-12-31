@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     {{--print_r(Session::all())--}}
-   
+
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -87,10 +87,14 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                    <a href="{{route('document.mail', ['filename' => $result['_source']['file']['filename']])}}"
+                                       class="btn btn-primary inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Mail
+                                    </a>
                                 @can('isLibrarian', App\Models\User::class)
                                     @include('partials.edit')
                                 @endcan
-
+                                </div>
                                 <hr>
                                 <iframe height="600px"
                                         width="100%"

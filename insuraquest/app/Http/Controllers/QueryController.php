@@ -55,8 +55,8 @@ class QueryController extends Controller
     {
         return request()->validate([
             'searchtext' => 'required',
-            'date-from' => 'date',
-            'date-until' => 'date|after:date-from',
+            'date-from' => 'nullable|date',
+            'date-until' => 'nullable|date|after_or_equal:date-from',
         ]);
     }
 }

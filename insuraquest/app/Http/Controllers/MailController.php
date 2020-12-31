@@ -18,27 +18,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MailController extends Controller
 {
-    public function sendEmail($id, $filename) {
+    public function sendEmail($filename) {
 
         $user = auth()->user();
         $email = $user->email;
 
-       
-   
+
+
         $mailData = [
             'title' => 'InsuraQuest Email',
-            'url' => 'https://www.insuraQuest.io',
-            'pdf' => Storage::disk('local')->get('public/' . $filename)
-            
-            
+            'attachment' => $filename
         ];
-  
+
         Mail::to($email)->send(new EmailInsuraquest($mailData));
-   
+
         return redirect()->route('search')
 
         -> with('success-mail', 'Mail was successfully sent');
 
-        
+
     }
 }
